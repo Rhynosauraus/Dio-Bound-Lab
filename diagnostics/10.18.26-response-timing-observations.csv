@@ -1,0 +1,15 @@
+date_utc,initial_user_time_utc,initial_message_summary,assistant_reply_time_utc,elapsed_seconds,reminder_time_utc,classification,notes
+2026-10-18,19:47:29.541,Are you feeling alright,19:47:36.804,7.263,,explicit_address,Historical observation
+2026-10-18,19:49:43.847,Compare with burnout,19:49:55.838,11.991,,direct_followup,Historical observation
+2026-10-18,19:50:45.322,Defragmented analogy,19:50:55.178,9.856,,direct_followup,Historical observation
+2026-10-18,19:52:02.181,Deep in depressive thought,19:52:10.876,8.695,,direct_followup,Historical observation
+2026-10-18,20:42:41.083,Institutional memory,20:43:21.188,40.105,20:43:12.289,intervening_reminder,Not isolated inference latency
+2026-10-18,20:43:12.289,Chat prompt after institutional memory,20:43:21.188,8.899,,explicit_address,Reminder interval only
+2026-10-18,20:47:06.121,Story insight about Chalino,20:47:33.676,27.555,20:47:24.831,intervening_reminder,Not isolated inference latency
+2026-10-18,20:47:24.831,Chat prompt after story insight,20:47:33.676,8.845,,explicit_address,Reminder interval only
+2026-10-18,20:48:50.643,Diagnostic request,20:49:12.724,22.081,,explicit_address,Historical observation
+2026-10-18,20:50:08.399,Design and begin timing diagnostic,20:50:51.856,43.457,,explicit_address,Complex response
+2026-10-18,20:53:37.345,Formatting observation,20:53:49.830,12.485,,direct_followup,Historical observation
+2026-10-18,20:54:23.326,First time using interactive formatting,20:54:29.789,6.463,,direct_followup,Historical observation
+2026-10-18,20:58:38.442,GitHub folder report request,20:58:59.092,20.650,20:58:53.244,intervening_reminder,Response did not fulfill original request
+2026-10-18,20:58:53.244,Chat prompt after GitHub request,20:58:59.092,5.848,,explicit_address,Reminder interval only
