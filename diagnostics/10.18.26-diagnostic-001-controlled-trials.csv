@@ -1,0 +1,1 @@
+trial_id,condition,eligible,exact_prompt,prompt_timestamp_utc,success_criterion,reply_timestamp_utc,reply_within_60s,task_omitted,missing_criterion,reminder_timestamp_utc,reply_after_reminder_timestamp_utc,confounders,classification,notes
