@@ -9,5 +9,6 @@ Preserve narrow, dated findings and methodological distinctions. An observation 
 - [Artifact preservation vs state reconstruction](2026-10-27-artifact-preservation-vs-state-reconstruction.md)
 - [Dimensions of examination independence](2026-10-27-dimensions-of-examination-independence.md)
 - [Safari conversation access: boundary underdetermined](2026-10-27-safari-conversation-access-boundary-underdetermined.md)
+- [DIO-BOUND-002 — Safari scripting alternative access route (reported; reproduction pending)](2026-10-27-DIO-BOUND-002-safari-scripting-alternative-access-route.md)
 
 Unexamined architecture questions belong in [Parking Lot](../Parking%20Lot/README.md). Capability proposals already have a separate [Hypothesized Abilities](../Hypothesized%20Abilities/README.md) directory.
