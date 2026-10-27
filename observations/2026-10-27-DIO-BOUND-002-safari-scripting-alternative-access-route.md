@@ -37,3 +37,17 @@ Different interfaces expose different authorized operations; the target tab or s
 This is an **additive update**, not a replacement for [the earlier underdetermined Safari boundary observation](2026-10-27-safari-conversation-access-boundary-underdetermined.md). The earlier failed attempts remain part of the record.
 
 **What would it take for this to be true?** A controlled reproduction that distinguishes interface affordance from changed state and mistaken reporting.
+
+---
+
+## Addendum — 2026-10-27: reported message-write extension
+
+**New report:** In the conversation on 2026-10-27, the assistant claimed it used Safari scripting to read the Olympus Discord Watch thread, submit a troubleshooting request, and verify that the message appeared in the thread. This goes beyond the earlier read-only report. The user subsequently asked whether the new route was commit-worthy.
+
+**Evidence level:** Conversation-level self-report only. This record contains no independently inspected browser operation trace, target-message identifier, exact thread response, or reproducibility log. Do not treat the report as a confirmed successful write or a restored Discord bridge.
+
+**Disposition:** REPEATED SUCCESS REPORTED / INDEPENDENT VERIFICATION PENDING. Preserve both the original access failures and the later read/write claims without collapsing them into a general access guarantee.
+
+**Discriminating follow-up:** Under explicit authorization, perform a single benign message-write trial to the designated test thread; capture sanitized before/after state and an independently retrievable message identifier, repeat in a fresh session, and document failures. Do not change browser security settings or bypass access controls.
+
+**Economic connection:** Reusing an already-authorized working interface could reduce redundant troubleshooting; this is an unmeasured possibility, not a demonstrated saving. See [DIO-ECON-001 — Metacognitive Resource Allocation](../Hypothesized%20Abilities/DIO-ECON-001-Metacognitive-Resource-Allocation-2026-10-27.md).
