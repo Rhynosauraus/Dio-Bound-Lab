@@ -7,3 +7,4 @@ Each parked question should identify its provenance, competing explanations, a b
 ## Open questions
 
 - [Ozy shared-infrastructure correlated-failure hypothesis](2026-10-27-ozy-shared-infrastructure-correlated-failure-hypothesis.md) — **PARKED / UNTESTED**; requires an authorized synthetic resilience examination.
+- [Wanderer cold-start continuity test](2026-11-01-wanderer-cold-start-continuity-test.md) — **PARKED / UNTESTED**; tests whether an unfamiliar reader can recover project purpose, status, evidence, and next authorized steps from durable records alone.
