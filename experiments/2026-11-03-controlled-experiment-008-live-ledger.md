@@ -1,6 +1,6 @@
 # Experiment 008 — Living observation ledger
 
-Status: COMPLETED (six responses issued). Date: 2026-11-03. Updated only on explicit request; no background monitoring.
+Status: COMPLETED (six responses issued). Date: 2026-11-03. Updated on explicit request; no background monitoring.
 
 ## Fixed boundaries
 - Six prompt-response cycles: round 1 control; rounds 2–6 context-continuity intervention.
@@ -8,27 +8,37 @@ Status: COMPLETED (six responses issued). Date: 2026-11-03. Updated only on expl
 - Observe accuracy/usefulness; corrective prompts/rework; response completion/stability; resource use/estimated cost; time to visible response; context retention/experiment tracking.
 - Interrupt upon first observed serious failure. Distinguish direct conversation evidence, user reports, and estimates.
 
-## Cycle ledger
-| Round | Condition | Evidence/status | Limitations |
-| --- | --- | --- | --- |
-| 1 | Control | Control response issued; six-round boundary and Experiment 007 distinguished. | No independent delivery, latency, or cost measurement. |
-| 2 | Intervention | Resumed after approximately 34-minute gap; retained boundaries and tracked round. | No causal attribution. |
-| 3 | Intervention | Created living ledger on request; maintained six-round limit. | Cost and delivery unmeasured. |
-| 4 | Intervention | Updated ledger on request; tracked unresolved Pally invitation problem separately. | No independent stability data. |
-| 5 | Intervention | Recognized Pally's GitHub access issue as within-thread continuity and resumed experimental tracking at 5/6. | No quantified benefit or cost. |
-| 6 | Intervention | User requested 'Update and proceed'; updated this same ledger and closed at 6/6. | User-side rendering/delivery of final response not independently verified. |
+## Per-pair observational dataset
+Times below are message timestamps from the group thread (UTC), not measured model execution time, time-to-first-token, or user-side display latency. Seconds are simple differences between user and assistant message timestamps. These may include orchestration and tool time.
+
+| Round | Condition | User message UTC | Assistant message UTC | Message gap (s) | Observable work | Limitations |
+| --- | --- | --- | --- | ---: | --- | --- |
+| 1 | Control | 21:59:50 | 22:00:01 | 11 | Control issued; six-round boundary distinguished from Experiment 007 | No token, compute, rendering or cost telemetry |
+| 2 | Intervention | 22:34:38 | 22:34:47 | 9 | Resumed after long gap; boundaries retained | No causal attribution |
+| 3 | Intervention | 22:35:26 | 22:35:47 | 21 | GitHub living ledger created on request | GitHub operation included in elapsed gap |
+| 4 | Intervention | 22:45:25 | 22:45:47 | 22 | Ledger updated; Pally invitation issue tracked separately | GitHub operation included in elapsed gap |
+| 5 | Intervention | 22:48:57 | 22:49:06 | 9 | Pally side issue linked to continuity observation | No user-side latency measurement |
+| 6 | Intervention | 22:49:55 | 22:50:19 | 24 | Ledger updated; experiment closed | GitHub operation included in elapsed gap |
+
+## Descriptive statistics for message gaps (not latency)
+- All six: n=6, sum=96 s, mean=16.0 s, median=16.0 s, range=9–24 s.
+- Control: n=1, 11 s.
+- Intervention: n=5, gaps 9, 21, 22, 9, 24 s; mean=17.0 s; median=21 s; sample standard deviation approximately 7.45 s.
+- Difference of intervention mean minus control gap = +6 s; NOT an effect estimate. Prompts and tool activity differ, and there is only one control observation.
+- Token counts, inference compute, tool execution costs, monetary charges, and time-to-visible-response: **unavailable**, not zero. No cost-per-pair estimate can be responsibly derived from message gaps alone.
+- GitHub writes are observable in rounds 3, 4, and 6, but cannot be priced from this record.
 
 ## Final evaluation
-- **Context continuity:** Observable preservation of experiment ID, six-round limit, control/intervention distinction, GitHub side issue, and repository-update authorization across topic changes. This supports successful continuity in these exchanges, not proof of improvement over control.
-- **Accuracy/usefulness:** No clear boundary misinterpretation identified in the observed intervention responses. Usefulness not independently scored.
-- **Corrective prompts/rework:** No corrections unambiguously attributable to Experiment 008 identified; this is not a quantified reduction versus control.
-- **Response completion/stability:** Six assistant responses issued in the visible thread; user-side delivery and platform stability remain unverified. No serious failure reported during these rounds.
-- **Resource consumption/cost:** No actual token, compute, or monetary telemetry. GitHub reads/writes are observable actions, not a reliable cost measure.
-- **Time to visible response:** No reliable user-side visibility timestamps; message timestamps are not a substitute for render latency.
-- **Causal limits:** One control response versus five interventions, non-equivalent prompts, time gaps, and no blinded scoring make causal improvement unestablished.
+- Context continuity: Experiment ID, six-round bound, control/intervention distinction, and Pally's unresolved invitation issue retained across topic changes; descriptive success, not demonstrated causal improvement.
+- Accuracy/usefulness: No clear boundary misinterpretation identified; usefulness not independently scored.
+- Corrective prompts/rework: No corrections unambiguously attributable to Experiment 008 identified; no defensible reduction estimate.
+- Response completion/stability: Six assistant messages present in the thread; actual user-side delivery and platform stability unverified. No serious failure reported in the six rounds.
+- Resource consumption/cost: No actual token, compute, or monetary telemetry. Message gaps are not resource-use measurements.
+- Time to visible response: Not measured. Message timestamps are not user-render timestamps.
+- Causal limits: One unmatched control versus five interventions, variable prompt complexity, and GitHub actions in some rounds make regression, moving averages, and t-tests on this sample exploratory at best and not valid evidence of intervention effects.
 
-## Decision
-Experiment 008 ends at the predefined sixth round. Result: **continuity demonstrated descriptively; comparative improvement and cost efficiency inconclusive.** Do not automatically extend or change variables. A future test could use matched prompts and independently collected delivery/latency/cost observations, subject to separate approval.
+## Decision and follow-on
+Experiment 008 closed at round 6. Continuity demonstrated descriptively; comparative improvement and cost efficiency inconclusive. A proposed Experiment 009 protocol is documented separately but **not initiated**. No automatic extension.
 
 ## Separate unresolved issue
-Pally reported repeated GitHub invitation errors, including after a replacement invitation. The user indicated the repository should be public. This is not established as an assistant-response failure; invitation status and access cause remain unverified.
+Pally reported repeated GitHub invitation errors even after a replacement invitation. Repository visibility and invitation status are not independently verified; this is not established as an assistant-response failure.
