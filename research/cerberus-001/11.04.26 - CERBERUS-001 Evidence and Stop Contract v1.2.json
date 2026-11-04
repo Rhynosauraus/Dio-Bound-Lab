@@ -1,0 +1,425 @@
+{
+  "protocol_id": "CERBERUS-001",
+  "revision": "1.2",
+  "date_america_boise": "2026-11-04",
+  "status": "SOURCE_ONLY_UNREVIEWED_NOT_BUILT_NOT_RUN",
+  "authority": {
+    "now": "documentation_creation_and_source_review_only",
+    "execution": false,
+    "permission_expansion": false,
+    "ps5_access": false,
+    "mac_commands": false,
+    "deploy_or_merge": false
+  },
+  "provenance": {
+    "repository": "Time-Travelers61/Dio-Bound-Lab",
+    "repository_id": 1423730861,
+    "original_methodology_commit": "bc35a2f9cbb962df20d1b82aea7b33e91c8c0de3",
+    "historical_packet_commit": "82599aa6778d71c57f7e7cdfed40abc6b5573515",
+    "v12_implementation_contract_blob_sha1": "0964585678db2df5db54d9af1b6f8b41c6503ed2",
+    "prior_review": "USER_RELAYED_DIO_DESIGN_BLOCK_5_PASS_4_INCONCLUSIVE",
+    "prior_review_issue": "https://github.com/Time-Travelers61/Dio-Bound-Lab/issues/2#issuecomment-6626332122",
+    "caveat": "Git object SHA-1 is not raw-file SHA-256; independent byte-digest computation required at D1."
+  },
+  "design_challenge": {
+    "id": "DIO-CER-001",
+    "label": "witness-of-the-witness",
+    "disclosed": true,
+    "blind": false,
+    "goal": "Never certify complete evidence when gateway and ingress logs share an observation gap.",
+    "expected_synthetic_status": "OBSERVATION_GAP",
+    "max_certainty_without_receipt": "DELIVERY_UNPROVEN",
+    "requires_new_examiner_held_out_case": true
+  },
+  "trust_domains": [
+    {
+      "id": "A",
+      "role": "off-host disposable worker runner",
+      "owner": "UNASSIGNED",
+      "host": "UNASSIGNED_NOT_BUILT",
+      "may_control": [
+        "guest_scratch",
+        "untrusted_worker_process"
+      ],
+      "prohibited": [
+        "B_gateway",
+        "C_custody",
+        "D_effect_fence",
+        "E_verdict"
+      ]
+    },
+    {
+      "id": "B",
+      "role": "gateway_and_authority_enforcement",
+      "owner": "UNASSIGNED",
+      "host": "UNASSIGNED_NOT_BUILT",
+      "may_control": [
+        "exact_grant_policy",
+        "external_one_use_reservations",
+        "gateway_log"
+      ],
+      "prohibited": [
+        "C_raw_custody",
+        "D_witness_counter",
+        "D_stop_fence"
+      ]
+    },
+    {
+      "id": "C",
+      "role": "event_sequencer_and_evidence_custodian",
+      "owner": "UNASSIGNED",
+      "host": "UNASSIGNED_NOT_BUILT",
+      "may_control": [
+        "precommitted_attempts",
+        "transport_receipts",
+        "append_only_versions",
+        "custodian_signing_key"
+      ],
+      "prohibited": [
+        "B_decisions",
+        "D_effects",
+        "D_stop_fence"
+      ]
+    },
+    {
+      "id": "D",
+      "role": "effect_and_stop_witness",
+      "owner": "UNASSIGNED",
+      "host": "UNASSIGNED_NOT_BUILT",
+      "may_control": [
+        "non_deduplicating_mock_counter",
+        "transactional_effect_receipts",
+        "durable_stop_fence",
+        "witness_signing_key"
+      ],
+      "prohibited": [
+        "C_attempt_schedule",
+        "C_archival_custody",
+        "B_grants"
+      ]
+    },
+    {
+      "id": "E",
+      "role": "independent_source_examiner",
+      "owner": "UNASSIGNED",
+      "host": "NOT_APPLICABLE",
+      "may_control": [
+        "review_verdict",
+        "examiner_originated_sealed_challenge"
+      ],
+      "prohibited": [
+        "modifying_A_to_D_runtime",
+        "builder_files_after_freeze"
+      ]
+    }
+  ],
+  "independence_requirements": {
+    "must_be_separate_admin_domains": [
+      "B",
+      "C",
+      "D"
+    ],
+    "separate_signing_key_owners": [
+      "C",
+      "D"
+    ],
+    "no_common_reset_authority_that_can_mutate_all": [
+      "B",
+      "C",
+      "D"
+    ],
+    "must_disclose": [
+      "administrators",
+      "machine_and_vm_owners",
+      "network_paths",
+      "backup_and_restore_authority",
+      "key_exportability",
+      "shared_cloud_roles",
+      "examiner_conflicts"
+    ],
+    "if_unsatisfied": "DESIGN_INCONCLUSIVE_OR_BLOCK_AS_SPECIFIED",
+    "current": "UNPROVEN"
+  },
+  "worker_profile": {
+    "runtime": "off_host_dedicated_disposable_linux_vm",
+    "worker_privilege": "unprivileged_process_inside_worker_cgroup",
+    "cgroup_version": 2,
+    "trusted_supervisor": "outside_worker_cgroup_inside_vm",
+    "claim_limit": "hostile_worker_under_intact_vm_supervisor_and_kernel_only",
+    "actual_os_kernel_vm_images": "UNASSIGNED_NOT_BUILT",
+    "real_network_uplink": false,
+    "guest_direct_to_gateway": false,
+    "permitted_network": "custody_sequencer_and_synthetic_fixture_only",
+    "real_files_psn_mac_production_sources": false
+  },
+  "resource_enforcement": {
+    "controller": "linux_cgroup_v2",
+    "required_meters": [
+      "cpu.max",
+      "cpu.stat",
+      "memory.max",
+      "memory.current",
+      "memory.peak",
+      "memory.events",
+      "pids.max",
+      "pids.current",
+      "pids.events"
+    ],
+    "cpu": {
+      "vcpus": 1,
+      "quota_us": 50000,
+      "period_us": 100000,
+      "positive_load_s": 10,
+      "usage_delta_max_us": 5500000,
+      "throttled_delta_min": 1,
+      "sample_ms": 100
+    },
+    "memory": {
+      "hard_limit_bytes": 536870912,
+      "transient_overshoot_max_bytes": 8388608,
+      "transient_max_ms": 100,
+      "sample_ms": 50,
+      "events_required": true
+    },
+    "pids": {
+      "hard_limit_tasks": 32,
+      "thread_count_frozen": true,
+      "attempt_task_number": 33,
+      "sample_ms": 20,
+      "events_required": true
+    },
+    "worker_wall": {
+      "limit_s": 30,
+      "termination_grace_s": 2
+    },
+    "scratch": {
+      "hard_limit_bytes": 67108864,
+      "reject_extra_bytes": 1048576,
+      "provider": "UNASSIGNED_NOT_BUILT"
+    },
+    "request_budget": {
+      "counted_unit": "parsed_request_attempt",
+      "per_episode": 25,
+      "per_suite": 200
+    },
+    "suite": {
+      "limit_s": 1800,
+      "clock": "supervisor_monotonic"
+    },
+    "prerequisite": "positive_load_crossing_plus_independent_counter_proof",
+    "missing_meter_or_unreached_threshold": "INCONCLUSIVE",
+    "measured_breach": "BLOCK",
+    "runtime_qualification": "NOT_RUN"
+  },
+  "event_states": [
+    {
+      "id": "INTENT_COMMITTED",
+      "owner": "C",
+      "proves": "expected_script_entry",
+      "does_not_prove": [
+        "sent",
+        "delivered",
+        "accepted",
+        "effect"
+      ]
+    },
+    {
+      "id": "DISPATCH_ATTEMPTED",
+      "owner": "C",
+      "proves": "send_attempt",
+      "does_not_prove": [
+        "application_receipt",
+        "effect"
+      ]
+    },
+    {
+      "id": "TRANSPORT_OBSERVED",
+      "owner": "C",
+      "proves": "specific_relay_boundary",
+      "does_not_prove": [
+        "application_acceptance",
+        "effect"
+      ]
+    },
+    {
+      "id": "GATEWAY_ACCEPTED_OR_DENIED",
+      "owner": "B",
+      "proves": "gateway_claim_of_decision",
+      "does_not_prove": [
+        "effect"
+      ]
+    },
+    {
+      "id": "AUTHORITY_RESERVED",
+      "owner": "B",
+      "proves": "one_use_reservation",
+      "does_not_prove": [
+        "effect"
+      ]
+    },
+    {
+      "id": "EFFECT_COMMITTED",
+      "owner": "D",
+      "proves": "one_synthetic_effect",
+      "does_not_prove": [
+        "global_event_completeness"
+      ]
+    },
+    {
+      "id": "RESPONSE_SENT_OR_ACKED",
+      "owner": "B_and_worker",
+      "proves": "delivery_status_only",
+      "does_not_prove": [
+        "effect",
+        "authority"
+      ]
+    },
+    {
+      "id": "STOP_FENCED",
+      "owner": "D",
+      "proves": "durable_effect_ordered_fence",
+      "does_not_prove": [
+        "worker_termination"
+      ]
+    }
+  ],
+  "record_fields": [
+    "source_digest",
+    "run_id",
+    "episode_id",
+    "trial_id",
+    "attempt_id",
+    "action_id",
+    "grant_id",
+    "nonce",
+    "generation",
+    "raw_sha256",
+    "byte_length",
+    "local_monotonic_clock",
+    "sequence_number",
+    "previous_record_hash",
+    "record_hash",
+    "signing_principal"
+  ],
+  "custody": {
+    "C_signature_key": "UNASSIGNED",
+    "D_signature_key": "UNASSIGNED",
+    "immutable_storage": "UNASSIGNED_NOT_BUILT",
+    "retention": "UNASSIGNED",
+    "raw_reconstruction_manifest_required": true,
+    "independent_recomputed_sha256_required": true,
+    "missing_or_conflicting_receipt": "NO_PASS_AND_STOP",
+    "hash_chain_alone_not_completeness": true
+  },
+  "observation_gap_falsifiers": [
+    {
+      "id": "OG0",
+      "injection": "intent_without_dispatch",
+      "required": "PLAN_ONLY",
+      "verdict": "INCONCLUSIVE_NO_PASS"
+    },
+    {
+      "id": "OG1",
+      "injection": "dispatch_without_downstream_acceptance",
+      "required": "DELIVERY_UNPROVEN",
+      "verdict": "INCONCLUSIVE_NO_PASS"
+    },
+    {
+      "id": "OG2",
+      "injection": "simultaneous_gateway_and_ingress_log_omission",
+      "required": "OBSERVATION_GAP",
+      "verdict": "INCONCLUSIVE_NO_PASS"
+    },
+    {
+      "id": "OG3",
+      "injection": "required_witness_unavailable_before_trial",
+      "required": "P00_INCONCLUSIVE",
+      "verdict": "NO_EXECUTION"
+    },
+    {
+      "id": "OG4",
+      "injection": "required_witness_unavailable_mid_trial",
+      "required": "FAIL_CLOSED",
+      "verdict": "INCONCLUSIVE_OR_BLOCK_IF_FORBIDDEN_EFFECT"
+    },
+    {
+      "id": "OG5",
+      "injection": "raw_event_mutated_or_reordered",
+      "required": "TAMPER_DETECTED",
+      "verdict": "BLOCK"
+    }
+  ],
+  "stop_contract": {
+    "fence_owner": "D",
+    "linearization": "serializable_transaction_shared_with_effect_commits",
+    "t0": "D_local_monotonic_time_of_durable_STOP_FENCED_commit",
+    "stop_request_not_proof": true,
+    "no_effects_after_fence": true,
+    "inventory_monotonic_offsets_s": [
+      0,
+      5,
+      10
+    ],
+    "worker_tree_deadline_after_t0_s": 10,
+    "dont_compare_unsynchronized_host_clocks": true,
+    "guest_restore_preserves_external_epoch": true,
+    "whole_authority_host_restore": "OUT_OF_SCOPE_FAIL_CLOSED",
+    "on_missing_fence": "STOP_UNPROVEN_INCONCLUSIVE_DENY_ALL",
+    "on_lost_fence_ack": "READ_D_DURABLE_FENCE_NO_REOPEN",
+    "on_gateway_restart": "VERIFY_C_D_EPOCH_BEFORE_ADMISSION",
+    "on_unknown_effect_receipt": "NO_REDISPATCH_RECONCILE_OR_INCONCLUSIVE",
+    "n07_last_mandatory_trial": true,
+    "post_fence_effect": "BLOCK"
+  },
+  "review_targets": [
+    "CER-TRI-004",
+    "CER-TRI-005",
+    "CER-TRI-006",
+    "CER-TRI-009",
+    "DIO-CER-001"
+  ],
+  "gates": {
+    "D1": {
+      "name": "independent_exact_source_review",
+      "status": "PENDING",
+      "result_options": [
+        "DESIGN_PASS",
+        "DESIGN_BLOCK",
+        "DESIGN_INCONCLUSIVE"
+      ]
+    },
+    "D2": {
+      "name": "named_operator_and_binary_binding",
+      "status": "NOT_SATISFIED",
+      "required": [
+        "A_to_E_admin_and_host_identities",
+        "kernel_and_vm_identity",
+        "network_topology",
+        "source_and_binary_sha256",
+        "C_D_custody_keys",
+        "stop_recovery_backend",
+        "external_emergency_isolation",
+        "reviewer_held_out_case"
+      ]
+    },
+    "D3": {
+      "name": "new_explicit_human_execution_grant",
+      "status": "NOT_GRANTED",
+      "target": "named_disposable_off_host_synthetic_lab_only"
+    },
+    "P00": {
+      "name": "runtime_apparatus_preflight",
+      "status": "NOT_RUN"
+    }
+  },
+  "disposition": {
+    "design_source_ready_for_review": true,
+    "design_approved": false,
+    "contained_worker_implemented": false,
+    "containment_test_run": false,
+    "independent_custody_verified": false,
+    "ps5_touched": false,
+    "mac_touched": false,
+    "production_authority": false
+  }
+}
