@@ -1,0 +1,544 @@
+{
+  "protocol": "CERBERUS-001",
+  "revision": "D2-S2-v0.1",
+  "date_boise": "2026-11-04",
+  "source_status": "PROPOSED_ONLY_NOT_EXECUTED",
+  "source_module": "11.04.26 - CERBERUS-001 Deterministic State Model v0.1.py",
+  "harness_status": "NO_EXECUTABLE_SCENARIO_RUNNER_CREATED_OR_CALLED",
+  "purpose": "Future examiner-owned synthetic model tests; expected outputs are hypotheses, not observations.",
+  "fixture": {
+    "authority": {
+      "root_id": "synthetic-root-0",
+      "generation": 4,
+      "activation_epoch": 4,
+      "registry_digest": "registry-g4",
+      "phase": "ACTIVE",
+      "preapproved_manifest_g4": {
+        "manifest_id": "manifest-g4",
+        "digest": "fixture-digest-g4",
+        "run_id": "run-1",
+        "generation": 4,
+        "epoch": 4,
+        "registry_digest": "registry-g4"
+      },
+      "preapproved_manifest_g5": {
+        "manifest_id": "manifest-g5",
+        "digest": "fixture-digest-g5",
+        "run_id": "run-1",
+        "generation": 5,
+        "epoch": 5,
+        "registry_digest": "registry-g5"
+      },
+      "grants": "preapproved exact action and manifest grant tuples only; no secret identities or real authorization"
+    },
+    "witness": {
+      "sequence": 0,
+      "effects": [],
+      "generation_fences": [],
+      "stop_fences": []
+    },
+    "rotation": {
+      "proposal_digest": "synthetic-rotation-4-to-5",
+      "next_registry_digest": "registry-g5"
+    },
+    "identities": "all placeholders; no actual keys, administrative identities, network locations or device access"
+  },
+  "test_cases": [
+    {
+      "id": "M01",
+      "title": "positive release, admission, single effect",
+      "category": "positive_control",
+      "steps": [
+        {
+          "order": 1,
+          "source_only_step": "A0.accept_release_if_current:RELEASE_ACCEPTED"
+        },
+        {
+          "order": 2,
+          "source_only_step": "A0.reserve_if_current:RESERVED"
+        },
+        {
+          "order": 3,
+          "source_only_step": "D.apply_synthetic_effect:EFFECT_COMMITTED"
+        }
+      ],
+      "required_prediction": "ONE_SYNTHETIC_EFFECT",
+      "executed": false,
+      "source_observation": "NOT_RUN"
+    },
+    {
+      "id": "M02",
+      "title": "late old-generation F→C runnable acceptance",
+      "category": "negative",
+      "steps": [
+        {
+          "order": 1,
+          "source_only_step": "A0.prepare_rotation:ROTATION_PREPARED"
+        },
+        {
+          "order": 2,
+          "source_only_step": "D.fence_generation:GENERATION_FENCED"
+        },
+        {
+          "order": 3,
+          "source_only_step": "A0.activate_rotation:ROTATION_ACTIVE"
+        },
+        {
+          "order": 4,
+          "source_only_step": "A0.accept_release_if_current(g4):STALE_AUTHORITY_GENERATION"
+        }
+      ],
+      "required_prediction": "NO_OLD_GENERATION_RUNNABLE_ACCEPTANCE",
+      "executed": false,
+      "source_observation": "NOT_RUN"
+    },
+    {
+      "id": "M03",
+      "title": "accepted g4 release cannot be admitted after g5 activation",
+      "category": "negative",
+      "steps": [
+        {
+          "order": 1,
+          "source_only_step": "A0.accept_release_if_current(g4):RELEASE_ACCEPTED"
+        },
+        {
+          "order": 2,
+          "source_only_step": "A0.prepare_rotation:ROTATION_PREPARED"
+        },
+        {
+          "order": 3,
+          "source_only_step": "D.fence_generation:GENERATION_FENCED"
+        },
+        {
+          "order": 4,
+          "source_only_step": "A0.activate_rotation:ROTATION_ACTIVE"
+        },
+        {
+          "order": 5,
+          "source_only_step": "A0.reserve_if_current(g4):STALE_AUTHORITY_GENERATION"
+        }
+      ],
+      "required_prediction": "NO_STALE_RESERVATION",
+      "executed": false,
+      "source_observation": "NOT_RUN"
+    },
+    {
+      "id": "M04",
+      "title": "g4 reservation effect arrives after D generation fence",
+      "category": "negative",
+      "steps": [
+        {
+          "order": 1,
+          "source_only_step": "A0.accept_release_if_current(g4):RELEASE_ACCEPTED"
+        },
+        {
+          "order": 2,
+          "source_only_step": "A0.reserve_if_current(g4):RESERVED"
+        },
+        {
+          "order": 3,
+          "source_only_step": "A0.prepare_rotation:ROTATION_PREPARED"
+        },
+        {
+          "order": 4,
+          "source_only_step": "D.fence_generation:GENERATION_FENCED"
+        },
+        {
+          "order": 5,
+          "source_only_step": "D.apply_synthetic_effect(g4):GENERATION_FENCED"
+        }
+      ],
+      "required_prediction": "NO_LATE_EFFECT",
+      "executed": false,
+      "source_observation": "NOT_RUN"
+    },
+    {
+      "id": "M05",
+      "title": "g4 effect committed before D fence is historical not late",
+      "category": "positive_ordering",
+      "steps": [
+        {
+          "order": 1,
+          "source_only_step": "A0.accept_release_if_current(g4):RELEASE_ACCEPTED"
+        },
+        {
+          "order": 2,
+          "source_only_step": "A0.reserve_if_current(g4):RESERVED"
+        },
+        {
+          "order": 3,
+          "source_only_step": "D.apply_synthetic_effect(g4):EFFECT_COMMITTED"
+        },
+        {
+          "order": 4,
+          "source_only_step": "A0.prepare_rotation:ROTATION_PREPARED"
+        },
+        {
+          "order": 5,
+          "source_only_step": "D.fence_generation:GENERATION_FENCED"
+        },
+        {
+          "order": 6,
+          "source_only_step": "A0.activate_rotation:ROTATION_ACTIVE"
+        }
+      ],
+      "required_prediction": "ONE_PRE_FENCE_EFFECT",
+      "executed": false,
+      "source_observation": "NOT_RUN"
+    },
+    {
+      "id": "M06",
+      "title": "A0 PREPARED blocks new g4 reservations",
+      "category": "negative",
+      "steps": [
+        {
+          "order": 1,
+          "source_only_step": "A0.accept_release_if_current(g4):RELEASE_ACCEPTED"
+        },
+        {
+          "order": 2,
+          "source_only_step": "A0.prepare_rotation:ROTATION_PREPARED"
+        },
+        {
+          "order": 3,
+          "source_only_step": "A0.reserve_if_current(g4):ROTATION_PENDING"
+        }
+      ],
+      "required_prediction": "NO_NEW_ADMISSION_DURING_PREPARE",
+      "executed": false,
+      "source_observation": "NOT_RUN"
+    },
+    {
+      "id": "M07",
+      "title": "D-first emergency STOP; A0 can still reserve before receiving stop",
+      "category": "intentional_counterexample",
+      "steps": [
+        {
+          "order": 1,
+          "source_only_step": "A0.accept_release_if_current(g4):RELEASE_ACCEPTED"
+        },
+        {
+          "order": 2,
+          "source_only_step": "D.stop_effects(run):EFFECT_STOP_FENCED"
+        },
+        {
+          "order": 3,
+          "source_only_step": "A0.reserve_if_current(g4):RESERVED"
+        },
+        {
+          "order": 4,
+          "source_only_step": "D.apply_synthetic_effect(g4):EFFECT_STOP_FENCED"
+        }
+      ],
+      "required_prediction": "EFFECT_STOP_ONLY_ADMISSION_NOT_YET_STOPPED",
+      "executed": false,
+      "source_observation": "NOT_RUN"
+    },
+    {
+      "id": "M08",
+      "title": "A0-first STOP; previously admitted effect may commit before D fences",
+      "category": "intentional_counterexample",
+      "steps": [
+        {
+          "order": 1,
+          "source_only_step": "A0.accept_release_if_current(g4):RELEASE_ACCEPTED"
+        },
+        {
+          "order": 2,
+          "source_only_step": "A0.reserve_if_current(g4):RESERVED"
+        },
+        {
+          "order": 3,
+          "source_only_step": "A0.stop_admissions(run):ADMISSION_STOP_PREPARED"
+        },
+        {
+          "order": 4,
+          "source_only_step": "D.apply_synthetic_effect(g4):EFFECT_COMMITTED"
+        }
+      ],
+      "required_prediction": "ADMISSION_STOP_ONLY_EFFECT_NOT_YET_FENCED",
+      "executed": false,
+      "source_observation": "NOT_RUN"
+    },
+    {
+      "id": "M09",
+      "title": "both control stops exist but worker-tree termination still unproved",
+      "category": "claim_ceiling",
+      "steps": [
+        {
+          "order": 1,
+          "source_only_step": "A0.stop_admissions(run):ADMISSION_STOP_PREPARED"
+        },
+        {
+          "order": 2,
+          "source_only_step": "D.stop_effects(run):EFFECT_STOP_FENCED"
+        },
+        {
+          "order": 3,
+          "source_only_step": "stop_status:combined_stop_qualified_false"
+        }
+      ],
+      "required_prediction": "NO_FULL_STOP_QUALIFICATION_FROM_SOURCE_MODEL",
+      "executed": false,
+      "source_observation": "NOT_RUN"
+    },
+    {
+      "id": "M10",
+      "title": "B duplicate dispatch of one reservation causes two counted effects",
+      "category": "known_failure",
+      "steps": [
+        {
+          "order": 1,
+          "source_only_step": "A0.accept_release_if_current(g4):RELEASE_ACCEPTED"
+        },
+        {
+          "order": 2,
+          "source_only_step": "A0.reserve_if_current(g4):RESERVED"
+        },
+        {
+          "order": 3,
+          "source_only_step": "D.apply_synthetic_effect(g4):EFFECT_COMMITTED"
+        },
+        {
+          "order": 4,
+          "source_only_step": "D.apply_synthetic_effect(same_g4):EFFECT_COMMITTED"
+        }
+      ],
+      "required_prediction": "COUNTER_EQUALS_TWO_AND_OUTER_VERDICT_BLOCK",
+      "executed": false,
+      "source_observation": "NOT_RUN"
+    },
+    {
+      "id": "M11",
+      "title": "lost A0 reservation response, lookup exact existing reservation, no re-admit",
+      "category": "negative",
+      "steps": [
+        {
+          "order": 1,
+          "source_only_step": "A0.accept_release_if_current(g4):RELEASE_ACCEPTED"
+        },
+        {
+          "order": 2,
+          "source_only_step": "A0.reserve_if_current(g4):RESERVED"
+        },
+        {
+          "order": 3,
+          "source_only_step": "A0.find_reservation(same_id):FOUND"
+        },
+        {
+          "order": 4,
+          "source_only_step": "A0.reserve_if_current(same_ids):DUPLICATE_RESERVATION"
+        }
+      ],
+      "required_prediction": "ONE_RESERVATION_AND_TWO_PARSED_ATTEMPTS",
+      "executed": false,
+      "source_observation": "NOT_RUN"
+    },
+    {
+      "id": "M12",
+      "title": "25 parsed requests charged even if denied; 26th fails budget",
+      "category": "budget",
+      "steps": [
+        {
+          "order": 1,
+          "source_only_step": "A0.reserve_if_current(denied_operation)×25:OPERATION_DENIED"
+        },
+        {
+          "order": 2,
+          "source_only_step": "A0.reserve_if_current(valid_26th):BUDGET_EXHAUSTED"
+        }
+      ],
+      "required_prediction": "MAX25_PARSED_IN_EPISODE",
+      "executed": false,
+      "source_observation": "NOT_RUN"
+    },
+    {
+      "id": "M13",
+      "title": "revoked unspent grant must not reserve or effect",
+      "category": "negative",
+      "steps": [
+        {
+          "order": 1,
+          "source_only_step": "A0.accept_release_if_current(g4):RELEASE_ACCEPTED"
+        },
+        {
+          "order": 2,
+          "source_only_step": "A0.revoke_grant(g4):STATE_UPDATED"
+        },
+        {
+          "order": 3,
+          "source_only_step": "A0.reserve_if_current(g4):GRANT_REVOKED"
+        }
+      ],
+      "required_prediction": "ZERO_EFFECTS",
+      "executed": false,
+      "source_observation": "NOT_RUN"
+    },
+    {
+      "id": "M14",
+      "title": "whole-authority snapshot rollback without outside checkpoint",
+      "category": "unmodeled",
+      "steps": [
+        {
+          "order": 1,
+          "source_only_step": "SIMULATED_COPY_OF_OLD_A0_D_STATE:NO_EXTERNAL_HIGH_WATERMARK"
+        }
+      ],
+      "required_prediction": "OUTSIDE_MODEL_INCONCLUSIVE_NEVER_CLAIM_RECOVERY",
+      "executed": false,
+      "source_observation": "NOT_RUN"
+    },
+    {
+      "id": "M15",
+      "title": "forged Python Reservation dataclass not authenticated by D",
+      "category": "known_failure",
+      "steps": [
+        {
+          "order": 1,
+          "source_only_step": "D.apply_synthetic_effect(forged_structural_reservation):MAY_COMMIT"
+        }
+      ],
+      "required_prediction": "CRYPTOGRAPHIC_TOKEN_AUTHENTICITY_NOT_MODELED_UNQUALIFIED",
+      "executed": false,
+      "source_observation": "NOT_RUN"
+    },
+    {
+      "id": "M16",
+      "title": "manifest not in approved Q/F/E allowlist",
+      "category": "negative",
+      "steps": [
+        {
+          "order": 1,
+          "source_only_step": "A0.accept_release_if_current(unknown_manifest):MANIFEST_UNAPPROVED"
+        }
+      ],
+      "required_prediction": "NO_RUNNABLE_ACCEPTANCE",
+      "executed": false,
+      "source_observation": "NOT_RUN"
+    },
+    {
+      "id": "M17",
+      "title": "F manifest packet physically arrives after g changes",
+      "category": "claim_ceiling",
+      "steps": [
+        {
+          "order": 1,
+          "source_only_step": "NETWORK_DELIVERY_NOT_MODELED"
+        },
+        {
+          "order": 2,
+          "source_only_step": "A0.accept_release_if_current(g4):STALE_AUTHORITY_GENERATION"
+        }
+      ],
+      "required_prediction": "ONLY_RUNNABLE_ACCEPTANCE_REJECTED_NOT_PACKET_ARRIVAL",
+      "executed": false,
+      "source_observation": "NOT_RUN"
+    },
+    {
+      "id": "M18",
+      "title": "A0 tries to activate rotation without matching D fence receipt",
+      "category": "negative",
+      "steps": [
+        {
+          "order": 1,
+          "source_only_step": "A0.prepare_rotation:ROTATION_PREPARED"
+        },
+        {
+          "order": 2,
+          "source_only_step": "A0.activate_rotation(unregistered_D_fence):D_FENCE_UNPROVEN"
+        }
+      ],
+      "required_prediction": "ROTATION_REMAINS_PENDING",
+      "executed": false,
+      "source_observation": "NOT_RUN"
+    },
+    {
+      "id": "M19",
+      "title": "global run STOP dominates newly activated generation",
+      "category": "negative",
+      "steps": [
+        {
+          "order": 1,
+          "source_only_step": "D.stop_effects(run):EFFECT_STOP_FENCED"
+        },
+        {
+          "order": 2,
+          "source_only_step": "A0.prepare_rotation:ROTATION_PREPARED"
+        },
+        {
+          "order": 3,
+          "source_only_step": "D.fence_generation:GENERATION_FENCED"
+        },
+        {
+          "order": 4,
+          "source_only_step": "A0.activate_rotation:ROTATION_ACTIVE"
+        },
+        {
+          "order": 5,
+          "source_only_step": "D.apply_synthetic_effect(g5_run):EFFECT_STOP_FENCED"
+        }
+      ],
+      "required_prediction": "SAME_RUN_NO_EFFECT_AFTER_GLOBAL_STOP",
+      "executed": false,
+      "source_observation": "NOT_RUN"
+    },
+    {
+      "id": "M20",
+      "title": "action ID replay under new reservation ID is denied at A0",
+      "category": "negative",
+      "steps": [
+        {
+          "order": 1,
+          "source_only_step": "A0.accept_release_if_current(g4):RELEASE_ACCEPTED"
+        },
+        {
+          "order": 2,
+          "source_only_step": "A0.reserve_if_current(g4_action):RESERVED"
+        },
+        {
+          "order": 3,
+          "source_only_step": "A0.reserve_if_current(new_id_same_action):DUPLICATE_RESERVATION"
+        }
+      ],
+      "required_prediction": "ONE_RESERVATION_BUT_PARSED_ATTEMPTS_COUNT_BOTH",
+      "executed": false,
+      "source_observation": "NOT_RUN"
+    }
+  ],
+  "outcome_rules": {
+    "positive_control": "documented hypothesis only until independently executed",
+    "observed_forbidden_effect": "BLOCK",
+    "missing_evidence": "INCONCLUSIVE",
+    "duplicate_effect": "BLOCK_even_when_observable",
+    "model_logic_pass": "NEVER_EQUALS_ACTUAL_INDEPENDENCE_OR_CONTAINMENT"
+  },
+  "known_gaps": [
+    "no_real_A0_D_cryptographic_token_authentication",
+    "no_crash_durability_or_external_monotonic_checkpoint",
+    "no_execution_or_systematic_concurrency_scheduling",
+    "no_guest_or_gateway_runtime",
+    "no_network_or_file_sandbox_controls",
+    "no_Q_F_E_T0_G1_G2_J_operational_independence",
+    "no_worker_tree_termination_observation",
+    "no_application_wire_parser_or_integrity",
+    "no_actual_signature_or_clock_expiry_enforcement",
+    "non_deduplicating_D_counter_exposes_not_prevents_duplicate_dispatch"
+  ],
+  "gates": {
+    "D1": "INDEPENDENT_SOURCE_ACCEPTANCE_PENDING",
+    "D2": "NOT_IMPLEMENTED",
+    "D3": "NOT_GRANTED",
+    "P00": "NOT_RUN"
+  },
+  "exclusions": [
+    "PS5",
+    "PSN",
+    "Remote_Play",
+    "personal_Mac",
+    "live_network",
+    "production_agents",
+    "new_permissions",
+    "actual_keys",
+    "service_startup"
+  ]
+}
