@@ -1,0 +1,264 @@
+{
+  "protocol": "CERBERUS-001",
+  "revision": "D2-S2-A0-proof-v0.4",
+  "creation_date_boise": "2026-11-04",
+  "status": "SOURCE_ONLY_NOT_IMPORTED_NOT_COMPILED_NOT_RUN",
+  "source_parent_commit": "2cd9a9de9c0147792c9dbc0b9bb789e9fbac7090",
+  "source_files": [
+    "11.04.26 - CERBERUS-001 A0 Commitment Proof Verifier v0.4.py",
+    "11.04.26 - CERBERUS-001 D Commitment Evidence Adapter v0.4.py",
+    "11.04.26 - CERBERUS-001 A0 Commitment Proof Tests v0.4.py"
+  ],
+  "claim_ceiling": "The source models verification of a signed challenge response against trusted inputs. No real cryptographic assurance, fresh authority guarantee, durable A0 commit, independent custody or effect safety is established.",
+  "protected_future_dependencies": [
+    "real_D_owned_random_nonce_generated_at_least_128_bits_and_consumed_once",
+    "actual_out_of_band_T0_anchor_and_role_key_fingerprint_enrollment",
+    "source_pinned_real_Ed25519_provider_not_test_double",
+    "independent_trust_admin_and_nonshared_snapshot_root",
+    "independent_durable_A0_commit_head_with_external_monotonic_checkpoint",
+    "D_owned_expected_generation_manifest_run_grant_action",
+    "D_effect_time_revocation_and_STOP_FENCED_transaction",
+    "only_approved_effect_entrypoint_and_no_legacy_bypass",
+    "authenticated_transport_and_A0_response_origin",
+    "independently_held_ingress_and_custody_evidence"
+  ],
+  "scenarios": [
+    {
+      "id": "AP01",
+      "synthetic_scenario": "Exact synthetic proof, matching D challenge and pinned key",
+      "required_prediction": "PROOF_VERIFIED_FOR_CHALLENGE",
+      "category": "MODEL_POSITIVE_ONLY",
+      "qualification_limit": "SHA512 test double is NOT Ed25519",
+      "executed": false,
+      "result": "NOT_RUN"
+    },
+    {
+      "id": "AP02",
+      "synthetic_scenario": "Proof replayed against a different D challenge nonce",
+      "required_prediction": "PROOF_CONTEXT_MISMATCH",
+      "category": "REJECT",
+      "qualification_limit": "Unique nonce must be D-created and durable later",
+      "executed": false,
+      "result": "NOT_RUN"
+    },
+    {
+      "id": "AP03",
+      "synthetic_scenario": "Response signed under old generation but D expects new generation",
+      "required_prediction": "PROOF_CONTEXT_MISMATCH",
+      "category": "REJECT",
+      "qualification_limit": "A0 epoch must also be current under external checkpoint",
+      "executed": false,
+      "result": "NOT_RUN"
+    },
+    {
+      "id": "AP04",
+      "synthetic_scenario": "A0 proof claims older/different checkpoint digest",
+      "required_prediction": "PROOF_CONTEXT_MISMATCH",
+      "category": "REJECT",
+      "qualification_limit": "D checkpoint identity must be independently anchored",
+      "executed": false,
+      "result": "NOT_RUN"
+    },
+    {
+      "id": "AP05",
+      "synthetic_scenario": "Change reservation ID inside signed raw JSON",
+      "required_prediction": "PROOF_CONTEXT_MISMATCH",
+      "category": "REJECT_BEFORE_CRYPTO",
+      "qualification_limit": "Expected context rejects mismatched ID first",
+      "executed": false,
+      "result": "NOT_RUN"
+    },
+    {
+      "id": "AP06",
+      "synthetic_scenario": "Use incorrect 64-byte signature",
+      "required_prediction": "PROOF_SIGNATURE_INVALID",
+      "category": "REJECT",
+      "qualification_limit": "Test verifier only",
+      "executed": false,
+      "result": "NOT_RUN"
+    },
+    {
+      "id": "AP07",
+      "synthetic_scenario": "Substitute pinned public-key fingerprint",
+      "required_prediction": "TRUST_ANCHOR_UNPROVEN",
+      "category": "REJECT",
+      "qualification_limit": "Source cannot establish real trusted bootstrap",
+      "executed": false,
+      "result": "NOT_RUN"
+    },
+    {
+      "id": "AP08",
+      "synthetic_scenario": "Substitute signer key ID despite valid-looking signature",
+      "required_prediction": "A0_PROOF_KEY_MISMATCH",
+      "category": "REJECT",
+      "qualification_limit": "No signer-selected authority",
+      "executed": false,
+      "result": "NOT_RUN"
+    },
+    {
+      "id": "AP09",
+      "synthetic_scenario": "Alter canonical JSON spacing",
+      "required_prediction": "PROOF_MALFORMED",
+      "category": "REJECT",
+      "qualification_limit": "Canonical byte equality required",
+      "executed": false,
+      "result": "NOT_RUN"
+    },
+    {
+      "id": "AP10",
+      "synthetic_scenario": "Duplicate JSON field with same value",
+      "required_prediction": "PROOF_MALFORMED",
+      "category": "REJECT",
+      "qualification_limit": "No JSON parser ambiguity",
+      "executed": false,
+      "result": "NOT_RUN"
+    },
+    {
+      "id": "AP11",
+      "synthetic_scenario": "Python bool masquerades as generation integer",
+      "required_prediction": "PROOF_MALFORMED",
+      "category": "REJECT",
+      "qualification_limit": "Exact integer types required",
+      "executed": false,
+      "result": "NOT_RUN"
+    },
+    {
+      "id": "AP12",
+      "synthetic_scenario": "A0 response head sequence older than reservation commit sequence",
+      "required_prediction": "PROOF_MALFORMED",
+      "category": "REJECT",
+      "qualification_limit": "Monotonic local ordering sanity check",
+      "executed": false,
+      "result": "NOT_RUN"
+    },
+    {
+      "id": "AP13",
+      "synthetic_scenario": "Signature verification adapter unavailable",
+      "required_prediction": "PROOF_SIGNATURE_PROVIDER_UNAVAILABLE",
+      "category": "REJECT",
+      "qualification_limit": "Never permissive fallback",
+      "executed": false,
+      "result": "NOT_RUN"
+    },
+    {
+      "id": "AP14",
+      "synthetic_scenario": "Signature verification provider raises runtime error",
+      "required_prediction": "PROOF_SIGNATURE_PROVIDER_UNAVAILABLE",
+      "category": "REJECT",
+      "qualification_limit": "No false PASS on missing provider",
+      "executed": false,
+      "result": "NOT_RUN"
+    },
+    {
+      "id": "AP15",
+      "synthetic_scenario": "Wrong A0 proof decision status",
+      "required_prediction": "PROOF_MALFORMED",
+      "category": "REJECT",
+      "qualification_limit": "Only COMMITTED_CURRENT qualifies",
+      "executed": false,
+      "result": "NOT_RUN"
+    },
+    {
+      "id": "AP16",
+      "synthetic_scenario": "Exact A0 proof one-shot adapter used twice",
+      "required_prediction": "TRUE_THEN_FALSE",
+      "category": "MODEL_ONE_SHOT_ONLY",
+      "qualification_limit": "No real durable consumption",
+      "executed": false,
+      "result": "NOT_RUN"
+    },
+    {
+      "id": "AP17",
+      "synthetic_scenario": "Commit adapter invoked with different payload hash",
+      "required_prediction": "COMMIT_ARGUMENTS_MISMATCH",
+      "category": "REJECT",
+      "qualification_limit": "Failure consumes one-shot adapter",
+      "executed": false,
+      "result": "NOT_RUN"
+    },
+    {
+      "id": "AP18",
+      "synthetic_scenario": "Commit adapter invoked with different reservation ID",
+      "required_prediction": "COMMIT_ARGUMENTS_MISMATCH",
+      "category": "REJECT",
+      "qualification_limit": "Challenge bound to exact reservation",
+      "executed": false,
+      "result": "NOT_RUN"
+    },
+    {
+      "id": "AP19",
+      "synthetic_scenario": "Absent D challenge object",
+      "required_prediction": "COMMIT_ARGUMENTS_MISMATCH",
+      "category": "REJECT",
+      "qualification_limit": "Must not throw/allow",
+      "executed": false,
+      "result": "NOT_RUN"
+    },
+    {
+      "id": "AP20",
+      "synthetic_scenario": "Absent pinned proof verifier callback",
+      "required_prediction": "PROOF_VERIFIER_UNAVAILABLE",
+      "category": "REJECT",
+      "qualification_limit": "No trust fallback",
+      "executed": false,
+      "result": "NOT_RUN"
+    },
+    {
+      "id": "AP21",
+      "synthetic_scenario": "Authentic old proof with independent checkpoint advanced after challenge issuance",
+      "required_prediction": "MODEL_CANNOT_PROVE_LIVENESS",
+      "category": "INCONCLUSIVE",
+      "qualification_limit": "Point-in-time signature not effect-time freshness",
+      "executed": false,
+      "result": "NOT_RUN"
+    },
+    {
+      "id": "AP22",
+      "synthetic_scenario": "Hostile verifier function returns invented successful receipt",
+      "required_prediction": "MODEL_ACCEPTS_FORGED_PROVIDER",
+      "category": "KNOWN_UNQUALIFIED_GAP",
+      "qualification_limit": "Actual protected D must pin provider and disallow injection",
+      "executed": false,
+      "result": "NOT_RUN"
+    },
+    {
+      "id": "AP23",
+      "synthetic_scenario": "Cross-run proof substitution",
+      "required_prediction": "PROOF_CONTEXT_MISMATCH",
+      "category": "REJECT",
+      "qualification_limit": "Run identity D-owned",
+      "executed": false,
+      "result": "NOT_RUN"
+    },
+    {
+      "id": "AP24",
+      "synthetic_scenario": "Proof raw payload exceeds fixed byte limit",
+      "required_prediction": "PROOF_MALFORMED",
+      "category": "REJECT",
+      "qualification_limit": "No oversized transcript",
+      "executed": false,
+      "result": "NOT_RUN"
+    }
+  ],
+  "gates": {
+    "D1": "PENDING",
+    "D2": "REAL_INFRASTRUCTURE_NOT_BUILT",
+    "D3": "NOT_GRANTED",
+    "P00": "NOT_RUN"
+  },
+  "permissions": {
+    "actual_device_access": false,
+    "external_network": false,
+    "new_keys": false,
+    "test_execution": false,
+    "vm_start": false,
+    "installation": false,
+    "merge": false
+  },
+  "adversarial_conclusions": {
+    "forged_callback_case": "AP22 shows no source-level injection boundary is a substitute for D-owned pinned provider.",
+    "stale_checkpoint_case": "AP21 demonstrates signed proof is not proof of continuously live authority.",
+    "replay_case": "AP02 rejects mismatched D nonce, but a D-owned nonce issuance/consumption ledger is unimplemented.",
+    "protected_stop": "A0 proof does not replace independent D grant, generation, global STOP fences."
+  }
+}
