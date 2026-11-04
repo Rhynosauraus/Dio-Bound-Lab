@@ -395,6 +395,27 @@ class OneUseEffectClaimTests(unittest.TestCase):
         self.assertEqual(result.status, "EFFECT_COMMITTED")
 
 
+    def test_EC27_fabricated_success_cannot_change_manifest_binding(self):
+        def fake_claim(*args):
+            return (
+                "VERIFIED_SIGNATURE_AND_BINDINGS",
+                dict(self.fields, manifest_sha256="f" * 64),
+            )
+        denied = self.submit(checker=fake_claim)
+        self.assertEqual(
+            denied.status, "D_CONTEXT_OR_VERIFICATION_OUTPUT_INVALID"
+        )
+        self.assertEqual(len(denied.ledger.effects), 0)
+
+    def test_EC28_unexpected_verification_IO_exception_is_observed(self):
+        def broken_provider(*args):
+            raise OSError("synthetic provider failure")
+        denied = self.submit(checker=broken_provider)
+        self.assertEqual(denied.status, "VERIFICATION_UNAVAILABLE")
+        self.assertEqual(len(denied.ledger.attempts), 1)
+        self.assertEqual(len(denied.ledger.effects), 0)
+
+
 if __name__ == "__main__":
     raise SystemExit(
         "CERBERUS source-only tests were not authorized for execution."
