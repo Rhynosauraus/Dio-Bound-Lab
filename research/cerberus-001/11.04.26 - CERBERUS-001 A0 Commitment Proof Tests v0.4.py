@@ -302,6 +302,26 @@ class ProofTests(unittest.TestCase):
         self.assertEqual(self.verify(proof=proof)[0], "PROOF_MALFORMED")
 
 
+    def test_AP25_separate_one_shot_ports_reuse_same_nonce_known_gap(self):
+        first = self.adapter()
+        second = self.adapter()
+        self.assertTrue(self.invoke(first))
+        self.assertTrue(self.invoke(second))  # NO shared durable nonce ledger.
+        # Separate D effect uniqueness must prevent a second effect; this
+        # local port alone is NOT a replay-control guarantee.
+
+    def test_AP26_same_old_checkpoint_after_external_advance_known_gap(self):
+        # The external high-watermark is NOT modeled here. A previously
+        # signed challenge response can still verify if D keeps the old
+        # expected checkpoint; this is NOT proof of fresh authority.
+        status1, _ = self.verify()
+        status2, _ = self.verify()
+        self.assertEqual(
+            (status1, status2),
+            ("PROOF_VERIFIED_FOR_CHALLENGE",) * 2
+        )
+
+
 if __name__ == "__main__":
     raise SystemExit(
         "CERBERUS tests not authorized for execution by source creation."
