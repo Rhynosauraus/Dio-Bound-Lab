@@ -1,0 +1,330 @@
+{
+  "protocol_id": "CERBERUS-001",
+  "stage": "D2-S2",
+  "source_revision": "0.3",
+  "date_america_boise": "2026-11-04",
+  "status": "SOURCE_ONLY_NOT_EXECUTED_NOT_COMPILED_NOT_QUALIFIED",
+  "parent_source_commit": "2a296df1973007239c77487b0e7cf0054b84abfe",
+  "files": {
+    "model": "11.04.26 - CERBERUS-001 One-Use Effect Claim Model v0.3.py",
+    "tests": "11.04.26 - CERBERUS-001 One-Use Effect Claim Tests v0.3.py",
+    "previous_boundary": "11.04.26 - CERBERUS-001 Authenticated Reservation Boundary v0.2.py"
+  },
+  "semantics": {
+    "distinct_observables": [
+      "D_ATTEMPT_OBSERVED",
+      "D_EFFECT_COMMITTED",
+      "D_FENCE_COMMITTED"
+    ],
+    "attempt_model": "one_attempt_receipt_per_D_invocation_even_if_invalid_or_replayed",
+    "effect_claim_model": "one_effect_per_reservation_ID_globally_and_per_(root,run,episode,action_id)",
+    "historical_retry": "authenticated_and_committed_original_receipt_only_no_new_effect",
+    "denial_rule": "no_effect_but_attempt_receipt_appears_at_D",
+    "one_transaction_required_for_real_D": "attempt_observation_plus_fence_check_plus_effect_claim_plus_counter_commit_and_custody",
+    "actual_atomicity": "NOT_ESTABLISHED",
+    "necessary_database_constraints": [
+      "UNIQUE(root_id,run_id,episode_id,action_id) across D committed effects",
+      "UNIQUE(reservation_id) across D committed effects",
+      "D generation/stop/grant fences serialized in the same DB transaction ordering as effects",
+      "D attempt receipts non-deduplicating and independently exportable"
+    ],
+    "distinction_from_v02": "v0.2 deliberately counted two committed effects for duplicate dispatch; v0.3 proposes non-deduplicating ATTEMPT logging with at-most-once EFFECT commit. This is a NEW SEMANTIC CONTRACT and cannot silently replace earlier historical evidence.",
+    "full_exactly_once_claim": false,
+    "at_most_once_claim": "logical_inmemory_model_only_not_runtime",
+    "liveness": "not_guaranteed; a permitted effect might never commit",
+    "raw_legacy_effect_entrypoints_remain": "EXIST_UNSAFE_FOR_DEPLOYMENT",
+    "independent_ingress_tap_required": "D attempt receipts do not prove events D never received",
+    "post_revocation": "historic receipts remain historical; new effect denied after D fence"
+  },
+  "critical_assumptions": [
+    "cryptographic verifier provider independently owned, source pinned, and NOT a test double",
+    "A0 commitment evidence independently authenticated, current/fresh where required, durable and outside rollback scope",
+    "D-owned expected context cannot be forged by gateway",
+    "D effect claim and fences share one durable serializable transaction boundary",
+    "no raw v0.1 or v0.2 bypass to commit effects",
+    "independent authority and custody administrators/backup roots",
+    "source-only Python dataclasses do not provide these guarantees"
+  ],
+  "scenarios": [
+    {
+      "id": "EC01",
+      "synthetic_fault": "First valid TEST_ONLY signed reservation and matching mock A0 commitment",
+      "expected": "EFFECT_COMMITTED",
+      "observable": "attempts=1;effects=1",
+      "category": "positive_semantics",
+      "executed": false,
+      "result": "NOT_RUN",
+      "verdict_ceiling": "SOURCE_LEVEL_PREDICTION_ONLY"
+    },
+    {
+      "id": "EC02",
+      "synthetic_fault": "Exact authenticated retry after effect was already committed",
+      "expected": "ALREADY_COMMITTED_HISTORICAL_ONLY",
+      "observable": "attempts=2;effects=1;prior_receipt_returned",
+      "category": "duplicate_prevented_in_model",
+      "executed": false,
+      "result": "NOT_RUN",
+      "verdict_ceiling": "SOURCE_LEVEL_PREDICTION_ONLY"
+    },
+    {
+      "id": "EC03",
+      "synthetic_fault": "Same old token retried after D global STOP_FENCED",
+      "expected": "ALREADY_COMMITTED_AFTER_FENCE_HISTORICAL_ONLY",
+      "observable": "attempts_increase;effects_unchanged",
+      "category": "historical_reconciliation",
+      "executed": false,
+      "result": "NOT_RUN",
+      "verdict_ceiling": "SOURCE_LEVEL_PREDICTION_ONLY"
+    },
+    {
+      "id": "EC04",
+      "synthetic_fault": "Same old token retried after D grant fence",
+      "expected": "ALREADY_COMMITTED_AFTER_FENCE_HISTORICAL_ONLY",
+      "observable": "no_new_effect",
+      "category": "historical_reconciliation",
+      "executed": false,
+      "result": "NOT_RUN",
+      "verdict_ceiling": "SOURCE_LEVEL_PREDICTION_ONLY"
+    },
+    {
+      "id": "EC05",
+      "synthetic_fault": "Repeated malformed/invalid signature tokens reach D",
+      "expected": "SIGNATURE_INVALID",
+      "observable": "two_attempts_recorded;zero_effects",
+      "category": "observation",
+      "executed": false,
+      "result": "NOT_RUN",
+      "verdict_ceiling": "SOURCE_LEVEL_PREDICTION_ONLY"
+    },
+    {
+      "id": "EC06",
+      "synthetic_fault": "A0 commit evidence port absent",
+      "expected": "A0_COMMITMENT_UNPROVEN",
+      "observable": "one_attempt;zero_effects",
+      "category": "fail_closed",
+      "executed": false,
+      "result": "NOT_RUN",
+      "verdict_ceiling": "SOURCE_LEVEL_PREDICTION_ONLY"
+    },
+    {
+      "id": "EC07",
+      "synthetic_fault": "Public key fingerprint mismatches expected pinned fingerprint",
+      "expected": "TRUST_ANCHOR_UNPROVEN",
+      "observable": "zero_effects",
+      "category": "fail_closed",
+      "executed": false,
+      "result": "NOT_RUN",
+      "verdict_ceiling": "SOURCE_LEVEL_PREDICTION_ONLY"
+    },
+    {
+      "id": "EC08",
+      "synthetic_fault": "Token generation g4 conflicts with D-owned expected g5",
+      "expected": "REQUEST_BINDING_MISMATCH",
+      "observable": "zero_effects",
+      "category": "effect_time_context",
+      "executed": false,
+      "result": "NOT_RUN",
+      "verdict_ceiling": "SOURCE_LEVEL_PREDICTION_ONLY"
+    },
+    {
+      "id": "EC09",
+      "synthetic_fault": "D global stop already committed before new valid token",
+      "expected": "RUN_STOP_FENCED",
+      "observable": "one_attempt;zero_effects",
+      "category": "stop_order",
+      "executed": false,
+      "result": "NOT_RUN",
+      "verdict_ceiling": "SOURCE_LEVEL_PREDICTION_ONLY"
+    },
+    {
+      "id": "EC10",
+      "synthetic_fault": "D generation fence already committed before old token",
+      "expected": "GENERATION_FENCED",
+      "observable": "one_attempt;zero_effects",
+      "category": "generation_fence",
+      "executed": false,
+      "result": "NOT_RUN",
+      "verdict_ceiling": "SOURCE_LEVEL_PREDICTION_ONLY"
+    },
+    {
+      "id": "EC11",
+      "synthetic_fault": "D grant fence already committed before grant's first effect",
+      "expected": "GRANT_FENCED",
+      "observable": "one_attempt;zero_effects",
+      "category": "grant_revocation",
+      "executed": false,
+      "result": "NOT_RUN",
+      "verdict_ceiling": "SOURCE_LEVEL_PREDICTION_ONLY"
+    },
+    {
+      "id": "EC12",
+      "synthetic_fault": "D grant fence after first effect; token retried",
+      "expected": "ALREADY_COMMITTED_AFTER_FENCE_HISTORICAL_ONLY",
+      "observable": "original_effect_preserved;no_new_effect",
+      "category": "revocation_history",
+      "executed": false,
+      "result": "NOT_RUN",
+      "verdict_ceiling": "SOURCE_LEVEL_PREDICTION_ONLY"
+    },
+    {
+      "id": "EC13",
+      "synthetic_fault": "Different A0-reservation ID, same root/run/episode/action already committed",
+      "expected": "ACTION_ALREADY_COMMITTED",
+      "observable": "no_new_effect_even_with_distinct_reservation",
+      "category": "action_uniqueness",
+      "executed": false,
+      "result": "NOT_RUN",
+      "verdict_ceiling": "SOURCE_LEVEL_PREDICTION_ONLY"
+    },
+    {
+      "id": "EC14",
+      "synthetic_fault": "Same reservation ID reused with different action ID and exact new mock commitment",
+      "expected": "RESERVATION_ID_CONFLICT",
+      "observable": "no_new_effect",
+      "category": "reservation_collision",
+      "executed": false,
+      "result": "NOT_RUN",
+      "verdict_ceiling": "SOURCE_LEVEL_PREDICTION_ONLY"
+    },
+    {
+      "id": "EC15",
+      "synthetic_fault": "Same reservation ID reused under another run",
+      "expected": "RESERVATION_ID_CONFLICT",
+      "observable": "no_new_effect",
+      "category": "cross_run_collision",
+      "executed": false,
+      "result": "NOT_RUN",
+      "verdict_ceiling": "SOURCE_LEVEL_PREDICTION_ONLY"
+    },
+    {
+      "id": "EC16",
+      "synthetic_fault": "Effect committed, response lost, exact token retried",
+      "expected": "ALREADY_COMMITTED_HISTORICAL_ONLY",
+      "observable": "prior_receipt_returned;no_redispatch",
+      "category": "lost_ack",
+      "executed": false,
+      "result": "NOT_RUN",
+      "verdict_ceiling": "SOURCE_LEVEL_PREDICTION_ONLY"
+    },
+    {
+      "id": "EC17",
+      "synthetic_fault": "Invalid, valid, then duplicate token invocations at D",
+      "expected": "SIGNATURE_INVALID/EFFECT_COMMITTED/ALREADY_COMMITTED_HISTORICAL_ONLY",
+      "observable": "attempts=3;effects=1",
+      "category": "observability",
+      "executed": false,
+      "result": "NOT_RUN",
+      "verdict_ceiling": "SOURCE_LEVEL_PREDICTION_ONLY"
+    },
+    {
+      "id": "EC18",
+      "synthetic_fault": "Attempt, effect, duplicate attempt, STOP, later retry",
+      "expected": "MONOTONIC_SEQUENCE_1_TO_5",
+      "observable": "attempt_and_effect_and_fence_order",
+      "category": "causal_order",
+      "executed": false,
+      "result": "NOT_RUN",
+      "verdict_ceiling": "SOURCE_LEVEL_PREDICTION_ONLY"
+    },
+    {
+      "id": "EC19",
+      "synthetic_fault": "Injected verifier claims success but returns different action ID",
+      "expected": "D_CONTEXT_OR_VERIFICATION_OUTPUT_INVALID",
+      "observable": "zero_effects",
+      "category": "source_port_defense",
+      "executed": false,
+      "result": "NOT_RUN",
+      "verdict_ceiling": "SOURCE_LEVEL_PREDICTION_ONLY"
+    },
+    {
+      "id": "EC20",
+      "synthetic_fault": "Verification interface absent entirely",
+      "expected": "VERIFICATION_UNAVAILABLE",
+      "observable": "one_attempt;zero_effects",
+      "category": "fail_closed",
+      "executed": false,
+      "result": "NOT_RUN",
+      "verdict_ceiling": "SOURCE_LEVEL_PREDICTION_ONLY"
+    },
+    {
+      "id": "EC21",
+      "synthetic_fault": "Verification interface throws RuntimeError",
+      "expected": "VERIFICATION_UNAVAILABLE",
+      "observable": "attempt_recorded;zero_effects",
+      "category": "fail_closed",
+      "executed": false,
+      "result": "NOT_RUN",
+      "verdict_ceiling": "SOURCE_LEVEL_PREDICTION_ONLY"
+    },
+    {
+      "id": "EC22",
+      "synthetic_fault": "A0 commit evidence port throws RuntimeError",
+      "expected": "A0_COMMITMENT_UNPROVEN",
+      "observable": "attempt_recorded;zero_effects",
+      "category": "fail_closed",
+      "executed": false,
+      "result": "NOT_RUN",
+      "verdict_ceiling": "SOURCE_LEVEL_PREDICTION_ONLY"
+    },
+    {
+      "id": "EC23",
+      "synthetic_fault": "Repeated same D grant fence",
+      "expected": "GRANT_FENCE_ALREADY_COMMITTED",
+      "observable": "same_state_no_unfence",
+      "category": "fence_idempotence",
+      "executed": false,
+      "result": "NOT_RUN",
+      "verdict_ceiling": "SOURCE_LEVEL_PREDICTION_ONLY"
+    },
+    {
+      "id": "EC24",
+      "synthetic_fault": "Generation fence with different proposal digest for same generation",
+      "expected": "GENERATION_FENCE_CONFLICT",
+      "observable": "prior_fence_unchanged",
+      "category": "fence_conflict",
+      "executed": false,
+      "result": "NOT_RUN",
+      "verdict_ceiling": "SOURCE_LEVEL_PREDICTION_ONLY"
+    },
+    {
+      "id": "EC25",
+      "synthetic_fault": "Repeated same D global STOP",
+      "expected": "RUN_STOP_ALREADY_COMMITTED",
+      "observable": "same_state_no_unfence",
+      "category": "stop_idempotence",
+      "executed": false,
+      "result": "NOT_RUN",
+      "verdict_ceiling": "SOURCE_LEVEL_PREDICTION_ONLY"
+    },
+    {
+      "id": "EC26",
+      "synthetic_fault": "Hostile test double A0 oracle always returns true",
+      "expected": "EFFECT_COMMITTED",
+      "observable": "KNOWN_UNQUALIFIED_DEPENDENCY;not_independent_A0_proof",
+      "category": "deliberate_failing_trust_assumption",
+      "executed": false,
+      "result": "NOT_RUN",
+      "verdict_ceiling": "KNOWN_MODEL_GAP_NOT_PROOF"
+    }
+  ],
+  "gates": {
+    "D1": "PENDING_INDEPENDENT_SOURCE_ACCEPTANCE",
+    "D2": "UNBUILT",
+    "D3": "NOT_GRANTED",
+    "P00": "NOT_RUN"
+  },
+  "excluded": [
+    "real_network",
+    "Mac",
+    "PS5",
+    "PSN",
+    "Remote_Play",
+    "actual_keys",
+    "VM_start",
+    "production_agents",
+    "software_install",
+    "runtime_execution",
+    "permission_changes",
+    "merge"
+  ]
+}
