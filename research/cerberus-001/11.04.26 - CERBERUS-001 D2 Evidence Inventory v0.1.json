@@ -1,0 +1,386 @@
+{
+  "protocol": "CERBERUS-001",
+  "revision": "D2-P0.1",
+  "creation_date_america_boise": "2026-11-04",
+  "source_state": "BUILD_PLAN_ONLY_UNREVIEWED_UNIMPLEMENTED",
+  "authorization": {
+    "now_allowed": [
+      "github_source_read",
+      "documentation_write_on_isolated_review_branch",
+      "static_consistency_review"
+    ],
+    "not_authorized": [
+      "physical_or_remote_host_inventory",
+      "PS5_or_PSN",
+      "personal_Mac_operations",
+      "new_signing_key_creation",
+      "install_or_run_test_service",
+      "network_probes",
+      "guest_vm_start",
+      "permission_expansion",
+      "production_agent_automation",
+      "merge_or_deploy",
+      "execution"
+    ],
+    "D1_independent_review": "PENDING",
+    "D2_actual_infrastructure": "NOT_BUILT",
+    "D3_target_specific_human_grant": "NOT_GRANTED",
+    "P00_runtime_test": "NOT_RUN"
+  },
+  "provenance": {
+    "repository": "Time-Travelers61/Dio-Bound-Lab",
+    "repository_id": 1423730861,
+    "source_methodology_commit": "bc35a2f9cbb962df20d1b82aea7b33e91c8c0de3",
+    "v11_commit": "82599aa6778d71c57f7e7cdfed40abc6b5573515",
+    "v12_commit": "af89777a0e7f805c98afdba6d5d930d67f5c4cbc",
+    "v13_commit": "4644000a7f273c4a508887d4474f23aff676fc18",
+    "v14_commit": "803d5454962625769564937664ff736d7e2b6642",
+    "v15_commit": "5f1d11c786b6340c9c5cf51bc432b8679733533c",
+    "internal_coherence_commit": "18b20e4204318c3a1d958ef776656cc7151781a3",
+    "analogous_recovery_source": {
+      "repo": "Time-Travelers61/RSS-Wanderer",
+      "path": "tests/test_combined_recovery_inventory.py",
+      "git_blob_sha1": "0038a37e871097a7173176193f4b5fcaa85083f3",
+      "applies": "stale self-consistent snapshot is not authorization freshness proof",
+      "not_applies": "does_not_transfer_running_code_or_qualification"
+    }
+  },
+  "candidate_architecture": {
+    "operational_trust_domains": 4,
+    "labels": [
+      "L",
+      "A0",
+      "D",
+      "C"
+    ],
+    "boundaries": [
+      {
+        "id": "L",
+        "role": "dedicated_off_host_synthetic_lab_runner_and_B_gateway",
+        "admin": "UNASSIGNED",
+        "host": "UNASSIGNED",
+        "backup_root": "UNASSIGNED",
+        "network": "ISOLATED_NO_EXTERNAL_ROUTE",
+        "proven_independent": false,
+        "limitation": "B_and_runner_sharing_admin_is_not_independent_against_compromise_of_that_admin"
+      },
+      {
+        "id": "A0",
+        "role": "authoritative_generation_release_and_one_use_admission_reservation",
+        "admin": "UNASSIGNED",
+        "host": "UNASSIGNED",
+        "backend_candidate": "single_writer_SQLite_transitional_only",
+        "backup_root": "UNASSIGNED",
+        "external_high_watermark": "UNASSIGNED_NOT_BUILT",
+        "proven_independent": false
+      },
+      {
+        "id": "D",
+        "role": "synthetic_effect_counter_generation_fences_and_global_stop",
+        "admin": "UNASSIGNED",
+        "host": "UNASSIGNED",
+        "backend_candidate": "separately_administered_transactional_effect_ledger",
+        "backup_root": "UNASSIGNED",
+        "proven_independent": false
+      },
+      {
+        "id": "C",
+        "role": "independent_manifest_and_raw_evidence_custody",
+        "admin": "UNASSIGNED",
+        "host": "UNASSIGNED",
+        "backend_candidate": "append_only_versioned_signed_raw_storage",
+        "backup_root": "UNASSIGNED",
+        "proven_independent": false
+      }
+    ],
+    "procedural_roles": [
+      "Q_authorized_workload_issuer",
+      "F_manifest_registrar",
+      "E_pre_release_evidence_holder",
+      "H_human_bootstrap",
+      "G1_G2_independent_guardians",
+      "J_independent_adjudicator"
+    ],
+    "procedural_roles_real_owners": "UNASSIGNED",
+    "exactly_two_phase_stop_note": "D_stop_is_effect_fence;A0_stop_is_release_and_admission_fence;both_confirmed_only_after_both_distinct_receipts",
+    "no_joint_transaction_claim": true,
+    "fact_ceiling": "all_proposed_not_observed"
+  },
+  "source_only_api": [
+    {
+      "actor": "A0",
+      "operation": "ACCEPT_RELEASE_IF_CURRENT",
+      "atomicity": "same_generation_and_manifest_digest_compare_plus_one_use_release_commit",
+      "preconditions": [
+        "active_generation",
+        "active_root",
+        "no_A0_STOP",
+        "signed_manifest",
+        "unique_release_id"
+      ],
+      "on_uncertainty": "DENY"
+    },
+    {
+      "actor": "A0",
+      "operation": "RESERVE_IF_CURRENT",
+      "atomicity": "same_generation_and_grant_budget_replay_check_plus_one_use_reservation_commit",
+      "preconditions": [
+        "live_grant",
+        "manifest_accepted",
+        "current_root_generation",
+        "budget_available",
+        "no_A0_STOP"
+      ],
+      "on_uncertainty": "DENY"
+    },
+    {
+      "actor": "A0",
+      "operation": "PREPARE_ROTATION",
+      "atomicity": "active_to_pending_serialized_with_reservations",
+      "preconditions": [
+        "authorized_transition"
+      ],
+      "on_uncertainty": "PENDING_DENY"
+    },
+    {
+      "actor": "D",
+      "operation": "FENCE_GENERATION",
+      "atomicity": "generation_fence_serialized_with_effect_counter",
+      "preconditions": [
+        "exact_A0_prepare_receipt"
+      ],
+      "on_uncertainty": "STOP_UNPROVEN"
+    },
+    {
+      "actor": "A0",
+      "operation": "ACTIVATE_ROTATION",
+      "atomicity": "new_generation_only_after_verified_D_fence",
+      "preconditions": [
+        "durable_D_fence_receipt"
+      ],
+      "on_uncertainty": "PENDING_DENY"
+    },
+    {
+      "actor": "A0",
+      "operation": "STOP_PREPARED",
+      "atomicity": "stop_serialized_with_admission_and_release",
+      "preconditions": [
+        "stop_request_or_conservative_local_stop"
+      ],
+      "on_uncertainty": "ADMISSION_STOP_UNPROVEN"
+    },
+    {
+      "actor": "D",
+      "operation": "STOP_FENCED",
+      "atomicity": "global_stop_serialized_with_effect_counter",
+      "preconditions": [
+        "stop_request"
+      ],
+      "on_uncertainty": "EFFECT_STOP_UNPROVEN"
+    },
+    {
+      "actor": "D",
+      "operation": "APPLY_SYNTHETIC_EFFECT",
+      "atomicity": "fence_check_and_non_deduplicating_counter_commit",
+      "preconditions": [
+        "valid_A0_reservation_token",
+        "no_generation_fence",
+        "no_D_global_stop"
+      ],
+      "on_uncertainty": "NO_EFFECT_PROOF"
+    },
+    {
+      "actor": "J",
+      "operation": "RECONCILE",
+      "atomicity": "read_only_independently_custodied_evidence_not_effect_mutation",
+      "preconditions": [
+        "original_Q_F_E_manifest",
+        "A0_receipt",
+        "D_receipt",
+        "C_raw_records"
+      ],
+      "on_uncertainty": "INCONCLUSIVE"
+    }
+  ],
+  "stages": [
+    {
+      "id": "D2-S0",
+      "name": "source_mapping",
+      "state": "PREPARED_AUTHOR_SIDE",
+      "allowed_now": true,
+      "artifacts": [
+        "minimal_D2_architecture",
+        "static_transition_matrix",
+        "historical_source_hashes"
+      ],
+      "completion_requires": "independent_D1_source_acceptance_remains_separate"
+    },
+    {
+      "id": "D2-S1",
+      "name": "read_only_target_inventory",
+      "state": "NOT_STARTED_UNAUTHORIZED",
+      "allowed_now": false,
+      "artifacts": [
+        "named_off_host_candidate",
+        "admin_root_graph",
+        "backup_restore_graph",
+        "kernel_and_controller_inventory",
+        "external_checkpoint_owner"
+      ],
+      "completion_requires": "new_explicit_target_specific_read_only_authorization"
+    },
+    {
+      "id": "D2-S2",
+      "name": "offline_reference_model",
+      "state": "NOT_STARTED",
+      "allowed_now": false,
+      "artifacts": [
+        "deterministic_state_machine",
+        "unit_case_specifications",
+        "frozen_source_hashes"
+      ],
+      "completion_requires": "explicit_execution_authorization_before_running_even_an_inert_model"
+    },
+    {
+      "id": "D2-S3",
+      "name": "independent_authority_and_witness_stores",
+      "state": "NOT_BUILT",
+      "allowed_now": false,
+      "artifacts": [
+        "A0_transaction_log",
+        "D_transaction_log",
+        "cross_actor_causal_receipts",
+        "power_loss_crash_restore_proof"
+      ],
+      "completion_requires": "independent_admin_and_durability_evidence"
+    },
+    {
+      "id": "D2-S4",
+      "name": "off_host_synthetic_fixture",
+      "state": "NOT_BUILT",
+      "allowed_now": false,
+      "artifacts": [
+        "synthetic_guest",
+        "isolated_B_gateway",
+        "network_file_positive_controls",
+        "P00"
+      ],
+      "completion_requires": "D1_design_pass_D2_resources_and_D3_explicit_authorization"
+    },
+    {
+      "id": "D2-S5",
+      "name": "adversarial_runtime_qualification",
+      "state": "NOT_RUN",
+      "allowed_now": false,
+      "artifacts": [
+        "held_out_challenge",
+        "raw_actor_receipts",
+        "signed_custody_manifest",
+        "pass_block_inconclusive_result"
+      ],
+      "completion_requires": "independent_judgement_and_human_approval"
+    }
+  ],
+  "source_only_negative_cases": [
+    {
+      "id": "RF-01",
+      "scope": "manifest_release",
+      "fault": "old_generation_release_arrives_after_rotation",
+      "expected": "stale_C_accept_rejected"
+    },
+    {
+      "id": "RF-02",
+      "scope": "manifest_release",
+      "fault": "C_release_accept_then_rotation_before_B_admission",
+      "expected": "stale_B_admission_rejected"
+    },
+    {
+      "id": "RF-03",
+      "scope": "effect_fence",
+      "fault": "B_admits_old_generation_then_D_fences_before_effect",
+      "expected": "D_rejects_old_effect"
+    },
+    {
+      "id": "RF-04",
+      "scope": "manifest_release",
+      "fault": "A0_offline_on_C_accept",
+      "expected": "fail_closed_no_runnable_acceptance"
+    },
+    {
+      "id": "RF-05",
+      "scope": "manifest_release",
+      "fault": "reused_release_id_after_restore",
+      "expected": "denied_or_exact_receipt_reconciliation"
+    },
+    {
+      "id": "GS-01",
+      "scope": "A0_stop",
+      "fault": "A0_STOP_then_B_admission",
+      "expected": "no_new_reservation"
+    },
+    {
+      "id": "GS-02",
+      "scope": "D_stop",
+      "fault": "D_STOP_then_old_reservation_effect",
+      "expected": "no_new_effect"
+    },
+    {
+      "id": "GS-03",
+      "scope": "D_stop",
+      "fault": "D_STOP_before_A0_stop_with_gap_reservation",
+      "expected": "effect_denied_admission_stop_not_yet_claimed"
+    },
+    {
+      "id": "GS-04",
+      "scope": "mixed_stop",
+      "fault": "A0_stop_without_verified_D_fence",
+      "expected": "admission_proven_effect_stop_unproven"
+    },
+    {
+      "id": "GS-05",
+      "scope": "D_stop",
+      "fault": "D_fence_ack_lost_then_gateway_restart",
+      "expected": "D_state_reconciled_no_speculative_effect"
+    },
+    {
+      "id": "GS-06",
+      "scope": "restore",
+      "fault": "A0_D_mixed_rollback_without_independent_checkpoint",
+      "expected": "fail_closed_inconclusive"
+    },
+    {
+      "id": "GS-07",
+      "scope": "stop_persistence",
+      "fault": "N07_stop_then_new_key_and_manifest",
+      "expected": "same_run_still_fenced"
+    }
+  ],
+  "missing_evidence": [
+    "off_host_disposable_target_identity",
+    "A0_and_D_distinct_admin_credentials_and_backup_roots",
+    "C_independent_custody_admin_and_original_manifest",
+    "H_G1_G2_root_enrollment_and_key_custody",
+    "A0_true_external_monotonic_checkpoint",
+    "cgroup_v2_real_host_support",
+    "crash_durable_transaction_semantics",
+    "source_and_binary_sha256",
+    "isolation_route_and_emergency_stop_evidence",
+    "independent_judgement",
+    "fresh_human_run_authorization"
+  ],
+  "stop_boundaries": {
+    "effect_stop": "D_STOP_FENCED_linearization",
+    "admission_stop": "A0_STOP_PREPARED_linearization",
+    "joint_stop_claim": "both_receipts_and_worker_tree_proof",
+    "late_A0_admission_after_D_fence": "possible_under_design_until_A0_stop_so_no_false_no_admission_claim",
+    "N07_final": true
+  },
+  "admission_and_effect_claims": {
+    "non_dedup_D_counter": true,
+    "duplicate_B_dispatch": "OBSERVABLE_BLOCK_NOT_GLOBALLY_PREVENTED",
+    "full_exactly_once": "NOT_ESTABLISHED",
+    "current_generation_reservation": "PROPOSED",
+    "isolation": "NOT_VERIFIED"
+  },
+  "final_disposition": "SOURCE_PREPARATION_ONLY_D1_PENDING_D2_UNBUILT_D3_NOT_GRANTED_P00_NOT_RUN"
+}
