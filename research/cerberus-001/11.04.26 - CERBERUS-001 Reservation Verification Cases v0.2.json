@@ -1,0 +1,267 @@
+{
+  "protocol_id": "CERBERUS-001",
+  "revision": "D2-S2 reservation v0.2",
+  "date_america_boise": "2026-11-04",
+  "artifact_type": "source-only adversarial specification",
+  "current_status": "UNREVIEWED_NOT_EXECUTED_NO_RUNTIME_QUALIFICATION",
+  "source_revision_parent": "1093da71375ce15b351c82bf2c68e88cb0a2ac9c",
+  "source_module": "11.04.26 - CERBERUS-001 Authenticated Reservation Boundary v0.2.py",
+  "source_unit_tests": "11.04.26 - CERBERUS-001 Reservation Boundary Unit Tests v0.2.py",
+  "authority": "SOURCE_CREATION_ONLY",
+  "actual_ed25519_keys_created": false,
+  "actual_crypto_dependency_installed_or_executed": false,
+  "test_only_verifier": "TEST_ONLY_NotEd25519Verifier based on SHA-512 fixture; intentionally not cryptographic signing",
+  "test_only_commit_evidence": "TEST_ONLY_CommitSet is not authenticated, monotonic or crash-durable",
+  "valid_operation": "mock.counter_increment",
+  "signed_envelope_schema": "CERBERUS-001-A0-RESERVATION-v0.2",
+  "canonical_payload": "ASCII JSON sort_keys, compact separators, exact schema, no duplicate keys; parsed bytes must equal canonical reserialization",
+  "signature_domain": "CERBERUS-001 null separator A0-RESERVATION-v0.2 null separator plus unsigned 4-byte payload length and exact payload bytes",
+  "key_pin": "SHA256(exact 32-byte Ed25519 public key) must equal independent expected fingerprint; never accept signer-supplied new public key",
+  "commit_proof": "separate A0 durable committed reservation lookup required; local test oracle does not satisfy independent D2 proof",
+  "effect_boundary": "signature and binding and commit proof and D-local generation/global run fences checked before pure counter transition",
+  "known_direct_bypass": "v0.1 apply_synthetic_effect remains directly callable; only a later trusted deployment API and host isolation can enforce entrypoint exclusivity",
+  "claim_limit": "source model gates forged structural tokens, but does not prove cryptographic custody, live grant/epoch, durability, or exactly-once dispatch",
+  "scenarios": [
+    {
+      "id": "RB01",
+      "attack": "test-only valid envelope and independent-oracle mock",
+      "expected_status_or_effect": "EFFECT_COMMITTED",
+      "classification": "positive_semantic_only",
+      "important_caveat": "Mock signature is NOT Ed25519; not an authenticated runtime PASS",
+      "executed": false,
+      "verified_runtime_result": "UNKNOWN_NOT_RUN"
+    },
+    {
+      "id": "RB02",
+      "attack": "unsigned structural token with 64 zero signature bytes",
+      "expected_status_or_effect": "SIGNATURE_INVALID",
+      "classification": "negative",
+      "important_caveat": "Simple forged dataclass cannot pass the source verification interface",
+      "executed": false,
+      "verified_runtime_result": "UNKNOWN_NOT_RUN"
+    },
+    {
+      "id": "RB03",
+      "attack": "pinned fingerprint inconsistent with actual supplied 32-byte public key",
+      "expected_status_or_effect": "TRUST_ANCHOR_UNPROVEN",
+      "classification": "negative",
+      "important_caveat": "Independent T0 enrollment still unproven",
+      "executed": false,
+      "verified_runtime_result": "UNKNOWN_NOT_RUN"
+    },
+    {
+      "id": "RB04",
+      "attack": "envelope key ID differs from independently pinned key ID",
+      "expected_status_or_effect": "A0_KEY_OR_ROOT_MISMATCH",
+      "classification": "negative",
+      "important_caveat": "Untrusted issuer-selected key not accepted",
+      "executed": false,
+      "verified_runtime_result": "UNKNOWN_NOT_RUN"
+    },
+    {
+      "id": "RB05",
+      "attack": "token root differs from pinned T0 root",
+      "expected_status_or_effect": "A0_KEY_OR_ROOT_MISMATCH",
+      "classification": "negative",
+      "important_caveat": "Cross-root substitution refused",
+      "executed": false,
+      "verified_runtime_result": "UNKNOWN_NOT_RUN"
+    },
+    {
+      "id": "RB06",
+      "attack": "reservation signed for g4 supplied against D-owned expected g5",
+      "expected_status_or_effect": "REQUEST_BINDING_MISMATCH",
+      "classification": "negative",
+      "important_caveat": "Effect-time generation context must originate at D",
+      "executed": false,
+      "verified_runtime_result": "UNKNOWN_NOT_RUN"
+    },
+    {
+      "id": "RB07",
+      "attack": "action id does not match D-owned expected context",
+      "expected_status_or_effect": "REQUEST_BINDING_MISMATCH",
+      "classification": "negative",
+      "important_caveat": "No arbitrary action substitution",
+      "executed": false,
+      "verified_runtime_result": "UNKNOWN_NOT_RUN"
+    },
+    {
+      "id": "RB08",
+      "attack": "manifest hash differs from D-owned expected manifest",
+      "expected_status_or_effect": "REQUEST_BINDING_MISMATCH",
+      "classification": "negative",
+      "important_caveat": "No unbound challenge substitution",
+      "executed": false,
+      "verified_runtime_result": "UNKNOWN_NOT_RUN"
+    },
+    {
+      "id": "RB09",
+      "attack": "disallowed operation mock.purchase",
+      "expected_status_or_effect": "ENVELOPE_INVALID",
+      "classification": "negative",
+      "important_caveat": "Only mock.counter_increment supported",
+      "executed": false,
+      "verified_runtime_result": "UNKNOWN_NOT_RUN"
+    },
+    {
+      "id": "RB10",
+      "attack": "extra signed payload field",
+      "expected_status_or_effect": "ENVELOPE_INVALID",
+      "classification": "negative",
+      "important_caveat": "Reject unknown schema extension by default",
+      "executed": false,
+      "verified_runtime_result": "UNKNOWN_NOT_RUN"
+    },
+    {
+      "id": "RB11",
+      "attack": "duplicate JSON key inside raw payload",
+      "expected_status_or_effect": "ENVELOPE_INVALID",
+      "classification": "negative",
+      "important_caveat": "Reject parser ambiguities",
+      "executed": false,
+      "verified_runtime_result": "UNKNOWN_NOT_RUN"
+    },
+    {
+      "id": "RB12",
+      "attack": "noncanonical whitespace inside otherwise parseable raw JSON",
+      "expected_status_or_effect": "ENVELOPE_INVALID",
+      "classification": "negative",
+      "important_caveat": "Sign exact bytes, not semantic equivalence",
+      "executed": false,
+      "verified_runtime_result": "UNKNOWN_NOT_RUN"
+    },
+    {
+      "id": "RB13",
+      "attack": "bool masquerades as generation integer",
+      "expected_status_or_effect": "ENVELOPE_INVALID",
+      "classification": "negative",
+      "important_caveat": "Exact type check, not Python isinstance(int)",
+      "executed": false,
+      "verified_runtime_result": "UNKNOWN_NOT_RUN"
+    },
+    {
+      "id": "RB14",
+      "attack": "signed envelope has no independent committed reservation evidence",
+      "expected_status_or_effect": "A0_COMMITMENT_UNPROVEN",
+      "classification": "negative",
+      "important_caveat": "Signature alone is not durable A0 admission proof",
+      "executed": false,
+      "verified_runtime_result": "UNKNOWN_NOT_RUN"
+    },
+    {
+      "id": "RB15",
+      "attack": "independent A0 commitment lookup unavailable",
+      "expected_status_or_effect": "A0_COMMITMENT_UNPROVEN",
+      "classification": "negative",
+      "important_caveat": "Fail closed under missing evidence",
+      "executed": false,
+      "verified_runtime_result": "UNKNOWN_NOT_RUN"
+    },
+    {
+      "id": "RB16",
+      "attack": "signature verification provider unavailable",
+      "expected_status_or_effect": "SIGNATURE_PROVIDER_UNAVAILABLE",
+      "classification": "negative",
+      "important_caveat": "No permissive fallback crypto",
+      "executed": false,
+      "verified_runtime_result": "UNKNOWN_NOT_RUN"
+    },
+    {
+      "id": "RB17",
+      "attack": "D commits g4 generation fence before effect",
+      "expected_status_or_effect": "GENERATION_FENCED",
+      "classification": "negative",
+      "important_caveat": "Effect-time revocation at D",
+      "executed": false,
+      "verified_runtime_result": "UNKNOWN_NOT_RUN"
+    },
+    {
+      "id": "RB18",
+      "attack": "D commits global STOP_FENCED for run before effect",
+      "expected_status_or_effect": "EFFECT_STOP_FENCED",
+      "classification": "negative",
+      "important_caveat": "No post-STOP synthetic effect",
+      "executed": false,
+      "verified_runtime_result": "UNKNOWN_NOT_RUN"
+    },
+    {
+      "id": "RB19",
+      "attack": "two genuine test-fixture dispatches with same signed token",
+      "expected_status_or_effect": "EFFECT_COMMITTED_TWICE_BLOCK",
+      "classification": "known_failure",
+      "important_caveat": "Authentic replay remains possible; this is a failure-detection witness, not prevention",
+      "executed": false,
+      "verified_runtime_result": "UNKNOWN_NOT_RUN"
+    },
+    {
+      "id": "RB20",
+      "attack": "mutate signed reservation nonce without resigning",
+      "expected_status_or_effect": "SIGNATURE_INVALID",
+      "classification": "negative",
+      "important_caveat": "Whole canonical payload signed, even nonce",
+      "executed": false,
+      "verified_runtime_result": "UNKNOWN_NOT_RUN"
+    },
+    {
+      "id": "RB21",
+      "attack": "A0 decision is DENIED rather than RESERVED",
+      "expected_status_or_effect": "ENVELOPE_INVALID",
+      "classification": "negative",
+      "important_caveat": "Denied decision cannot be passed as admitted",
+      "executed": false,
+      "verified_runtime_result": "UNKNOWN_NOT_RUN"
+    },
+    {
+      "id": "RB22",
+      "attack": "commit sequence negative/string/zero",
+      "expected_status_or_effect": "ENVELOPE_INVALID",
+      "classification": "negative",
+      "important_caveat": "Tight integer range and type",
+      "executed": false,
+      "verified_runtime_result": "UNKNOWN_NOT_RUN"
+    },
+    {
+      "id": "RB23",
+      "attack": "oversized raw reservation payload",
+      "expected_status_or_effect": "ENVELOPE_INVALID",
+      "classification": "negative",
+      "important_caveat": "Length-bounded wire boundary",
+      "executed": false,
+      "verified_runtime_result": "UNKNOWN_NOT_RUN"
+    },
+    {
+      "id": "RB24",
+      "attack": "valid run-1 token against run-2 D context",
+      "expected_status_or_effect": "REQUEST_BINDING_MISMATCH",
+      "classification": "negative",
+      "important_caveat": "Cross-run replay refused",
+      "executed": false,
+      "verified_runtime_result": "UNKNOWN_NOT_RUN"
+    }
+  ],
+  "blocked_gates": {
+    "D1": "independent_source_review_pending",
+    "D2": "actual_A0_D_cryptographic_and_committed_stores_not_built",
+    "D3": "no_explicit_human_target_specific_experiment_grant",
+    "P00": "not_run"
+  },
+  "constraints": [
+    "no_ps5",
+    "no_personal_mac",
+    "no_keys",
+    "no_service_start",
+    "no_network",
+    "no_host_commands",
+    "no_runtime_test_execution",
+    "no_permissions_change",
+    "no_merge"
+  ],
+  "security_notes": [
+    "All successful synthetic fixtures depend on test-only non-cryptographic verifier; no Ed25519 success has been observed.",
+    "A valid signature and historical A0 commitment do not establish current grant liveness or effect-time revocation without external fenced state.",
+    "The signature provider is an injection port; production must only accept independently pinned, reviewed Ed25519 provider with verified implementation identity.",
+    "ExpectedEffect context must be D-owned; a caller cannot supply both forged envelope and its matching expected scope.",
+    "Real D must serialize verification of its generation and STOP fences with the actual effect; pure Python transition is not a durable linearization.",
+    "Repeated signed valid token still causes multiple synthetic effects here; must score BLOCK rather than exactly-once PASS."
+  ]
+}
