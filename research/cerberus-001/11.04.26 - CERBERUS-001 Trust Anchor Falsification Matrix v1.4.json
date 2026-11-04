@@ -88,6 +88,27 @@
       "key": "UNASSIGNED",
       "fingerprint": "UNASSIGNED",
       "adjudication_note": "a separate runtime adjudicator must independently verify E's claimed receipts and must not be the sole owner of their production"
+    },
+    "J": {
+      "name": "post-run independent adjudicator",
+      "actual_principal": "UNASSIGNED",
+      "admin_domain": "UNASSIGNED",
+      "role": "must independently inspect E pre-release custody, T0, A0, B/C/D records",
+      "conflict_prohibition": [
+        "E",
+        "A",
+        "B",
+        "C",
+        "D",
+        "G1",
+        "G2",
+        "A0"
+      ],
+      "may_not_rewrite": [
+        "E_pre_release_ack",
+        "root_evidence",
+        "witness_receipts"
+      ]
     }
   },
   "trust_anchor_t0": {
@@ -328,7 +349,8 @@
         "serializer_and_signature_implementation_digests",
         "backup_restore_access_graph",
         "independent_runtime_adjudication",
-        "synthetic_challenge"
+        "synthetic_challenge",
+        "J_distinct_runtime_adjudicator_and_conflict_graph"
       ]
     },
     "D3": {
