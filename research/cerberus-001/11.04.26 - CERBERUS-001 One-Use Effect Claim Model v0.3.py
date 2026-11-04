@@ -187,10 +187,6 @@ def record_one_use_effect(
             status if type(status) is str else "ENVELOPE_UNVERIFIED",
         )
 
-    required = (
-        "root_id", "run_id", "episode_id", "action_id", "grant_id",
-        "generation", "reservation_id", "commit_sequence",
-    )
     if any(
         name not in value or
         value[name] != getattr(d_owned_expected, name, object())
