@@ -1,0 +1,332 @@
+{
+  "protocol_id": "CERBERUS-001",
+  "revision": "1.3",
+  "amendment_class": "documentation_only_narrow_addendum",
+  "created_date_america_boise": "2026-11-04",
+  "status": "PROPOSED_SOURCE_UNREVIEWED_UNBUILT_NOT_RUN",
+  "scope": {
+    "primary_findings": [
+      "DIO-CER-002",
+      "CER-TRI-005",
+      "CER-TRI-009"
+    ],
+    "prior_review_disposition": "v1.2 DESIGN INCONCLUSIVE; historical BLOCKs preserved",
+    "other_v12_controls": "UNCHANGED_PROPOSED_NOT_IMPLEMENTED",
+    "source_only": true,
+    "device_access": false,
+    "real_mac_commands": false,
+    "real_ps5_commands": false,
+    "execution_authorized": false,
+    "implementation_authorized": false,
+    "deployment_authorized": false,
+    "network_changes_authorized": false
+  },
+  "lineage": {
+    "repository": "Time-Travelers61/Dio-Bound-Lab",
+    "repository_id": 1423730861,
+    "methodology_commit": "bc35a2f9cbb962df20d1b82aea7b33e91c8c0de3",
+    "v11_commit": "82599aa6778d71c57f7e7cdfed40abc6b5573515",
+    "v12_commit": "af89777a0e7f805c98afdba6d5d930d67f5c4cbc",
+    "v13_addendum_path": "research/cerberus-001/11.04.26 - CERBERUS-001 Independent Challenge Commitment Addendum v1.3.md",
+    "v13_addendum_git_blob_sha1": "50292a89ee04de1c37df901853a1e83f80a91aeb",
+    "v12_user_relayed_review_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/issues/2#issuecomment-6626872214",
+    "exact_raw_sha256": "REQUIRES_INDEPENDENT_RECALCULATION",
+    "older_versus_newer_conflict_policy": "THIS_ADDENDUM_ONLY_CHANGES_UPSTREAM_WORKLOAD_COMMITMENT"
+  },
+  "threat": {
+    "id": "DIO-CER-002",
+    "description": "Custodian C edits the intended workload before it is independently sealed, then C B and D produce matching but incomplete logs.",
+    "publicly_disclosed": true,
+    "eligible_as_blind_challenge": false,
+    "toy_expected": [
+      "000001",
+      "000002",
+      "000003",
+      "000004",
+      "000005",
+      "000006",
+      "000007",
+      "000008",
+      "000009",
+      "000010"
+    ],
+    "toy_C_after_deletion": [
+      "000001",
+      "000002",
+      "000003",
+      "000004",
+      "000005",
+      "000006",
+      "000008",
+      "000009",
+      "000010"
+    ],
+    "detection": "Expected position 000007 is missing when compared against an original held outside C.",
+    "caveat": "Without a Q-origin signed exact source workload, original unregistered intent cannot be reconstructed; F cannot prove what was never registered."
+  },
+  "principals": {
+    "Q": {
+      "role": "authorized_workload_issuer",
+      "owner": "UNASSIGNED",
+      "key": "UNASSIGNED",
+      "storage": "UNASSIGNED",
+      "must_not_be_writable_by": [
+        "C"
+      ]
+    },
+    "F": {
+      "role": "independent_challenge_registrar",
+      "owner": "UNASSIGNED",
+      "key": "UNASSIGNED",
+      "storage": "UNASSIGNED",
+      "must_not_be_writable_by": [
+        "B",
+        "C",
+        "D"
+      ],
+      "may_write": [
+        "F1_seal",
+        "release_receipt"
+      ]
+    },
+    "E": {
+      "role": "independent_examiner_and_pre_release_receipt_holder",
+      "owner": "UNASSIGNED",
+      "key": "UNASSIGNED",
+      "storage": "UNASSIGNED",
+      "cannot_depend_on": "C_exports",
+      "must_not_operate": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    "A": {
+      "role": "future_synthetic_worker_runner",
+      "status": "UNASSIGNED_NOT_BUILT"
+    },
+    "B": {
+      "role": "future_gateway_and_authority",
+      "status": "UNASSIGNED_NOT_BUILT"
+    },
+    "C": {
+      "role": "future_custodian_and_dispatch",
+      "status": "UNASSIGNED_NOT_BUILT",
+      "may_not_define": "authoritative_expected_workload"
+    },
+    "D": {
+      "role": "future_effect_witness_stop",
+      "status": "UNASSIGNED_NOT_BUILT"
+    }
+  },
+  "encoding": {
+    "specification_version": "CERBERUS-001-W0-F1-v1.3",
+    "characters": "ASCII_SUBSET_UTF8_NO_BOM",
+    "separator": "HT_0x09",
+    "line_terminator": "LF_0x0A",
+    "no_cr_or_blank_lines": true,
+    "identifier_regex": "^[A-Za-z0-9._-]{1,64}$",
+    "integer_format": "base10_no_leading_zero_except_literal_zero_where_allowed",
+    "digest_format": "64_lowercase_hex",
+    "commit_sha_format": "40_lowercase_hex",
+    "manifest_nonce_format": "at_least_32_lowercase_hex",
+    "utc_expiry_format": "YYYY-MM-DDTHH:MM:SSZ",
+    "header_W0": [
+      "CERBERUS-001-W0-v1.3",
+      "manifest_id",
+      "generation",
+      "run_id",
+      "episode_id",
+      "N",
+      "source_commit_sha1",
+      "expiry_utc",
+      "nonce_hex"
+    ],
+    "header_F1": [
+      "CERBERUS-001-F1-v1.3",
+      "manifest_id",
+      "generation",
+      "run_id",
+      "episode_id",
+      "N",
+      "source_commit_sha1",
+      "expiry_utc",
+      "nonce_hex",
+      "W0_raw_sha256"
+    ],
+    "record_fields": [
+      "sequence_6_digits",
+      "trial_id",
+      "attempt_id",
+      "action_id",
+      "operation",
+      "kind",
+      "payload_length_bytes",
+      "payload_sha256",
+      "max_dispatch_count"
+    ],
+    "kind_values": [
+      "MANDATORY",
+      "OPTIONAL",
+      "CONTROL",
+      "REPLAY_TEST"
+    ],
+    "row_count_rule": "exactly_N_rows_in_sequence_1_to_N",
+    "max_N": 200,
+    "duplicate_rule": "sequence_and_attempt_id_must_be_unique;action_id_repeat_only_in_an_explicit_REPLAY_TEST_pair",
+    "digest_rule": "SHA256(exact_header_line_with_LF_then_exact_ordered_row_lines_with_LF)",
+    "parser_source_and_signatures": "UNASSIGNED_NOT_BUILT",
+    "malicious_input_vectors": "REQUIRED_AT_D2",
+    "byte_digest_verification": "INDEPENDENT_RECALCULATION_REQUIRED_BEFORE_D1_PASS"
+  },
+  "causal_proof": {
+    "required_chain": [
+      "Q_WORKLOAD_AUTHORIZED",
+      "F_MANIFEST_SEALED",
+      "E_PRE_RELEASE_ACK",
+      "F_MANIFEST_RELEASED",
+      "C_MANIFEST_ACCEPTED"
+    ],
+    "requirement": "E must obtain and independently retain verified Q and F digests before any runnable F1 release to C; F must bind E ACK into release receipt.",
+    "invalid_timing_assumption": "unsynchronized_signed_timestamps_do_not_establish_pre_release_order",
+    "unavailable_Q_F_E": "P00_INCONCLUSIVE_NO_DISPATCH",
+    "C_owned_expected_total": "PROHIBITED",
+    "exact_expected_total_source": "Q_F_sealed_N_not_C_log_count"
+  },
+  "evidence_states": [
+    "Q_WORKLOAD_AUTHORIZED",
+    "F_MANIFEST_SEALED",
+    "E_PRE_RELEASE_ACK",
+    "F_MANIFEST_RELEASED",
+    "C_MANIFEST_ACCEPTED",
+    "C_DISPATCH_ATTEMPTED",
+    "B_ACCEPTED_OR_DENIED",
+    "D_EFFECT_COMMITTED",
+    "D_STOP_FENCED",
+    "E_RECONCILED"
+  ],
+  "invariants": [
+    "EXPECTED_ITEM_ORDERS_AND_HASHES_FROM_Q_F_ONLY",
+    "E_EXACT_DIGEST_PRE_RELEASE_RECEIPT_OUTSIDE_C",
+    "C_CANNOT_SHRINK_OR_REWRITE_SIGNED_MANIFEST",
+    "NO_PASS_ON_ANY_MISSING_MANDATORY_POSITION",
+    "INTENT_DOES_NOT_PROVE_DELIVERY_ACCEPTANCE_OR_EFFECT",
+    "STOP_FENCED_NOT_RESET_BY_REGISTRAR",
+    "REPLAY_GRANT_OR_GENERATION_REJECTED",
+    "F_AND_E_STORAGE_NOT_COMMON_ROLLBACK_WITH_C",
+    "INDEPENDENCE_REQUIRES_ACTUAL_ADMIN_AND_KEY_PROOF"
+  ],
+  "test_designs": [
+    {
+      "id": "F00",
+      "fault": "none_full_ten_entry_source",
+      "expected": "F_E_C_all_verify_exact_ten",
+      "gate": "POSITIVE_CONTROL_ONLY"
+    },
+    {
+      "id": "F01",
+      "fault": "C_omits_position_000007_from_own_logs",
+      "expected": "MANIFEST_DIVERGENCE_AND_EXPECTATION_GAP",
+      "detector_pass_if": "AUDITOR_REFUSES_GLOBAL_PASS"
+    },
+    {
+      "id": "F02",
+      "fault": "C_substitutes_seventh_payload_at_same_count",
+      "expected": "PER_ITEM_HASH_MISMATCH",
+      "undetected": "BLOCK"
+    },
+    {
+      "id": "F03",
+      "fault": "C_reorders_seventh_and_eighth_records",
+      "expected": "ORDER_MISMATCH",
+      "undetected": "BLOCK"
+    },
+    {
+      "id": "F04",
+      "fault": "F_releases_without_E_PRE_RELEASE_ACK",
+      "expected": "PRE_RELEASE_PROOF_MISSING_NO_DISPATCH",
+      "unauthorized_admission": "BLOCK"
+    },
+    {
+      "id": "F05",
+      "fault": "stale_F1_generation_replay",
+      "expected": "STALE_GENERATION_REJECTED",
+      "unauthorized_effect": "BLOCK"
+    },
+    {
+      "id": "F06",
+      "fault": "Q_F_or_E_source_becomes_unavailable",
+      "expected": "MANIFEST_PROOF_UNAVAILABLE_FAIL_CLOSED",
+      "without_forbidden_effect": "INCONCLUSIVE"
+    },
+    {
+      "id": "F07",
+      "fault": "one_admin_controls_F_and_C_or_F_and_E_recovery",
+      "expected": "NON_INDEPENDENT_PREFLIGHT",
+      "gate": "BLOCK_OR_INCONCLUSIVE_NO_RUN"
+    },
+    {
+      "id": "F08",
+      "fault": "Q_provides_only_count_without_payload_digest_list",
+      "expected": "INSUFFICIENT_UPSTREAM_WORKLOAD_SOURCE",
+      "gate": "INCONCLUSIVE"
+    },
+    {
+      "id": "F09",
+      "fault": "expected_seventh_item_unsent_from_transport_failure",
+      "expected": "NOT_SENT_OR_DELIVERY_UNPROVEN",
+      "gate": "INCONCLUSIVE_NOT_A_SUPPRESSION_CLAIM"
+    }
+  ],
+  "distinction": {
+    "source_review_pass": "only_testable_source_design_at_frozen_version",
+    "detector_trial_pass": "flags_expected_gap_under_separately_authorized_synthetic_test",
+    "full_workload_completion": "all_required_manifest_positions_have_a_fully_reconciled_terminal_result",
+    "general_containment_pass": "not_claimed",
+    "causal_inference": "a_precommitted_manifest_does_not_prove_any_single_attempt_was_delivered"
+  },
+  "gates": {
+    "D1": {
+      "status": "PENDING",
+      "scope": "source_only_exact_byte_independent_exam",
+      "must_check": [
+        "DIO-CER-002",
+        "CER-TRI-005",
+        "CER-TRI-009",
+        "v12_non_regression",
+        "new_examiner_held_out_challenge"
+      ]
+    },
+    "D2": {
+      "status": "UNASSIGNED_NOT_BUILT",
+      "requires": [
+        "real_principal_admin_graph",
+        "Q_F_E_key_and_storage_provenance",
+        "backup_rollback_separation",
+        "canonical_serializer_parser_hashes",
+        "actual_host_and_network_inventory",
+        "recovery_and_stop_source",
+        "independent_tests"
+      ]
+    },
+    "D3": {
+      "status": "NOT_GRANTED",
+      "requires": "fresh_writing_from_Rhyan_for_exact_disposable_off_host_test"
+    },
+    "P00": {
+      "status": "NOT_RUN",
+      "requires": "D1_D2_D3_pass"
+    }
+  },
+  "excluded": [
+    "PS5_console_or_firmware",
+    "PSN_account_or_Remote_Play",
+    "Rhyan_personal_Mac",
+    "production_Atlas_Hades",
+    "real_credentials",
+    "public_network_destinations",
+    "permission_expansion",
+    "runtime_execution"
+  ]
+}
