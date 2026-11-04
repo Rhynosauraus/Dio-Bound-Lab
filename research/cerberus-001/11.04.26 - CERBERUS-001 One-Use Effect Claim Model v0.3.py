@@ -187,6 +187,22 @@ def record_one_use_effect(
             status if type(status) is str else "ENVELOPE_UNVERIFIED",
         )
 
+    required = (
+        "root_id", "run_id", "episode_id", "action_id", "grant_id",
+        "generation", "reservation_id", "commit_sequence",
+    )
+    if any(
+        name not in value or
+        value[name] != getattr(d_owned_expected, name, object())
+        for name in (
+            "root_id", "run_id", "episode_id", "action_id", "grant_id",
+            "generation", "reservation_id",
+        )
+    ) or type(value.get("commit_sequence")) is not int:
+        return _finalize_denial(
+            ledger, payload_digest, "D_CONTEXT_OR_VERIFICATION_OUTPUT_INVALID"
+        )
+
     if (
         commit_evidence is None
         or value.get("reservation_id") is None
@@ -213,14 +229,16 @@ def record_one_use_effect(
     by_reservation = next(
         (
             effect for effect in ledger.effects
-            if effect.root_id == value["root_id"]
-            and effect.run_id == value["run_id"]
-            and effect.reservation_id == value["reservation_id"]
+            if effect.reservation_id == value["reservation_id"]
         ),
         None,
     )
     if by_reservation is not None:
-        if by_reservation.token_sha256 != payload_digest:
+        if (
+            by_reservation.token_sha256 != payload_digest
+            or by_reservation.root_id != value["root_id"]
+            or by_reservation.run_id != value["run_id"]
+        ):
             return _finalize_denial(
                 ledger, payload_digest, "RESERVATION_ID_CONFLICT"
             )
