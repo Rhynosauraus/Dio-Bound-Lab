@@ -305,6 +305,26 @@
       "executed": false,
       "result": "NOT_RUN",
       "verdict_ceiling": "KNOWN_MODEL_GAP_NOT_PROOF"
+    },
+    {
+      "id": "EC27",
+      "synthetic_fault": "An injected verifier falsely reports success but substitutes a different manifest digest",
+      "expected": "D_CONTEXT_OR_VERIFICATION_OUTPUT_INVALID",
+      "observable": "invalid_full_D_owned_manifest_binding;no_effect",
+      "category": "source_port_defense",
+      "executed": false,
+      "result": "NOT_RUN",
+      "verdict_ceiling": "SOURCE_LEVEL_PREDICTION_ONLY"
+    },
+    {
+      "id": "EC28",
+      "synthetic_fault": "Verification provider raises an unexpected OSError",
+      "expected": "VERIFICATION_UNAVAILABLE",
+      "observable": "attempt_recorded;zero_effects",
+      "category": "fail_closed_unavailable_dependency",
+      "executed": false,
+      "result": "NOT_RUN",
+      "verdict_ceiling": "SOURCE_LEVEL_PREDICTION_ONLY"
     }
   ],
   "gates": {
