@@ -1,0 +1,273 @@
+{
+  "protocol": "CERBERUS-001",
+  "stage": "D2-S2",
+  "revision": "0.7",
+  "date_america_boise": "2026-11-04",
+  "status": "SOURCE_ONLY_NOT_IMPORTED_COMPILED_OR_EXECUTED",
+  "source_parent_commit": "651aec1b7905119da5943622d120b624dedc3c8b",
+  "scope": "D_PRIVATE_READ_ATTEMPT_OBSERVATION_ONLY; no classification, historical-issuer verification, durable persistence, caller grant, receipt release or effect",
+  "sources": {
+    "journal": "11.04.26 - CERBERUS-001 D Historical Read Attempt Journal v0.7.py",
+    "tests": "11.04.26 - CERBERUS-001 Historical Read Journal Tests v0.7.py",
+    "predecessor_classifier": "11.04.26 - CERBERUS-001 D Historical Reconciliation Classifier v0.6.py"
+  },
+  "cases": [
+    {
+      "id": "RA01",
+      "synthetic_fault": "Valid synthetic historical read intent, empty D-private read journal",
+      "required_predicted_status": "D_PRIVATE_READ_ATTEMPT_LOGGED_HOLD",
+      "qualification_limit": "model appends one read observation; no auth",
+      "executed": false,
+      "observed_result": "NOT_RUN",
+      "effect_authorized": false,
+      "receipt_release_authorized": false,
+      "durable_commit_proven": false
+    },
+    {
+      "id": "RA02",
+      "synthetic_fault": "Second identical incoming read intent after first in-memory append",
+      "required_predicted_status": "D_PRIVATE_READ_ATTEMPT_LOGGED_HOLD",
+      "qualification_limit": "second read attempt retained distinctly; no dedup",
+      "executed": false,
+      "observed_result": "NOT_RUN",
+      "effect_authorized": false,
+      "receipt_release_authorized": false,
+      "durable_commit_proven": false
+    },
+    {
+      "id": "RA03",
+      "synthetic_fault": "Altered raw token bytes across read attempts",
+      "required_predicted_status": "D_PRIVATE_READ_ATTEMPT_LOGGED_HOLD",
+      "qualification_limit": "different read attempt token digests",
+      "executed": false,
+      "observed_result": "NOT_RUN",
+      "effect_authorized": false,
+      "receipt_release_authorized": false,
+      "durable_commit_proven": false
+    },
+    {
+      "id": "RA04",
+      "synthetic_fault": "Missing intent object",
+      "required_predicted_status": "D_PRIVATE_READ_ATTEMPT_LOGGED_INVALID",
+      "qualification_limit": "invalid request still observed inside model",
+      "executed": false,
+      "observed_result": "NOT_RUN",
+      "effect_authorized": false,
+      "receipt_release_authorized": false,
+      "durable_commit_proven": false
+    },
+    {
+      "id": "RA05",
+      "synthetic_fault": "Wrong raw token type (str instead of bytes)",
+      "required_predicted_status": "D_PRIVATE_READ_ATTEMPT_LOGGED_INVALID",
+      "qualification_limit": "no token material trusted",
+      "executed": false,
+      "observed_result": "NOT_RUN",
+      "effect_authorized": false,
+      "receipt_release_authorized": false,
+      "durable_commit_proven": false
+    },
+    {
+      "id": "RA06",
+      "synthetic_fault": "Empty original token bytes",
+      "required_predicted_status": "D_PRIVATE_READ_ATTEMPT_LOGGED_INVALID",
+      "qualification_limit": "invalid token does not skip logging",
+      "executed": false,
+      "observed_result": "NOT_RUN",
+      "effect_authorized": false,
+      "receipt_release_authorized": false,
+      "durable_commit_proven": false
+    },
+    {
+      "id": "RA07",
+      "synthetic_fault": "Token exceeding 4096-byte source-model limit",
+      "required_predicted_status": "D_PRIVATE_READ_ATTEMPT_LOGGED_INVALID",
+      "qualification_limit": "invalid request logged length without keeping raw token",
+      "executed": false,
+      "observed_result": "NOT_RUN",
+      "effect_authorized": false,
+      "receipt_release_authorized": false,
+      "durable_commit_proven": false
+    },
+    {
+      "id": "RA08",
+      "synthetic_fault": "Malformed untrusted principal claim",
+      "required_predicted_status": "D_PRIVATE_READ_ATTEMPT_LOGGED_INVALID",
+      "qualification_limit": "must not turn name claim into identity",
+      "executed": false,
+      "observed_result": "NOT_RUN",
+      "effect_authorized": false,
+      "receipt_release_authorized": false,
+      "durable_commit_proven": false
+    },
+    {
+      "id": "RA09",
+      "synthetic_fault": "Malformed untrusted receipt grant claim",
+      "required_predicted_status": "D_PRIVATE_READ_ATTEMPT_LOGGED_INVALID",
+      "qualification_limit": "must not turn grant claim into permission",
+      "executed": false,
+      "observed_result": "NOT_RUN",
+      "effect_authorized": false,
+      "receipt_release_authorized": false,
+      "durable_commit_proven": false
+    },
+    {
+      "id": "RA10",
+      "synthetic_fault": "bool-as-reservation claim",
+      "required_predicted_status": "D_PRIVATE_READ_ATTEMPT_LOGGED_INVALID",
+      "qualification_limit": "invalid claim recorded without privileges",
+      "executed": false,
+      "observed_result": "NOT_RUN",
+      "effect_authorized": false,
+      "receipt_release_authorized": false,
+      "durable_commit_proven": false
+    },
+    {
+      "id": "RA11",
+      "synthetic_fault": "Unhashable fake original issuer key identifier",
+      "required_predicted_status": "D_PRIVATE_READ_ATTEMPT_LOGGED_INVALID",
+      "qualification_limit": "invalid claim recorded without exception",
+      "executed": false,
+      "observed_result": "NOT_RUN",
+      "effect_authorized": false,
+      "receipt_release_authorized": false,
+      "durable_commit_proven": false
+    },
+    {
+      "id": "RA12",
+      "synthetic_fault": "Stolen authentic historical token with attacker-chosen principal name",
+      "required_predicted_status": "D_PRIVATE_READ_ATTEMPT_LOGGED_HOLD",
+      "qualification_limit": "no historical receipt read right follows from token possession",
+      "executed": false,
+      "observed_result": "NOT_RUN",
+      "effect_authorized": false,
+      "receipt_release_authorized": false,
+      "durable_commit_proven": false
+    },
+    {
+      "id": "RA13",
+      "synthetic_fault": "Issuer key retired after historical effect",
+      "required_predicted_status": "D_PRIVATE_READ_ATTEMPT_LOGGED_HOLD",
+      "qualification_limit": "archive authenticity not evaluated by model; no release",
+      "executed": false,
+      "observed_result": "NOT_RUN",
+      "effect_authorized": false,
+      "receipt_release_authorized": false,
+      "durable_commit_proven": false
+    },
+    {
+      "id": "RA14",
+      "synthetic_fault": "Issuer key compromised but claimed as authentic historical key",
+      "required_predicted_status": "D_PRIVATE_READ_ATTEMPT_LOGGED_HOLD",
+      "qualification_limit": "cannot infer signing-time authenticity from caller key claim",
+      "executed": false,
+      "observed_result": "NOT_RUN",
+      "effect_authorized": false,
+      "receipt_release_authorized": false,
+      "durable_commit_proven": false
+    },
+    {
+      "id": "RA15",
+      "synthetic_fault": "D-private journal head does not match row count",
+      "required_predicted_status": "D_READ_JOURNAL_UNPROVEN",
+      "qualification_limit": "cannot append; custody gap must be externally witnessed",
+      "executed": false,
+      "observed_result": "NOT_RUN",
+      "effect_authorized": false,
+      "receipt_release_authorized": false,
+      "durable_commit_proven": false
+    },
+    {
+      "id": "RA16",
+      "synthetic_fault": "Prior journal entry has impossible read sequence",
+      "required_predicted_status": "D_READ_JOURNAL_UNPROVEN",
+      "qualification_limit": "cannot append to corrupt model view",
+      "executed": false,
+      "observed_result": "NOT_RUN",
+      "effect_authorized": false,
+      "receipt_release_authorized": false,
+      "durable_commit_proven": false
+    },
+    {
+      "id": "RA17",
+      "synthetic_fault": "Adversary synthesizes a well-typed journal with copied entries",
+      "required_predicted_status": "D_PRIVATE_READ_ATTEMPT_LOGGED_HOLD",
+      "qualification_limit": "KNOWN_UNQUALIFIED_CUSTODY_GAP; type shape not D ownership",
+      "executed": false,
+      "observed_result": "NOT_RUN",
+      "effect_authorized": false,
+      "receipt_release_authorized": false,
+      "durable_commit_proven": false
+    },
+    {
+      "id": "RA18",
+      "synthetic_fault": "Prior attempt status is unhashable list",
+      "required_predicted_status": "D_READ_JOURNAL_UNPROVEN",
+      "qualification_limit": "fail-closed without exception after strict status type check",
+      "executed": false,
+      "observed_result": "NOT_RUN",
+      "effect_authorized": false,
+      "receipt_release_authorized": false,
+      "durable_commit_proven": false
+    },
+    {
+      "id": "RA19",
+      "synthetic_fault": "D-private sequence at 2^63 - 1",
+      "required_predicted_status": "D_READ_JOURNAL_UNPROVEN",
+      "qualification_limit": "model refuses sequence overflow",
+      "executed": false,
+      "observed_result": "NOT_RUN",
+      "effect_authorized": false,
+      "receipt_release_authorized": false,
+      "durable_commit_proven": false
+    },
+    {
+      "id": "RA20",
+      "synthetic_fault": "Sensitive raw token must not be retained in read journal row",
+      "required_predicted_status": "D_PRIVATE_READ_ATTEMPT_LOGGED_HOLD",
+      "qualification_limit": "raw bytes absent from emitted row; SHA256 digest only",
+      "executed": false,
+      "observed_result": "NOT_RUN",
+      "effect_authorized": false,
+      "receipt_release_authorized": false,
+      "durable_commit_proven": false
+    }
+  ],
+  "warnings": {
+    "outside_D_ingress": "A D journal cannot account for unseen/discarded external incoming messages. Independently held ingress witness required.",
+    "durability": "Source only returns a new immutable tuple; it cannot commit a transaction or prove storage survived a crash.",
+    "early_failure": "If journal is invalid, source reports D_READ_JOURNAL_UNPROVEN without claiming an appended row. A real D must fail closed and independent ingress must record the loss.",
+    "historic_key": "Old signed token requires independently enrolled issuance-time key/snapshot; key retirement is not automatic invalidity and a compromised key may demand source-timestamp/custody adjudication.",
+    "caller_auth": "Authentic original token != current receipt-read authority. Read-rights must be independently scoped and revokeable.",
+    "A0_and_D": "This source does not reauthorize A0 commitment or effects; the previous v0.3/v0.4 BLOCK remains.",
+    "known_gap": "RA17 shows copied/forged in-memory journal has valid shape. Real D store ownership is not established.",
+    "no_privileged_read": "Every model return has permit_historical_lookup=false, permit_receipt_release=false, permit_new_effect=false, durable_commit_proven=false."
+  },
+  "future_required_order": [
+    "independently_observed_B_to_D_ingress_receipt",
+    "D_protected_transaction_append_one_attempt_even_when_malformed",
+    "durable_commit_receipt_prior_to_lookup_or_external_disclosure",
+    "verify_original_token_under_independently_archived_issuance_time_key_and_snapshot",
+    "authenticate_requesting_principal_current_receipt_read_grant_and_revocation",
+    "D_owned_historical_match_with_original_bytes_digest",
+    "privileged_fenced_receipt_release_only_under_separate_independent_authorization",
+    "outbound_send_observation_and_gap_reconciliation"
+  ],
+  "gates": {
+    "author_source_readback": "PENDING",
+    "D1": "PENDING",
+    "D2_S1": "UNASSIGNED",
+    "D2_real_stores": "NOT_BUILT",
+    "D3": "NOT_GRANTED",
+    "P00": "NOT_RUN"
+  },
+  "prohibitions": [
+    "no_python_compilation_import_execution",
+    "no_SQL_or_test_run",
+    "no_network_VM_real_keys_services",
+    "no_personal_Mac_PS5_PSN_RemotePlay",
+    "no_production_change",
+    "no_permission_change",
+    "no_merge"
+  ]
+}
