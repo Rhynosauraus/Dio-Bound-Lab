@@ -1,0 +1,224 @@
+{
+  "protocol": "CERBERUS-001",
+  "stage": "D2-S2",
+  "revision": "0.6",
+  "date_america_boise": "2026-11-04",
+  "status": "SOURCE_ONLY_NOT_RUN_NOT_INDEPENDENTLY_ACCEPTED",
+  "source_base_commit": "fce4daf2b312e9a5a91ab099005743aa54eb0e2d",
+  "source_model": "11.04.26 - CERBERUS-001 D Historical Reconciliation Classifier v0.6.py",
+  "source_test_definitions": "11.04.26 - CERBERUS-001 Historical Reconciliation Tests v0.6.py",
+  "scope": "D_PRIVATE_HISTORICAL_RECEIPT_CLASSIFICATION_ONLY; never external receipt release; never new effect",
+  "source_contract": {
+    "predecessor_v03": "record_one_use_effect invokes A0 evidence before by_reservation historical lookup",
+    "predecessor_v04": "OneShotCommitEvidence consumes one local proof instance on first call; later call returns false",
+    "identified_protocol_defect": "Reusing v0.4 one-shot proof adapter for v0.3 historical retry yields A0_COMMITMENT_UNPROVEN before historical receipt lookup, blocking the advertised EC02/EC03 replay result",
+    "positive_claim": "Candidate classification only on exact in-memory D receipt/view and query fields, with no A0 input and NO external release or effect authority",
+    "no_repair_claim": "Existing v0.3 admission path remains unchanged; no live D orchestrator, protected identity, durable nonce, or real reconciliation protocol is present",
+    "known_provenance_counterexample": "RH14: forge the data class and exactly copy ledger fields; classifier still returns candidate. Only D-owned custody + separately authenticated requester can authorize historical receipt release.",
+    "no_attempt_completeness": "This classifier does not append attempt receipts. Future D ingress/writer must durably record every inbound attempt regardless of classification and distinguish external ingress not seen by D.",
+    "historical_signing_key": "Future original-token verification must rely on independently enrolled original issuance key/snapshot, not current A0 active admission key alone.",
+    "after_fence": "A read-only historical candidate is not an effect, admission, revocation override or right to release a receipt.",
+    "transaction_race": "A negative candidate lookup is not a new-effect permit: subsequent effect transaction must recheck uniqueness and all D fences under one durable serializable ordering."
+  },
+  "cases": [
+    {
+      "id": "RH01",
+      "synthetic_fault": "Original D-owned effect and matching internal binding",
+      "required_predicted_status": "D_PRIVATE_HISTORICAL_CANDIDATE",
+      "policy": "NO_NEW_EFFECT_NO_EXTERNAL_RELEASE",
+      "family": "POSITIVE_MODEL",
+      "executed": false,
+      "observed_result": "NOT_RUN"
+    },
+    {
+      "id": "RH02",
+      "synthetic_fault": "Same historical effect after matching D run STOP",
+      "required_predicted_status": "D_PRIVATE_HISTORICAL_CANDIDATE_AFTER_FENCE",
+      "policy": "NO_NEW_EFFECT_NO_EXTERNAL_RELEASE",
+      "family": "POST_FENCE",
+      "executed": false,
+      "observed_result": "NOT_RUN"
+    },
+    {
+      "id": "RH03",
+      "synthetic_fault": "Same historical effect after matching D generation fence",
+      "required_predicted_status": "D_PRIVATE_HISTORICAL_CANDIDATE_AFTER_FENCE",
+      "policy": "NO_NEW_EFFECT_NO_EXTERNAL_RELEASE",
+      "family": "POST_FENCE",
+      "executed": false,
+      "observed_result": "NOT_RUN"
+    },
+    {
+      "id": "RH04",
+      "synthetic_fault": "Same historical effect after matching D grant fence",
+      "required_predicted_status": "D_PRIVATE_HISTORICAL_CANDIDATE_AFTER_FENCE",
+      "policy": "NO_NEW_EFFECT_NO_EXTERNAL_RELEASE",
+      "family": "POST_FENCE",
+      "executed": false,
+      "observed_result": "NOT_RUN"
+    },
+    {
+      "id": "RH05",
+      "synthetic_fault": "Same reservation id with changed original token digest",
+      "required_predicted_status": "HISTORICAL_BINDING_CONFLICT",
+      "policy": "NO_CANDIDATE_NO_EXTERNAL_RELEASE",
+      "family": "BINDING_REFUSAL",
+      "executed": false,
+      "observed_result": "NOT_RUN"
+    },
+    {
+      "id": "RH06",
+      "synthetic_fault": "Same reservation id with changed root",
+      "required_predicted_status": "HISTORICAL_BINDING_CONFLICT",
+      "policy": "NO_CANDIDATE_NO_EXTERNAL_RELEASE",
+      "family": "BINDING_REFUSAL",
+      "executed": false,
+      "observed_result": "NOT_RUN"
+    },
+    {
+      "id": "RH07",
+      "synthetic_fault": "Same reservation id with changed action",
+      "required_predicted_status": "HISTORICAL_BINDING_CONFLICT",
+      "policy": "NO_CANDIDATE_NO_EXTERNAL_RELEASE",
+      "family": "BINDING_REFUSAL",
+      "executed": false,
+      "observed_result": "NOT_RUN"
+    },
+    {
+      "id": "RH08",
+      "synthetic_fault": "Reservation absent from D record",
+      "required_predicted_status": "HISTORICAL_NOT_FOUND",
+      "policy": "NO_CANDIDATE_NO_EXTERNAL_RELEASE",
+      "family": "NOT_FOUND",
+      "executed": false,
+      "observed_result": "NOT_RUN"
+    },
+    {
+      "id": "RH09",
+      "synthetic_fault": "Two D effects carry same reservation id",
+      "required_predicted_status": "D_HISTORY_UNPROVEN",
+      "policy": "REJECT_CORRUPTED_D_SNAPSHOT",
+      "family": "CORRUPT_LEDGER",
+      "executed": false,
+      "observed_result": "NOT_RUN"
+    },
+    {
+      "id": "RH10",
+      "synthetic_fault": "Two D effects carry same root/run/episode/action",
+      "required_predicted_status": "D_HISTORY_UNPROVEN",
+      "policy": "REJECT_CORRUPTED_D_SNAPSHOT",
+      "family": "CORRUPT_LEDGER",
+      "executed": false,
+      "observed_result": "NOT_RUN"
+    },
+    {
+      "id": "RH11",
+      "synthetic_fault": "Query generation supplied as bool rather than int",
+      "required_predicted_status": "QUERY_INVALID",
+      "policy": "REJECT_QUERY",
+      "family": "MALFORMED_CONTEXT",
+      "executed": false,
+      "observed_result": "NOT_RUN"
+    },
+    {
+      "id": "RH12",
+      "synthetic_fault": "Query generation supplied as float rather than int",
+      "required_predicted_status": "QUERY_INVALID",
+      "policy": "REJECT_QUERY",
+      "family": "MALFORMED_CONTEXT",
+      "executed": false,
+      "observed_result": "NOT_RUN"
+    },
+    {
+      "id": "RH13",
+      "synthetic_fault": "D effect record sequence zero",
+      "required_predicted_status": "D_HISTORY_UNPROVEN",
+      "policy": "REJECT_CORRUPTED_D_SNAPSHOT",
+      "family": "CORRUPT_LEDGER",
+      "executed": false,
+      "observed_result": "NOT_RUN"
+    },
+    {
+      "id": "RH14",
+      "synthetic_fault": "An attacker fabricates a fully matching in-memory query object",
+      "required_predicted_status": "D_PRIVATE_HISTORICAL_CANDIDATE",
+      "policy": "STILL_NO_EXTERNAL_RELEASE",
+      "family": "KNOWN_UNQUALIFIED_PROVENANCE_GAP",
+      "executed": false,
+      "observed_result": "NOT_RUN"
+    },
+    {
+      "id": "RH15",
+      "synthetic_fault": "Historical candidate with no D fence",
+      "required_predicted_status": "D_PRIVATE_HISTORICAL_CANDIDATE",
+      "policy": "NO_EXTERNAL_RELEASE",
+      "family": "NON_DISCLOSURE",
+      "executed": false,
+      "observed_result": "NOT_RUN"
+    },
+    {
+      "id": "RH16",
+      "synthetic_fault": "Historical candidate with a D generation fence",
+      "required_predicted_status": "D_PRIVATE_HISTORICAL_CANDIDATE_AFTER_FENCE",
+      "policy": "NO_EXTERNAL_RELEASE",
+      "family": "NON_DISCLOSURE",
+      "executed": false,
+      "observed_result": "NOT_RUN"
+    },
+    {
+      "id": "RH17",
+      "synthetic_fault": "No committed effect records",
+      "required_predicted_status": "HISTORICAL_NOT_FOUND",
+      "policy": "NO_NEW_EFFECT",
+      "family": "NOT_FOUND",
+      "executed": false,
+      "observed_result": "NOT_RUN"
+    },
+    {
+      "id": "RH18",
+      "synthetic_fault": "Unrelated run stopped, but request run not stopped",
+      "required_predicted_status": "D_PRIVATE_HISTORICAL_CANDIDATE",
+      "policy": "NO_NEW_EFFECT_NO_EXTERNAL_RELEASE",
+      "family": "FENCE_SCOPE",
+      "executed": false,
+      "observed_result": "NOT_RUN"
+    },
+    {
+      "id": "RH19",
+      "synthetic_fault": "Original grant differs from query grant",
+      "required_predicted_status": "HISTORICAL_BINDING_CONFLICT",
+      "policy": "NO_CANDIDATE_NO_EXTERNAL_RELEASE",
+      "family": "BINDING_REFUSAL",
+      "executed": false,
+      "observed_result": "NOT_RUN"
+    },
+    {
+      "id": "RH20",
+      "synthetic_fault": "Original episode differs from query episode",
+      "required_predicted_status": "HISTORICAL_BINDING_CONFLICT",
+      "policy": "NO_CANDIDATE_NO_EXTERNAL_RELEASE",
+      "family": "BINDING_REFUSAL",
+      "executed": false,
+      "observed_result": "NOT_RUN"
+    }
+  ],
+  "qualification": {
+    "author_static_source_verification": "PENDING_READBACK",
+    "independent_D1": "PENDING",
+    "D2_S1_independent_lab_target": "UNASSIGNED",
+    "D2_S2_code_execution": "NOT_RUN",
+    "D2_real_infrastructure": "NOT_BUILT",
+    "D3": "NOT_GRANTED",
+    "P00": "NOT_RUN"
+  },
+  "execution_prohibitions": [
+    "no_source_import_compilation_execution",
+    "no_test_runner",
+    "no_SQL_or_VM",
+    "no_keys_services_network",
+    "no_Mac_PS5_PSN_RemotePlay",
+    "no_merge",
+    "no_permission_change",
+    "no_production_agent"
+  ]
+}
