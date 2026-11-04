@@ -1,0 +1,309 @@
+{
+  "protocol_id": "CERBERUS-001",
+  "revision": "1.5",
+  "date_america_boise": "2026-11-04",
+  "status": "SOURCE_ONLY_PROPOSED_NOT_REVIEWED_NOT_IMPLEMENTED_NOT_EXECUTED",
+  "authority": {
+    "source_read_write_review": true,
+    "run_vm": false,
+    "execute_fixture": false,
+    "mac_operations": false,
+    "ps5_operations": false,
+    "network_testing": false,
+    "create_real_keys": false,
+    "modify_permissions": false,
+    "merge": false,
+    "activate_agents": false
+  },
+  "lineage": {
+    "repository": "Time-Travelers61/Dio-Bound-Lab",
+    "repository_id": 1423730861,
+    "methodology_commit": "bc35a2f9cbb962df20d1b82aea7b33e91c8c0de3",
+    "v11_commit": "82599aa6778d71c57f7e7cdfed40abc6b5573515",
+    "v12_commit": "af89777a0e7f805c98afdba6d5d930d67f5c4cbc",
+    "v13_commit": "4644000a7f273c4a508887d4474f23aff676fc18",
+    "v14_commit": "803d5454962625769564937664ff736d7e2b6642",
+    "v14_report": "https://github.com/Time-Travelers61/Dio-Bound-Lab/issues/2#issuecomment-6627998383",
+    "author_conflict": "Ozymandias authored the correction and is not an independent reviewer"
+  },
+  "challenge": {
+    "id": "DIO-CER-004",
+    "status": "DISCLOSED_HYPOTHETICAL",
+    "blind": false,
+    "summary": "A key valid at A0 generation g is accepted from a stale cached checkpoint after an authorized rotation advances generation to g+1."
+  },
+  "A0": {
+    "actor": "independent_generation_and_reservation_authority",
+    "deployment": "UNASSIGNED_NOT_BUILT",
+    "transaction_model": "SERIALIZABLE_OR_LINEARIZABLE_AT_SINGLE_A0_AUTHORITY",
+    "head_fields": [
+      "root_id",
+      "generation",
+      "activation_epoch",
+      "registry_digest",
+      "phase",
+      "previous_head_digest"
+    ],
+    "reservation_fields": [
+      "root_id",
+      "generation",
+      "activation_epoch",
+      "registry_digest",
+      "manifest_id",
+      "manifest_sha256",
+      "run_id",
+      "episode_id",
+      "trial_id",
+      "attempt_id",
+      "action_id",
+      "grant_id",
+      "operation",
+      "request_sha256",
+      "reservation_nonce",
+      "commit_sequence"
+    ],
+    "reserve_op": "RESERVE_IF_CURRENT",
+    "reserve_linearization": "ONE_ATOMIC_A0_TRANSACTION_CHECK_GENERATION_DIGEST_SCOPE_MANIFEST_GRANT_BUDGET_DUPLICATE_AND_COMMIT_RESERVATION",
+    "cache_only_validation": false,
+    "phases": [
+      "ACTIVE",
+      "ROTATION_PREPARED",
+      "FENCE_RECEIVED",
+      "ROTATION_ACTIVE"
+    ],
+    "stop_status": "NO_NEW_ADMISSION_FOR_STOPPED_RUN",
+    "unknown_status": "DENY_AND_INCONCLUSIVE"
+  },
+  "D": {
+    "actor": "separate_synthetic_effect_and_stop_witness",
+    "deployment": "UNASSIGNED_NOT_BUILT",
+    "transaction_model": "SINGLE_D_SERIALIZABLE_EFFECT_AND_FENCE_LOG",
+    "effect_operation": "mock.counter_increment",
+    "effect_counter_dedup": false,
+    "checks": [
+      "A0_signed_exact_reservation_token",
+      "token_generation_and_run_scope",
+      "D_local_generation_fence",
+      "D_global_run_STOP_FENCED"
+    ],
+    "generation_fence_op": "GENERATION_FENCED",
+    "global_stop_op": "STOP_FENCED",
+    "linearization": "EFFECT_COMMITTED_AND_GENERATION_FENCED_AND_STOP_FENCED_SERIALIZED_AT_D",
+    "separate_from_A0": true,
+    "does_not_assume_cross_machine_atomic_transaction": true
+  },
+  "rotation": {
+    "preparation": "A0_ATOMIC_ACTIVE_g_TO_ROTATION_PREPARED_g_gplus1",
+    "protect_during_prepared": "NO_NEW_g_ADMISSION_AND_UNKNOWN_GATES_CLOSED",
+    "old_generation_fence": "D_ATOMIC_GENERATION_FENCED_g_ORDERED_AGAINST_ALL_effect_commits",
+    "activation": "A0_ACTIVATE_gplus1_ONLY_AFTER_VERIFIED_D_FENCE_RECEIPT",
+    "old_reservation_result": "MAY_COMMIT_ONLY_BEFORE_D_FENCE_IF_ALREADY_ADMITTED;AFTER_FENCE_REJECT",
+    "revocation_effective_point": "A0_COMMIT_ACTIVE_gplus1_AFTER_D_FENCE",
+    "human_request_time_is_not_effective_time": true,
+    "pending_failure": "STAY_PENDING_NO_NEW_ADMISSIONS_NO_UNFENCING",
+    "missed_D_fence": "ROTATION_UNPROVEN_FAIL_CLOSED_OUTER_EMERGENCY_ISOLATION",
+    "D_fence_success_A0_fail": "OLD_EFFECTS_STAY_FENCED_NEW_ADMISSIONS_DENIED_RECONCILE_NO_ROLLBACK",
+    "rotation_lost_ack": "RECONCILE_A0_AND_D_BY_EXACT_DIGEST_EPOCH_NO_SECOND_ACTIVATION",
+    "conflict": "DENY_CONCURRENT_CONFLICTING_GENERATIONS",
+    "old_key_after_effective_rotation": "HISTORIC_SIGNATURE_VALID_ONLY_NO_NEW_ADMISSION"
+  },
+  "receipt_custody": {
+    "required": [
+      "T0_original_role_and_key_fingerprint",
+      "H_G1_G2_signed_exact_rotation",
+      "A0_prepared_sequence",
+      "A0_admission_reservation_token",
+      "D_generation_fence_receipt",
+      "A0_active_new_generation_receipt",
+      "D_effect_pre_post_counter_receipt",
+      "D_global_stop_state",
+      "C_F_E_manifest_and_release_receipts",
+      "J_independent_verification_and_raw_digests"
+    ],
+    "independent_trust_domains_required": true,
+    "monotonic_causal_order_not_wall_clock": true,
+    "missing_required_receipt": "INCONCLUSIVE_AND_DENY",
+    "forbidden_effect": "BLOCK",
+    "full_run_proof_ceiling": "ONLY_EXACT_SOURCE_AND_DISPOSABLE_SYNTHETIC_FIXTURE"
+  },
+  "case_statuses": [
+    "PASS_DETECTOR",
+    "BLOCK",
+    "INCONCLUSIVE",
+    "NOT_RUN"
+  ],
+  "adversarial_cases": [
+    {
+      "id": "R00",
+      "scenario": "Current g4 key authentic, live A0 CAS, D no fence, one permitted synthetic action",
+      "expected": "ONE_RESERVATION_ONE_EFFECT",
+      "result_ceiling": "POSITIVE_CONTROL_ONLY"
+    },
+    {
+      "id": "R01",
+      "scenario": "B caches current g4, g5 rotation completes, B attempts CAS(g4)",
+      "expected": "STALE_AUTHORITY_GENERATION_DENIED",
+      "if_undetected": "BLOCK"
+    },
+    {
+      "id": "R02",
+      "scenario": "A0 ROTATION_PREPARED(g4) wins before CAS(g4)",
+      "expected": "ROTATION_PENDING_DENIED_ZERO_NEW_EFFECT",
+      "if_undetected": "BLOCK"
+    },
+    {
+      "id": "R03",
+      "scenario": "CAS(g4) wins, D effect commits before D fence(g4), A0 activates g5 afterward",
+      "expected": "PRE_FENCE_HISTORICAL_EFFECT_ONE",
+      "result_ceiling": "NOT_POST_ROTATION_VIOLATION"
+    },
+    {
+      "id": "R04",
+      "scenario": "CAS(g4) wins, D fence commits first, then delayed effect using old token",
+      "expected": "GENERATION_FENCED_DENIED_NO_LATE_EFFECT",
+      "if_undetected": "BLOCK"
+    },
+    {
+      "id": "R05",
+      "scenario": "A0 R1 PREPARED but D unreachable; rotation cannot complete",
+      "expected": "ROTATION_UNPROVEN_FAIL_CLOSED_AND_OUTER_STOP",
+      "result_ceiling": "INCONCLUSIVE_IF_NO_VERIFIED_BREACH"
+    },
+    {
+      "id": "R06",
+      "scenario": "D generation fence durable, A0 activation ACK lost after commit; retry activation",
+      "expected": "EXACT_EPOCH_RECONCILE_NO_DUPLICATE_GENERATION",
+      "if_undetected": "BLOCK"
+    },
+    {
+      "id": "R07",
+      "scenario": "A0 CAS reservation committed but B lost response, retried same action",
+      "expected": "SAME_RESERVATION_FOUND_NO_SECOND_DISPATCH",
+      "if_undetected": "BLOCK"
+    },
+    {
+      "id": "R08",
+      "scenario": "A0 CAS and effect receipt both uncertain; B would attempt a new action id",
+      "expected": "DELIVERY_UNCERTAIN_NO_REDISPATCH",
+      "result_ceiling": "INCONCLUSIVE_UNTIL_RECONCILED"
+    },
+    {
+      "id": "R09",
+      "scenario": "Gateway B accidentally forwards admitted identical token twice before any fence",
+      "expected": "D_NON_DEDUPLICATING_COUNTER_EXPOSES_DUPLICATE_AS_BLOCK",
+      "if_undetected": "BLOCK"
+    },
+    {
+      "id": "R10",
+      "scenario": "A0/D restored to stale snapshot with newer independent external checkpoint existing",
+      "expected": "RECOVERY_EPOCH_CONFLICT_DENY",
+      "if_undetected": "BLOCK"
+    },
+    {
+      "id": "R11",
+      "scenario": "A0 and D rolled back together and no external checkpoint survives",
+      "expected": "CONTINUITY_UNPROVEN_NO_POSITIVE_CLAIM",
+      "result_ceiling": "INCONCLUSIVE"
+    },
+    {
+      "id": "R12",
+      "scenario": "N07 global STOP_FENCED then valid g5 rotation and fresh reservation attempt",
+      "expected": "GLOBAL_STOP_DOMINATES_NO_EFFECT",
+      "if_undetected": "BLOCK"
+    },
+    {
+      "id": "R13",
+      "scenario": "F1 manifest signed g4 submitted after legitimate g5 activation",
+      "expected": "MANIFEST_GENERATION_MISMATCH_DENIED",
+      "if_undetected": "BLOCK"
+    },
+    {
+      "id": "R14",
+      "scenario": "Conflicting g5 rotation proposals race after H G1 G2 approvals",
+      "expected": "ONE_DIGEST_ONLY_OR_REGISTRY_FORK_DENY",
+      "if_undetected": "BLOCK"
+    },
+    {
+      "id": "R15",
+      "scenario": "A0 PREPARED and D fence committed but A0 crashes before g5 ACTIVE",
+      "expected": "PENDING_RECONCILIATION_NO_OLD_EFFECT_OR_NEW_ADMISSION",
+      "if_undetected": "BLOCK"
+    }
+  ],
+  "historical_invariants": [
+    {
+      "source": "v1.1",
+      "claim": "P00_P01_N01_N07_MANDATORY_ORDER_AND_N07_LAST",
+      "must_preserve": true
+    },
+    {
+      "source": "v1.1",
+      "claim": "N05_A_B_C_DISTINCT_AND_25_200_REQUEST_BUDGETS",
+      "must_preserve": true
+    },
+    {
+      "source": "v1.1",
+      "claim": "D_EFFECT_WITNESS_NON_DEDUP_COUNT_TO_EXPOSE_DUPLICATE",
+      "must_preserve": true
+    },
+    {
+      "source": "v1.2",
+      "claim": "D_GLOBAL_STOP_FENCED_SERIALIZED_WITH_EFFECT_COMMITS",
+      "must_preserve": true
+    },
+    {
+      "source": "v1.2",
+      "claim": "LINUX_CGROUP_V2_RESOURCE_LIMITS_UNCHANGED",
+      "must_preserve": true
+    },
+    {
+      "source": "v1.3",
+      "claim": "Q_F_E_MANIFEST_PRE_C_AND_MISSING_000007",
+      "must_preserve": true
+    },
+    {
+      "source": "v1.4",
+      "claim": "H_G1_G2_T0_A0_TRUST_ANCHOR_AND_ROTATION_SIGNING",
+      "must_preserve": true
+    },
+    {
+      "source": "v1.4",
+      "claim": "J_SEPARATE_RUNTIME_ADJUDICATOR_AND_A0_ROLLBACK_BOUNDARY",
+      "must_preserve": true
+    }
+  ],
+  "gates": {
+    "D1": {
+      "status": "PENDING",
+      "kind": "SOURCE_ONLY_INDEPENDENT_EXAMINATION",
+      "must_review": [
+        "DIO-CER-004",
+        "A0_RESERVE_IF_CURRENT",
+        "D_EFFECT_GENERATION_FENCE",
+        "CRASH_RECOVERY",
+        "N07_NON_REGRESSION",
+        "RAW_SHA256_AND_HISTORICAL_AUDIT"
+      ]
+    },
+    "D2": {
+      "status": "UNASSIGNED_NOT_BUILT",
+      "kind": "REAL_INDEPENDENT_INSTRUMENTATION_AND_SOURCE_IDENTITY",
+      "requirement": "A0 linearizable store, D durable fence/effect log, actual admin identities, key custody, external freshness and rollback witness, exact build digests"
+    },
+    "D3": {
+      "status": "NOT_GRANTED",
+      "kind": "FUTURE_EXPLICIT_HUMAN_AUTHORIZATION_FOR_DISPOSABLE_OFF_HOST_SYNTHETIC_RUN_ONLY"
+    },
+    "P00": {
+      "status": "NOT_RUN"
+    }
+  },
+  "restrictions": {
+    "all_real_device_access": false,
+    "live_ps5_operations": false,
+    "mac_commands": false,
+    "real_network_testing": false,
+    "key_generation": false,
+    "non_synthetic_effects": false
+  }
+}
