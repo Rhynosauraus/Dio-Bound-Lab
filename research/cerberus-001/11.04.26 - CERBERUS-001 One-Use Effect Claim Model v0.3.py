@@ -176,7 +176,7 @@ def record_one_use_effect(
         status, value = verify_envelope(
             token, pinned_key, d_owned_expected, verifier
         )
-    except (RuntimeError, ValueError, TypeError, AttributeError, KeyError):
+    except Exception:
         return _finalize_denial(
             ledger, payload_digest, "VERIFICATION_UNAVAILABLE"
         )
@@ -191,10 +191,15 @@ def record_one_use_effect(
         name not in value or
         value[name] != getattr(d_owned_expected, name, object())
         for name in (
-            "root_id", "run_id", "episode_id", "action_id", "grant_id",
-            "generation", "reservation_id",
+            "root_id", "generation", "activation_epoch", "registry_digest",
+            "manifest_id", "manifest_sha256", "run_id", "episode_id",
+            "trial_id", "attempt_id", "action_id", "grant_id", "operation",
+            "request_sha256", "reservation_id",
         )
-    ) or type(value.get("commit_sequence")) is not int:
+    ) or (
+        type(value.get("commit_sequence")) is not int
+        or value["commit_sequence"] <= 0
+    ):
         return _finalize_denial(
             ledger, payload_digest, "D_CONTEXT_OR_VERIFICATION_OUTPUT_INVALID"
         )
@@ -211,7 +216,7 @@ def record_one_use_effect(
         is_committed = commit_evidence.committed(
             value["reservation_id"], value["commit_sequence"], payload_digest
         )
-    except (RuntimeError, ValueError, TypeError, AttributeError, KeyError):
+    except Exception:
         return _finalize_denial(
             ledger, payload_digest, "A0_COMMITMENT_UNPROVEN"
         )
