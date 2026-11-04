@@ -238,6 +238,24 @@
       "qualification_limit": "No oversized transcript",
       "executed": false,
       "result": "NOT_RUN"
+    },
+    {
+      "id": "AP25",
+      "synthetic_scenario": "Two separately constructed one-shot adapters use the exact same signed proof and D challenge nonce",
+      "required_prediction": "BOTH_MODEL_PORTS_ACCEPT_KNOWN_GAP",
+      "category": "KNOWN_UNQUALIFIED_GAP",
+      "qualification_limit": "No shared durable D nonce issuance/consumption registry; one-shot instance is not global replay control",
+      "executed": false,
+      "result": "NOT_RUN"
+    },
+    {
+      "id": "AP26",
+      "synthetic_scenario": "An external authority checkpoint advances after D captures expected digest, but the model reuses the old expected checkpoint",
+      "required_prediction": "REPEATED_MODEL_VERIFICATION_CAN_SUCCEED_KNOWN_GAP",
+      "category": "KNOWN_UNQUALIFIED_GAP",
+      "qualification_limit": "Signature consistency cannot establish fresh authority without an independent monotonic source and effect-time fence",
+      "executed": false,
+      "result": "NOT_RUN"
     }
   ],
   "gates": {
@@ -259,6 +277,8 @@
     "forged_callback_case": "AP22 shows no source-level injection boundary is a substitute for D-owned pinned provider.",
     "stale_checkpoint_case": "AP21 demonstrates signed proof is not proof of continuously live authority.",
     "replay_case": "AP02 rejects mismatched D nonce, but a D-owned nonce issuance/consumption ledger is unimplemented.",
-    "protected_stop": "A0 proof does not replace independent D grant, generation, global STOP fences."
+    "protected_stop": "A0 proof does not replace independent D grant, generation, global STOP fences.",
+    "recreated_adapter_nonce_reuse": "AP25 deliberately confirms isolated one-shot objects are insufficient for global nonce uniqueness.",
+    "stale_checkpoint_after_capture": "AP26 deliberately confirms old expected checkpoints can continue validating authentic historical proofs."
   }
 }
