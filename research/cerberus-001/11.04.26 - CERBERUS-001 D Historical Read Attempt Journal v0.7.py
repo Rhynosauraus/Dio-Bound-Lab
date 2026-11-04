@@ -149,18 +149,19 @@ def record_d_private_read_attempt(
             status="D_READ_JOURNAL_UNPROVEN",
             recorded_in_model=False,
         )
-    try:
-        raw = getattr(intent, "original_token_bytes")
-        reservation = getattr(intent, "reservation_id_claim")
-        principal = getattr(intent, "principal_id_claim")
-        grant = getattr(intent, "receipt_grant_id_claim")
-        issuer = getattr(intent, "original_issuer_key_id_claim")
-        correct_class = type(intent) is ReadIntent
-    except Exception:
+    # Reject foreign objects before resolving any attribute. A property
+    # lookup on attacker-supplied Python objects can run arbitrary methods.
+    correct_class = type(intent) is ReadIntent
+    if correct_class:
+        raw = intent.original_token_bytes
+        reservation = intent.reservation_id_claim
+        principal = intent.principal_id_claim
+        grant = intent.receipt_grant_id_claim
+        issuer = intent.original_issuer_key_id_claim
+    else:
         raw, reservation, principal, grant, issuer = (
             None, None, None, None, None
         )
-        correct_class = False
 
     raw_valid = type(raw) is bytes and 1 <= len(raw) <= MAX_TOKEN_BYTES
     complete = (
