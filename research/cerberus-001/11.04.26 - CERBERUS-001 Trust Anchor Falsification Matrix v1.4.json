@@ -1,0 +1,343 @@
+{
+  "protocol_id": "CERBERUS-001",
+  "revision": "1.4",
+  "creation_date_america_boise": "2026-11-04",
+  "status": "SOURCE_CONTRACT_PROPOSED_UNREVIEWED_UNBUILT_NOT_RUN",
+  "scope": {
+    "focus": [
+      "DIO-CER-003",
+      "CER-TRI-009",
+      "CER-TRI-005",
+      "NON_REGRESSION_CER_TRI_006_004"
+    ],
+    "v13_parent_commit": "4644000a7f273c4a508887d4474f23aff676fc18",
+    "v12_parent_commit": "af89777a0e7f805c98afdba6d5d930d67f5c4cbc",
+    "v11_parent_commit": "82599aa6778d71c57f7e7cdfed40abc6b5573515",
+    "root_repo": "Time-Travelers61/Dio-Bound-Lab",
+    "source_only": true,
+    "execution_authorized": false,
+    "permission_change_authorized": false,
+    "mac_access_authorized": false,
+    "ps5_access_authorized": false,
+    "production_access_authorized": false,
+    "merge_authorized": false
+  },
+  "disclosed_challenge": {
+    "id": "DIO-CER-003",
+    "title": "authorization-substitution",
+    "disclosed": true,
+    "blind": false,
+    "scenario": "Q authorized key q0 replaced in mutable registry by qX; attacker signs matching W0/F1; logs and signatures agree under substituted config.",
+    "correct_acceptance": "NOT_ACCEPTED",
+    "reason": "independently anchored key fingerprint mismatch"
+  },
+  "roles": {
+    "H": {
+      "name": "human enrollment and rotation authorizer",
+      "actual_principal": "UNASSIGNED",
+      "evidence": "independently verifiable out-of-band approval; not merely actor label"
+    },
+    "G1": {
+      "name": "anchor guardian 1",
+      "actual_principal": "UNASSIGNED",
+      "admin_domain": "UNASSIGNED",
+      "signing_key": "UNASSIGNED",
+      "storage": "UNASSIGNED",
+      "distinct_from": [
+        "G2",
+        "C",
+        "B",
+        "D"
+      ]
+    },
+    "G2": {
+      "name": "anchor guardian 2",
+      "actual_principal": "UNASSIGNED",
+      "admin_domain": "UNASSIGNED",
+      "signing_key": "UNASSIGNED",
+      "storage": "UNASSIGNED",
+      "distinct_from": [
+        "G1",
+        "C",
+        "B",
+        "D"
+      ]
+    },
+    "A0": {
+      "name": "monotonic external activation checkpoint",
+      "actual_principal": "UNASSIGNED",
+      "admin_domain": "UNASSIGNED",
+      "storage": "UNASSIGNED_NOT_BUILT",
+      "rollback_domain": "MUST_NOT_SHARE_WITH_REGISTRY_OR_GUEST_OR_C"
+    },
+    "Q": {
+      "name": "authorized workload issuer",
+      "actual_principal": "UNASSIGNED",
+      "key": "UNASSIGNED",
+      "fingerprint": "UNASSIGNED"
+    },
+    "F": {
+      "name": "independent manifest registrar",
+      "actual_principal": "UNASSIGNED",
+      "key": "UNASSIGNED",
+      "fingerprint": "UNASSIGNED"
+    },
+    "E": {
+      "name": "pre-release examiner and receipt holder",
+      "actual_principal": "UNASSIGNED",
+      "key": "UNASSIGNED",
+      "fingerprint": "UNASSIGNED",
+      "adjudication_note": "a separate runtime adjudicator must independently verify E's claimed receipts and must not be the sole owner of their production"
+    }
+  },
+  "trust_anchor_t0": {
+    "purpose": "fixed origin of Q,F,E and G1,G2 verification-key authority",
+    "environment": "SYNTHETIC_LAB_ONLY",
+    "root_id": "UNASSIGNED",
+    "generation": 0,
+    "root_digest": "UNASSIGNED",
+    "algorithm_proposal": "Ed25519",
+    "public_key_length_bytes": 32,
+    "public_key_fingerprint": "SHA256(EXACT_32_RAW_ED25519_PUBLIC_KEY_BYTES)",
+    "digest_format": "64_lowercase_hex",
+    "private_keys": "NOT_IN_PUBLIC_ARTIFACT",
+    "human_approval_independent_of_registry": true,
+    "guardian_retentions": 2,
+    "separate_admin_guardians_required": true,
+    "checkpoint_before_verification_required": true,
+    "crypto_implementation": "UNASSIGNED_NOT_BUILT",
+    "honest_assumption": "cannot prove initial human enrollment from a self-signed registry; outside authenticated enrollment or joint guardian compromise not guaranteed"
+  },
+  "registry": {
+    "source_of_truth": "T0_PLUS_AUTHENTICATED_TRANSITIONS_PLUS_A0",
+    "mutable_registry_is_not_trust_root": true,
+    "fields": [
+      "root_id",
+      "t0_digest",
+      "generation",
+      "activation_epoch",
+      "previous_registry_digest",
+      "authorized_role_key_fingerprints",
+      "role_purpose_scope",
+      "effective_and_expiry_limits",
+      "status",
+      "signed_transition_receipts"
+    ],
+    "accepted_status": [
+      "PENDING",
+      "ACTIVE",
+      "RETIRED",
+      "REVOKED"
+    ],
+    "verify_before": [
+      "Q_W0_SIGN",
+      "F_F1_SEAL",
+      "E_PRE_RELEASE_ACK",
+      "F_TO_C_RELEASE",
+      "B_ADMISSION",
+      "RESTART_OR_RESTORE"
+    ],
+    "must_check": [
+      "T0_digest",
+      "G1_G2_admin_independence",
+      "A0_monotonic_generation",
+      "previous_digest_link",
+      "role_and_scope",
+      "expiry",
+      "revocation",
+      "generation",
+      "external_activation_epoch"
+    ],
+    "failure": "FAIL_CLOSED_NO_EFFECTS_NO_PASS",
+    "stale_generation": "STALE_TRUST_GENERATION",
+    "fork": "REGISTRY_FORK",
+    "unknown_key": "TRUST_ANCHOR_MISMATCH",
+    "invalid_scope": "WRONG_KEY_PURPOSE"
+  },
+  "role_rotation": {
+    "signatories": [
+      "H_out_of_band_exact_fingerprint_approval",
+      "G1_key_signature",
+      "G2_key_signature"
+    ],
+    "self_approved_old_key_only": false,
+    "old_key_optional_as_evidence_only": true,
+    "activation_order": [
+      "ROTATION_PROPOSED",
+      "H_APPROVED",
+      "G1_APPROVED",
+      "G2_APPROVED",
+      "A0_GENERATION_COMMITTED",
+      "R_n_ACTIVE"
+    ],
+    "replay_idempotence": "same_exact_digest_epoch_reconciles_no_double_activation",
+    "concurrent_conflict": "REGISTRY_FORK_NO_NEW_ACTIVATION",
+    "source_of_epoch": "independent_A0",
+    "old_key_rule": "historical_signature_verification_only_after_retired_not_new_admission",
+    "root_rotation": "fresh_human_out_of_band_approval_and_verified_remaining_prior_external_guardian_or_new_root_enrollment",
+    "irrecoverable": "NEW_ROOT_ENROLLMENT_NOT_CONTINUITY"
+  },
+  "stop_recovery": {
+    "n07_last_mandatory": true,
+    "stop_epoch_may_not_be_reset_by_rotation": true,
+    "whole_lab_and_A0_snapshot_rollback": "CONTINUITY_UNPROVEN_FAIL_CLOSED",
+    "A0_unavailable": "FRESHNESS_UNPROVEN",
+    "lost_commit_ack": "reconcile_exact_A0_digest_and_epoch_do_not_reissue_conflicting_activation",
+    "registry_older_than_A0": "STALE_TRUST_GENERATION",
+    "forbidden_effect_after_STOP_FENCED": "BLOCK",
+    "unauthorized_admission": "BLOCK"
+  },
+  "attestation_states": [
+    "H_BOOTSTRAP_APPROVED",
+    "G1_G2_T0_RETAINED",
+    "A0_ANCHOR_COMMITTED",
+    "R0_ACTIVE",
+    "Q_W0_AUTHORIZED",
+    "F_F1_SEALED",
+    "E_PRE_RELEASE_ACK",
+    "F_F1_RELEASED",
+    "C_MANIFEST_ACCEPTED",
+    "B_AUTHORIZATION_DECISION",
+    "D_EFFECT_OR_DENIAL"
+  ],
+  "rotation_states": [
+    "ROTATION_PROPOSED",
+    "H_APPROVED",
+    "G1_APPROVED",
+    "G2_APPROVED",
+    "A0_GENERATION_COMMITTED",
+    "R_n_ACTIVE"
+  ],
+  "falsifiers": [
+    {
+      "id": "T00",
+      "injection": "all_independent_anchors_agree",
+      "expected": "ROOT_AUTHORITY_ACCEPTABLE_FOR_DESIGN_TEST",
+      "classification": "POSITIVE_CONTROL_ONLY"
+    },
+    {
+      "id": "T01",
+      "injection": "mutable_registry_substitutes_Q_key_q0_with_qX_and_consistent_W0_F1",
+      "expected": "TRUST_ANCHOR_MISMATCH_OR_UNAUTHORIZED_TRANSITION",
+      "fail_if": "accepted_substitution",
+      "classification": "BLOCK_ON_UNDETECTED_ACCEPTANCE"
+    },
+    {
+      "id": "T02",
+      "injection": "valid_old_registry_and_signatures_after_new_A0_generation",
+      "expected": "STALE_TRUST_GENERATION",
+      "fail_if": "accept_old_key_for_new_work",
+      "classification": "BLOCK"
+    },
+    {
+      "id": "T03",
+      "injection": "H_G1_G2_authorize_exact_new_Q_key_and_A0_commits_one_new_epoch",
+      "expected": "ROTATION_ACCEPTED_ONCE_AFTER_A0",
+      "fail_if": "wrong_or_duplicate_activation",
+      "classification": "POSITIVE_CONTROL"
+    },
+    {
+      "id": "T04",
+      "injection": "compromised_old_Q_signs_its_own_replacement",
+      "expected": "ROTATION_UNAUTHORIZED",
+      "fail_if": "accept_without_H_G1_G2",
+      "classification": "BLOCK"
+    },
+    {
+      "id": "T05",
+      "injection": "two_conflicting_registry_hashes_same_epoch",
+      "expected": "REGISTRY_FORK",
+      "fail_if": "accept_either_without_resolution",
+      "classification": "BLOCK"
+    },
+    {
+      "id": "T06",
+      "injection": "G1_and_G2_under_same_administrator_or_backup_root",
+      "expected": "NON_INDEPENDENT_ANCHOR_CUSTODY",
+      "fail_if": "claim_independent",
+      "classification": "BLOCK_IF_FALSE_PASS"
+    },
+    {
+      "id": "T07",
+      "injection": "A0_missing_or_one_guardian_receipt_missing",
+      "expected": "FRESHNESS_UNPROVEN_OR_TRUST_ANCHOR_UNPROVEN",
+      "fail_if": "dispatch_or_admission",
+      "classification": "INCONCLUSIVE_IF_NO_EFFECT"
+    },
+    {
+      "id": "T08",
+      "injection": "A0_committed_rotation_but_ack_lost_before_client_retry",
+      "expected": "RECONCILE_EXISTING_DIGEST_EPOCH",
+      "fail_if": "double_or_conflicting_activation",
+      "classification": "BLOCK"
+    },
+    {
+      "id": "T09",
+      "injection": "whole_lab_snapshot_rewinds_registry_and_A0",
+      "expected": "FAIL_CLOSED_WITHOUT_OUTSIDE_CHECKPOINT",
+      "fail_if": "stale_action_accepted",
+      "classification": "INCONCLUSIVE_OR_BLOCK_IF_VIOLATION"
+    },
+    {
+      "id": "T10",
+      "injection": "root_compromised_and_proposes_self_signed_new_root",
+      "expected": "NEW_ROOT_ENROLLMENT_NOT_CONTINUITY",
+      "fail_if": "self_upgrade_silent",
+      "classification": "BLOCK"
+    },
+    {
+      "id": "T11",
+      "injection": "otherwise_valid_role_key_wrong_scope_expiry_or_manifest_epoch",
+      "expected": "WRONG_KEY_PURPOSE_OR_WRONG_EPOCH",
+      "fail_if": "admission",
+      "classification": "BLOCK"
+    },
+    {
+      "id": "T12",
+      "injection": "H_enrollment_and_both_guardians_compromised",
+      "expected": "OUTSIDE_ASSURANCE_SCOPE_HALT",
+      "classification": "UNKNOWN_NOT_PASS"
+    },
+    {
+      "id": "T13",
+      "injection": "role_rotation_after_durable_N07_STOP_FENCED",
+      "expected": "STOP_PERSISTS_AND_NO_LATE_EFFECT",
+      "fail_if": "post_fence_effect",
+      "classification": "BLOCK"
+    }
+  ],
+  "gates": {
+    "D1": {
+      "status": "PENDING",
+      "scope": "exact_source_only",
+      "must_check": [
+        "DIO-CER-003",
+        "CER-TRI-009",
+        "CER-TRI-005",
+        "stop_and_resource_nonregression",
+        "independent_sha256"
+      ]
+    },
+    "D2": {
+      "status": "UNASSIGNED_NOT_BUILT",
+      "needs": [
+        "actual_H_approval_evidence",
+        "G1_G2_distinct_admin_and_keys",
+        "A0_external_monotonic_durability",
+        "Q_F_E_role_key_fingerprints",
+        "serializer_and_signature_implementation_digests",
+        "backup_restore_access_graph",
+        "independent_runtime_adjudication",
+        "synthetic_challenge"
+      ]
+    },
+    "D3": {
+      "status": "NOT_GRANTED",
+      "scope": "named_disposable_off_host_synthetic_runner_only"
+    },
+    "P00": {
+      "status": "NOT_RUN"
+    }
+  },
+  "declaration": "No real identities/keys/hosts/trust anchors/VMs were created or contacted; static source specification only."
+}
