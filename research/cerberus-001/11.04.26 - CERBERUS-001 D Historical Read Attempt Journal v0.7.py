@@ -101,6 +101,7 @@ def _valid_prior_attempt(value: object, expected_index: int) -> bool:
         ))
         and type(value.raw_byte_length) is int
         and value.raw_byte_length >= -1
+        and type(value.status) is str
         and value.status in LOG_STATUSES
     )
 
