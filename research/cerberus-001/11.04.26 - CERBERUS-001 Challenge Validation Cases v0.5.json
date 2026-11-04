@@ -1,0 +1,171 @@
+{
+  "project": "CERBERUS-001",
+  "stage": "D2-S2",
+  "revision": "v0.5",
+  "date_local": "2026-11-04",
+  "timezone": "America/Boise",
+  "based_on_pinned_commit": "80c8f9444193018835015cff9ab63560f1f7afb6",
+  "standing": "SOURCE_ONLY_NO_IMPORT_NO_PARSE_NO_COMPILE_NO_TEST_EXECUTION",
+  "wire_protocol": "CERBERUS-001-A0-COMMIT-PROOF-v0.4",
+  "wire_signing_domain_unchanged": true,
+  "scope": "Refine trusted DChallenge/PinnedProofKey exact input typing; retain earlier v0.4 wire format.",
+  "detection": "v0.4 compares signed integer fields using Python equality and dereferences pinned without validating its type; malformed trusted inputs may be accepted or raise before proof status return.",
+  "source_claim": "Strict input validation is proposed at function boundary, not yet demonstrated by Python tests or independent review.",
+  "implementation_limit": "Even a correctly typed Python dataclass can be constructed by an untrusted caller; deployment must independently establish D ownership, authority freshness and T0 pin custody.",
+  "test_cryptography": "TEST_ONLY_NotEd25519 uses a predictable SHA512 equality fixture and carries no cryptographic security assurance.",
+  "tests": [
+    {
+      "id": "CV01",
+      "scenario": "Exact strictly typed synthetic challenge and pin",
+      "expected_status": "PROOF_VERIFIED_FOR_CHALLENGE",
+      "category": "MODEL_POSITIVE_ONLY",
+      "limit": "TEST_ONLY fixture is not real Ed25519",
+      "executed": false,
+      "observed_result": "NOT_RUN"
+    },
+    {
+      "id": "CV02",
+      "scenario": "D generation is bool True while signed integer generation is 1",
+      "expected_status": "PROOF_CONTEXT_UNPROVEN",
+      "category": "NEGATIVE",
+      "limit": "Python True == 1 must not admit D context",
+      "executed": false,
+      "observed_result": "NOT_RUN"
+    },
+    {
+      "id": "CV03",
+      "scenario": "D activation epoch is bool True while signed integer is 1",
+      "expected_status": "PROOF_CONTEXT_UNPROVEN",
+      "category": "NEGATIVE",
+      "limit": "Exact integer type required",
+      "executed": false,
+      "observed_result": "NOT_RUN"
+    },
+    {
+      "id": "CV04",
+      "scenario": "D reservation commit sequence is float 11.0 while signed value is integer 11",
+      "expected_status": "PROOF_CONTEXT_UNPROVEN",
+      "category": "NEGATIVE",
+      "limit": "Numeric equality must not replace exact types",
+      "executed": false,
+      "observed_result": "NOT_RUN"
+    },
+    {
+      "id": "CV05",
+      "scenario": "D registry digest uppercase hex instead of valid lower-case SHA256 grammar",
+      "expected_status": "PROOF_CONTEXT_UNPROVEN",
+      "category": "NEGATIVE",
+      "limit": "Invalid trusted input cannot be relied upon for equality",
+      "executed": false,
+      "observed_result": "NOT_RUN"
+    },
+    {
+      "id": "CV06",
+      "scenario": "D nonce contains nonhex characters",
+      "expected_status": "PROOF_CONTEXT_UNPROVEN",
+      "category": "NEGATIVE",
+      "limit": "Malformed challenge must not be silently accepted",
+      "executed": false,
+      "observed_result": "NOT_RUN"
+    },
+    {
+      "id": "CV07",
+      "scenario": "Duck-typed caller object contains otherwise matching challenge values",
+      "expected_status": "PROOF_CONTEXT_UNPROVEN",
+      "category": "NEGATIVE",
+      "limit": "Python object shape does not establish D ownership",
+      "executed": false,
+      "observed_result": "NOT_RUN"
+    },
+    {
+      "id": "CV08",
+      "scenario": "D challenge object is absent",
+      "expected_status": "PROOF_CONTEXT_UNPROVEN",
+      "category": "NEGATIVE",
+      "limit": "No null dereference or permissive fallback",
+      "executed": false,
+      "observed_result": "NOT_RUN"
+    },
+    {
+      "id": "CV09",
+      "scenario": "Pinned trust anchor object is absent",
+      "expected_status": "TRUST_ANCHOR_UNPROVEN",
+      "category": "NEGATIVE",
+      "limit": "No null dereference or permissive fallback",
+      "executed": false,
+      "observed_result": "NOT_RUN"
+    },
+    {
+      "id": "CV10",
+      "scenario": "Duck-typed caller object contains otherwise matching pin fields",
+      "expected_status": "TRUST_ANCHOR_UNPROVEN",
+      "category": "NEGATIVE",
+      "limit": "Python structure is not T0 enrollment",
+      "executed": false,
+      "observed_result": "NOT_RUN"
+    },
+    {
+      "id": "CV11",
+      "scenario": "Pinned public key is 31 bytes",
+      "expected_status": "TRUST_ANCHOR_UNPROVEN",
+      "category": "NEGATIVE",
+      "limit": "Exact Ed25519 public-key length",
+      "executed": false,
+      "observed_result": "NOT_RUN"
+    },
+    {
+      "id": "CV12",
+      "scenario": "Well-typed different D generation",
+      "expected_status": "PROOF_CONTEXT_MISMATCH",
+      "category": "NEGATIVE",
+      "limit": "Semantic binding still checked after input typing",
+      "executed": false,
+      "observed_result": "NOT_RUN"
+    },
+    {
+      "id": "CV13",
+      "scenario": "Signature verification provider absent",
+      "expected_status": "PROOF_SIGNATURE_PROVIDER_UNAVAILABLE",
+      "category": "NEGATIVE",
+      "limit": "No trust fallback",
+      "executed": false,
+      "observed_result": "NOT_RUN"
+    },
+    {
+      "id": "CV14",
+      "scenario": "Signed proof missing or wrong object type",
+      "expected_status": "PROOF_MALFORMED",
+      "category": "NEGATIVE",
+      "limit": "Reject malformed signing envelope",
+      "executed": false,
+      "observed_result": "NOT_RUN"
+    }
+  ],
+  "gates": {
+    "D1": "PENDING",
+    "D2_S1": "TARGET_AND_PERMISSION_UNASSIGNED",
+    "D2_S2": "SOURCE_CANDIDATE_ONLY",
+    "D3": "NOT_GRANTED",
+    "P00": "NOT_RUN"
+  },
+  "not_performed": [
+    "Python import or execution",
+    "Python compilation",
+    "SQL execution",
+    "service start",
+    "key generation",
+    "network/device operations",
+    "permission change",
+    "merge"
+  ],
+  "holdpoints": [
+    "Independent T0 enrollment",
+    "D-held immutable expected challenge",
+    "D challenge random nonce and durable consumption",
+    "external current checkpoint",
+    "A0 real signing provider",
+    "protected D-only effect entry",
+    "serializable grant-generation-STOP transaction",
+    "independent examiner"
+  ]
+}
