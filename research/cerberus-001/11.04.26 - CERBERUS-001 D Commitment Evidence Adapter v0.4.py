@@ -75,18 +75,25 @@ class OneShotCommitEvidence:
             return False
         self._used = True  # Also consume malformed/failed attempts.
 
-        if (
-            type(reservation_id) is not str
-            or type(sequence) is not int
-            or type(payload_sha256) is not str
-            or type(self._challenge.reservation_id) is not str
-            or type(self._challenge.reservation_commit_sequence) is not int
-            or type(self._challenge.reservation_payload_sha256) is not str
-            or reservation_id != self._challenge.reservation_id
-            or sequence != self._challenge.reservation_commit_sequence
-            or payload_sha256
-            != self._challenge.reservation_payload_sha256
-        ):
+        try:
+            expected_id = self._challenge.reservation_id
+            expected_sequence = self._challenge.reservation_commit_sequence
+            expected_digest = self._challenge.reservation_payload_sha256
+            arguments_match = (
+                type(reservation_id) is str
+                and type(sequence) is int
+                and sequence > 0
+                and type(payload_sha256) is str
+                and type(expected_id) is str
+                and type(expected_sequence) is int
+                and type(expected_digest) is str
+                and reservation_id == expected_id
+                and sequence == expected_sequence
+                and payload_sha256 == expected_digest
+            )
+        except Exception:
+            arguments_match = False
+        if not arguments_match:
             self.result = ModelPortReceipt(
                 reservation_id=reservation_id if type(reservation_id) is str else "",
                 commit_sequence=sequence if type(sequence) is int else -1,
