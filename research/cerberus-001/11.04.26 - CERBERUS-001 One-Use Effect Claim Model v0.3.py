@@ -107,7 +107,10 @@ class Outcome:
 
 def _request_digest(token: Any) -> str:
     """Hash only raw bytes; malformed objects count as attempts with an empty-byte marker."""
-    raw = getattr(token, "payload_bytes", None)
+    try:
+        raw = getattr(token, "payload_bytes", None)
+    except Exception:
+        raw = None
     return sha256(raw if type(raw) is bytes else b"").hexdigest()
 
 
