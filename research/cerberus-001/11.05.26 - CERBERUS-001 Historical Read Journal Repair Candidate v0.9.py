@@ -93,7 +93,13 @@ _MISSING = object()
 def _safe_field(value: object, field: str) -> object:
     """Malformed exact-class records fail validation rather than raising."""
     try:
-        return getattr(value, field, _MISSING)
+        # These exact-class dataclasses store supplied values in __dict__.
+        # Do not use getattr(default): journal dataclasses have class-level
+        # defaults which could hide a deleted/corrupted instance field.
+        owned_fields = object.__getattribute__(value, "__dict__")
+        if type(owned_fields) is not dict or field not in owned_fields:
+            return _MISSING
+        return owned_fields[field]
     except Exception:
         return _MISSING
 
