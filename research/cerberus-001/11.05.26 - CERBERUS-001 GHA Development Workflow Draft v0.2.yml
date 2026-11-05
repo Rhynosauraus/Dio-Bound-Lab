@@ -1,0 +1,238 @@
+# CERBERUS-001 D2-S1-GHA-001 -- INERT SOURCE-ONLY WORKFLOW DRAFT v0.2
+# DATE: November 5, 2026 (America/Boise)
+# REVIEW STATUS: NOT INSTALLED IN .github/workflows; NOT EXECUTED.
+# This draft is stored under research/cerberus-001/, NOT .github/workflows/.
+# It cannot be triggered in its present location. Installing it on the
+# default branch requires SEPARATE human approval, followed by a SEPARATE
+# explicit execution authorization. These are not implied here.
+#
+# CLAIM CEILING: unit-test reproducibility on an internet-connected GitHub
+# hosted VM only. NOT network containment, A0/D/C independence, durable
+# custody, anti-rollback, PS5 access, production readiness or D2 qualification.
+#
+# Expected future installation path after approval:
+#   .github/workflows/cerberus-development-gate.yml
+# The exact source checkout stays pinned to the reviewed v0.9 commit.
+# v0.2 is a new review-only candidate. The v0.1 draft stays frozen on
+# commit 6e47da7a5620bc458963254059cebced99cea163.
+# Inline Python compatibility/step behavior is UNEXECUTED and examiner-pending.
+name: CERBERUS D2-S1 Development Reproducibility (manual only)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cerberus-development-reproducibility
+  cancel-in-progress: false
+
+jobs:
+  synthetic-only:
+    name: Bounded source regression on disposable Ubuntu
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    env:
+      PYTHONNOUSERSITE: "1"
+      PYTHONDONTWRITEBYTECODE: "1"
+      PIP_NO_INDEX: "1"
+      GIT_TERMINAL_PROMPT: "0"
+    steps:
+      - name: Check out the exact reviewed source
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1, Node24 declaration
+        with:
+          ref: 93f9e6d9f9ce9abe88cfe8dd3e4cdef5d54ef85e
+          persist-credentials: false
+          fetch-depth: 1
+          clean: true
+          submodules: false
+          lfs: false
+
+      - name: Clear evidence workspace (best-effort after checkout)
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence
+          rm -f evidence/summary.json evidence/unit-tests.txt
+
+      - name: Verify source identity and run the 34 pure-unit cases
+        shell: bash
+        timeout-minutes: 7
+        run: |
+          set -euo pipefail
+          mkdir -p evidence
+          python3 - <<'PY'
+          import hashlib
+          import importlib.util
+          import io
+          import json
+          import os
+          import pathlib
+          import subprocess
+          import sys
+          import unittest
+
+          PIN = "93f9e6d9f9ce9abe88cfe8dd3e4cdef5d54ef85e"
+          ROOT = pathlib.Path("research/cerberus-001")
+          FILES = [
+              "11.05.26 - CERBERUS-001 Historical Read Journal Repair Candidate v0.9.py",
+              "11.05.26 - CERBERUS-001 Historical Read Journal Regression Tests v0.9.py",
+              "11.05.26 - CERBERUS-001 Malformed Journal Regression Cases v0.9.json",
+          ]
+          EVIDENCE = pathlib.Path("evidence")
+          out = {
+              "schema": "cerberus.gha-development-evidence/v0.2",
+              "source_commit": PIN,
+              "observed_checkout_sha": "UNKNOWN",
+              "receipt_scope": "RUNNER_BEST_EFFORT_NOT_DURABLE_CUSTODY",
+              "github_workflow_ref": os.environ.get("GITHUB_WORKFLOW_REF", "UNKNOWN"),
+              "github_sha": os.environ.get("GITHUB_SHA", "UNKNOWN"),
+              "github_run_id": os.environ.get("GITHUB_RUN_ID", "UNKNOWN"),
+              "github_run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT", "UNKNOWN"),
+              "runner_label": "ubuntu-24.04",
+              "runner_os": os.environ.get("RUNNER_OS", "UNKNOWN"),
+              "runner_arch": os.environ.get("RUNNER_ARCH", "UNKNOWN"),
+              "image_os": os.environ.get("ImageOS", "UNKNOWN"),
+              "image_version": os.environ.get("ImageVersion", "UNKNOWN"),
+              "python_version": sys.version,
+              "evidence_scope": "SYNTHETIC_DEVELOPMENT_UNIT_TESTS_ONLY",
+              "security_qualification": "NOT_ASSESSED",
+              "d1_full_qualification": "INCONCLUSIVE",
+              "d2_containment": "NOT_QUALIFIED",
+              "d3_test_authorization": "NOT_IMPLIED_BY_A_PASS",
+              "files_sha256": {},
+              "expected_tests": 34,
+              "observed_tests": 0,
+              "failures": [],
+              "errors": [],
+              "skipped": [],
+              "expected_failures": [],
+              "unexpected_successes": [],
+              "success": False,
+          }
+          exit_code = 1
+          try:
+              actual_sha = subprocess.run(
+                  ["git", "rev-parse", "HEAD"], check=True,
+                  capture_output=True, text=True,
+              ).stdout.strip()
+              out["observed_checkout_sha"] = actual_sha
+              if actual_sha != PIN:
+                  raise RuntimeError("checkout SHA does not match frozen source")
+
+              for name in FILES:
+                  path = ROOT / name
+                  if not path.is_file():
+                      raise RuntimeError("missing reviewed fixture " + name)
+                  out["files_sha256"][name] = hashlib.sha256(path.read_bytes()).hexdigest()
+
+              suite_file = ROOT / FILES[1]
+              spec = importlib.util.spec_from_file_location(
+                  "cerberus_gha_reviewed_v09_tests", suite_file
+              )
+              if spec is None or spec.loader is None:
+                  raise RuntimeError("dated test module is not importable")
+              module = importlib.util.module_from_spec(spec)
+              sys.modules[spec.name] = module
+              spec.loader.exec_module(module)
+              suite = unittest.defaultTestLoader.loadTestsFromModule(module)
+              out["observed_tests"] = suite.countTestCases()
+              if out["observed_tests"] != 34:
+                  raise RuntimeError("expected exactly 34 frozen tests")
+              stream = io.StringIO()
+              result = unittest.TextTestRunner(
+                  stream=stream, verbosity=2, failfast=False
+              ).run(suite)
+              raw_log = stream.getvalue()
+              raw_bytes = raw_log.encode("utf-8", errors="replace")
+              out["log_truncated_to_64KiB"] = len(raw_bytes) > 65536
+              bounded_log = raw_bytes[:65536].decode("utf-8", errors="ignore").encode("utf-8")
+              (EVIDENCE / "unit-tests.txt").write_bytes(bounded_log)
+              out["tests_run"] = result.testsRun
+              out["failures"] = [
+                  {"test": str(t)[:128],
+                   "traceback_sha256": hashlib.sha256(msg.encode("utf-8", errors="replace")).hexdigest()}
+                  for t, msg in result.failures
+              ]
+              out["errors"] = [
+                  {"test": str(t)[:128],
+                   "traceback_sha256": hashlib.sha256(msg.encode("utf-8", errors="replace")).hexdigest()}
+                  for t, msg in result.errors
+              ]
+              out["skipped"] = [
+                  {"test": str(t)[:128], "reason": msg[:256]}
+                  for t, msg in result.skipped
+              ]
+              out["expected_failures"] = [str(t)[:128] for t, _ in result.expectedFailures]
+              out["unexpected_successes"] = [str(t)[:128] for t in result.unexpectedSuccesses]
+              out["success"] = (
+                  result.wasSuccessful()
+                  and result.testsRun == 34
+                  and not result.failures
+                  and not result.errors
+                  and not result.skipped
+                  and not result.expectedFailures
+                  and not result.unexpectedSuccesses
+              )
+              exit_code = 0 if out["success"] else 1
+          except Exception as exc:
+              out["setup_error"] = type(exc).__name__ + ": " + str(exc)[:1024]
+              exit_code = 1
+          finally:
+              receipt = (json.dumps(out, indent=2, sort_keys=True, ensure_ascii=True) + "\n").encode("ascii")
+              if len(receipt) > 32768:
+                  exit_code = 1
+                  out["success"] = False
+                  out["summary_overflow"] = True
+                  for category in ("failures", "errors", "skipped", "expected_failures", "unexpected_successes"):
+                      out[category] = {"detail_omitted": True, "count": len(out[category])}
+                  receipt = (json.dumps(out, indent=2, sort_keys=True, ensure_ascii=True) + "\n").encode("ascii")
+                  if len(receipt) > 32768:
+                      raise RuntimeError("unable to bound evidence receipt size")
+              (EVIDENCE / "summary.json").write_bytes(receipt)
+              print("CERBERUS development-unit result:", "PASS" if out["success"] else "FAIL")
+              print("Executed cases:", out.get("tests_run", 0))
+              print("Security qualification:", out["security_qualification"])
+          sys.exit(exit_code)
+          PY
+          test -s evidence/summary.json
+          test -s evidence/unit-tests.txt
+
+      # Shell-only fallback is intentionally separate from the inline Python
+      # parser. It can run after a Python syntax/import failure or checkout
+      # failure, but CANNOT guarantee a receipt if the VM never starts,
+      # is forcibly terminated, cancelled, or artifact upload fails.
+      - name: Materialize explicit failure-only evidence if primary missing
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence
+          if [[ ! -s evidence/summary.json ]]; then
+            printf '%s\n' '{"schema":"cerberus.gha-development-evidence/v0.2","source_commit":"93f9e6d9f9ce9abe88cfe8dd3e4cdef5d54ef85e","status":"MISSING_PRIMARY_SUMMARY","success":false,"security_qualification":"NOT_ASSESSED","d2_containment":"NOT_QUALIFIED","custody":"RUNNER_BEST_EFFORT_ONLY"}' > evidence/summary.json
+          fi
+          if [[ ! -s evidence/unit-tests.txt ]]; then
+            printf '%s\n' 'NO_COMPLETE_UNIT_TEST_LOG; TEST_COMPLETION_NOT_EVIDENCED' > evidence/unit-tests.txt
+          fi
+          test -s evidence/summary.json
+          test -s evidence/unit-tests.txt
+
+      - name: Preserve bounded development evidence in GitHub
+        if: always()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0, Node24 declaration
+        with:
+          name: cerberus-d2-s1-gha-001-synthetic-evidence
+          path: evidence/
+          if-no-files-found: error
+          retention-days: 7
+          compression-level: 6
+
+# WARNING: Uploading to GitHub Actions is NOT independent C custody.
+# Standard GitHub-hosted runners retain public egress by default. Checkout,
+# artifact upload and GitHub platform services use network access. The
+# workflow never proves zero egress or true security isolation.
+# v0.2 has no runtime, parser, job, or artifact acceptance evidence.
