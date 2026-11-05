@@ -103,25 +103,30 @@ jobs:
           try:
               for name in FILES:
                   path = ROOT / name
-                  assert path.is_file(), "missing reviewed fixture " + name
+                  if not path.is_file():
+                      raise RuntimeError("missing reviewed fixture " + name)
                   out["files_sha256"][name] = hashlib.sha256(path.read_bytes()).hexdigest()
 
               suite_file = ROOT / FILES[1]
               spec = importlib.util.spec_from_file_location(
                   "cerberus_gha_reviewed_v09_tests", suite_file
               )
-              assert spec is not None and spec.loader is not None
+              if spec is None or spec.loader is None:
+              raise RuntimeError("dated test module is not importable")
               module = importlib.util.module_from_spec(spec)
               sys.modules[spec.name] = module
               spec.loader.exec_module(module)
               suite = unittest.defaultTestLoader.loadTestsFromModule(module)
               out["observed_tests"] = suite.countTestCases()
-              assert out["observed_tests"] == 34, "expected exactly 34 frozen tests"
+              if out["observed_tests"] != 34:
+                  raise RuntimeError("expected exactly 34 frozen tests")
               stream = io.StringIO()
               result = unittest.TextTestRunner(
                   stream=stream, verbosity=2, failfast=False
               ).run(suite)
-              (EVIDENCE / "unit-tests.txt").write_text(stream.getvalue(), encoding="utf-8")
+              raw_log = stream.getvalue()
+              out["log_truncated_to_64KiB"] = len(raw_log) > 65536
+              (EVIDENCE / "unit-tests.txt").write_text(raw_log[:65536], encoding="utf-8")
               out["tests_run"] = result.testsRun
               out["failures"] = [
                   {"test": str(t), "detail": msg[:8192]} for t, msg in result.failures
