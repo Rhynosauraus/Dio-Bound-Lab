@@ -198,7 +198,7 @@ class HistoricalReadJournalTests(unittest.TestCase):
         self.hold(result)
 
 
-    def test_FZ01_missing_principal_logs_invalid_on_healthy_journal(self):
+    def test_RJ01_missing_principal_logs_invalid_on_healthy_journal(self):
         damaged = replace(self.intent)
         object.__delattr__(damaged, "principal_id_claim")
         out = self.append(intent=damaged)
@@ -207,7 +207,7 @@ class HistoricalReadJournalTests(unittest.TestCase):
         self.assertEqual(len(out.journal.attempts), 1)
         self.hold(out)
 
-    def test_H01_missing_issuer_claim_logs_invalid_on_healthy_journal(self):
+    def test_RJ02_missing_issuer_claim_logs_invalid_on_healthy_journal(self):
         damaged = replace(self.intent)
         object.__delattr__(damaged, "original_issuer_key_id_claim")
         out = self.append(intent=damaged)
@@ -215,7 +215,7 @@ class HistoricalReadJournalTests(unittest.TestCase):
         self.assertTrue(out.recorded_in_model)
         self.hold(out)
 
-    def test_FZ02_missing_original_token_logs_invalid_marker(self):
+    def test_RJ03_missing_original_token_logs_invalid_marker(self):
         damaged = replace(self.intent)
         object.__delattr__(damaged, "original_token_bytes")
         out = self.append(intent=damaged)
@@ -224,7 +224,7 @@ class HistoricalReadJournalTests(unittest.TestCase):
         self.assertEqual(out.journal.attempts[0].token_sha256, sha256(b"").hexdigest())
         self.hold(out)
 
-    def test_FZ03_all_missing_input_fields_still_log_invalid(self):
+    def test_RJ04_all_missing_input_fields_still_log_invalid(self):
         for key in (
             "original_token_bytes", "reservation_id_claim",
             "principal_id_claim", "receipt_grant_id_claim",
@@ -238,7 +238,7 @@ class HistoricalReadJournalTests(unittest.TestCase):
                 self.assertTrue(out.recorded_in_model)
                 self.hold(out)
 
-    def test_FZ13_missing_prior_token_digest_fails_closed(self):
+    def test_RJ05_missing_prior_token_digest_fails_closed(self):
         first = self.append()
         row = replace(first.journal.attempts[0])
         object.__delattr__(row, "token_sha256")
@@ -249,7 +249,7 @@ class HistoricalReadJournalTests(unittest.TestCase):
         self.assertFalse(out.recorded_in_model)
         self.hold(out)
 
-    def test_FZ14_missing_journal_attempts_fails_closed(self):
+    def test_RJ06_missing_journal_attempts_fails_closed(self):
         damaged = replace(self.journal)
         object.__delattr__(damaged, "attempts")
         out = self.append(journal=damaged)
@@ -257,7 +257,7 @@ class HistoricalReadJournalTests(unittest.TestCase):
         self.assertFalse(out.recorded_in_model)
         self.hold(out)
 
-    def test_FZ15_missing_journal_sequence_fails_closed(self):
+    def test_RJ07_missing_journal_sequence_fails_closed(self):
         damaged = replace(self.journal)
         object.__delattr__(damaged, "read_sequence")
         out = self.append(journal=damaged)
@@ -265,7 +265,7 @@ class HistoricalReadJournalTests(unittest.TestCase):
         self.assertFalse(out.recorded_in_model)
         self.hold(out)
 
-    def test_FZ16_missing_prior_status_fails_closed(self):
+    def test_RJ08_missing_prior_status_fails_closed(self):
         first = self.append()
         row = replace(first.journal.attempts[0])
         object.__delattr__(row, "status")
@@ -274,7 +274,7 @@ class HistoricalReadJournalTests(unittest.TestCase):
         self.assertFalse(out.recorded_in_model)
         self.hold(out)
 
-    def test_FZ17_missing_prior_sequence_fails_closed(self):
+    def test_RJ09_missing_prior_sequence_fails_closed(self):
         first = self.append()
         row = replace(first.journal.attempts[0])
         object.__delattr__(row, "read_sequence")
@@ -283,7 +283,7 @@ class HistoricalReadJournalTests(unittest.TestCase):
         self.assertFalse(out.recorded_in_model)
         self.hold(out)
 
-    def test_FZ18_missing_prior_raw_length_fails_closed(self):
+    def test_RJ10_missing_prior_raw_length_fails_closed(self):
         first = self.append()
         row = replace(first.journal.attempts[0])
         object.__delattr__(row, "raw_byte_length")
@@ -292,7 +292,7 @@ class HistoricalReadJournalTests(unittest.TestCase):
         self.assertFalse(out.recorded_in_model)
         self.hold(out)
 
-    def test_FZ19_missing_other_digest_fields_fail_closed(self):
+    def test_RJ11_missing_other_digest_fields_fail_closed(self):
         fields = (
             "reservation_claim_sha256", "principal_claim_sha256",
             "grant_claim_sha256", "issuer_key_claim_sha256"
@@ -307,7 +307,7 @@ class HistoricalReadJournalTests(unittest.TestCase):
                 self.assertFalse(out.recorded_in_model)
                 self.hold(out)
 
-    def test_FZ20_invalid_journal_with_valid_intent_never_claims_append(self):
+    def test_RJ12_invalid_journal_with_valid_intent_never_claims_append(self):
         first = self.append()
         row = replace(first.journal.attempts[0])
         object.__delattr__(row, "token_sha256")
@@ -318,13 +318,13 @@ class HistoricalReadJournalTests(unittest.TestCase):
         self.assertIs(out.journal, old)
         self.hold(out)
 
-    def test_FZ21_wrong_class_journal_fails_closed(self):
+    def test_RJ13_wrong_class_journal_fails_closed(self):
         out = self.m.record_d_private_read_attempt(None, self.intent)
         self.assertEqual(out.status, "D_READ_JOURNAL_UNPROVEN")
         self.assertFalse(out.recorded_in_model)
         self.hold(out)
 
-    def test_FZ22_copied_valid_journal_is_not_durable_custody(self):
+    def test_RJ14_copied_valid_journal_is_not_durable_custody(self):
         copied = replace(self.append().journal)
         out = self.append(journal=copied)
         self.assertTrue(out.recorded_in_model)  # Only model syntax.
