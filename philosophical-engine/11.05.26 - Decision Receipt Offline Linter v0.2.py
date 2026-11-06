@@ -295,13 +295,15 @@ def _reject_constant(name):
 def _load_json_strict(path):
     with Path(path).open("rb") as handle:
         data = handle.read(MAX_RECEIPT_BYTES + 1)
-    if len(data) > MAX_RECEIPT_BYTES:        raise ValueError("receipt exceeds byte limit")
+    if len(data) > MAX_RECEIPT_BYTES:
+        raise ValueError("receipt exceeds byte limit")
     return json.loads(data.decode("utf-8"), object_pairs_hook=_no_duplicate_keys, parse_constant=_reject_constant)
 
 def _read_original(path):
     with Path(path).open("rb") as handle:
         data = handle.read(MAX_ORIGINAL_BYTES + 1)
-    if len(data) > MAX_ORIGINAL_BYTES:        raise ValueError("original question exceeds byte limit")
+    if len(data) > MAX_ORIGINAL_BYTES:
+        raise ValueError("original question exceeds byte limit")
     return data.decode("utf-8")
 
 def main():
