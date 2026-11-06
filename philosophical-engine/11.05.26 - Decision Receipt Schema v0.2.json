@@ -11,6 +11,7 @@
     "status",
     "exact_proposition",
     "source_packet",
+    "receipt_id",
     "original_question_sha256",
     "depth",
     "depth_reason",
