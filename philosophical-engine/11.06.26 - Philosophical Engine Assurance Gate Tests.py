@@ -8,6 +8,7 @@ import hashlib
 import importlib.util
 import json
 from pathlib import Path
+from unittest import mock
 import subprocess
 import sys
 import tempfile
@@ -122,6 +123,30 @@ class GateTests(unittest.TestCase):
     def test_source_file_missing_fails_closed(self):
         with tempfile.TemporaryDirectory() as d:
             with self.assertRaises(OSError):gate.load_pinned_linter(d)
+
+    def test_verified_bytes_survive_post_read_file_swap(self):
+        # A malicious file swap after the hash read must not alter what executes.
+        with tempfile.TemporaryDirectory() as d:
+            path=Path(d)/gate.LINTER_NAME
+            safe=b'def check(receipt, original):\n    return []\n'
+            path.write_bytes(safe)
+            original_read=Path.read_bytes
+            def read_then_swap(actual_path):
+                original=original_read(actual_path)
+                actual_path.write_text('raise RuntimeError("swapped code executed")\n')
+                return original
+            with mock.patch.object(gate, 'LINTER_SHA256', hashlib.sha256(safe).hexdigest()):
+                with mock.patch.object(Path, 'read_bytes', autospec=True, side_effect=read_then_swap):
+                    check=gate.load_pinned_linter(d)
+            self.assertEqual(check({}, None), [])
+            self.assertIn('swapped code', path.read_text())
+
+    def test_exact_source_identity_fails_closed(self):
+        with tempfile.TemporaryDirectory() as d:
+            path=Path(d)/gate.LINTER_NAME
+            path.write_text('def check(r, o): return []\n')
+            with self.assertRaises(ValueError): gate.load_pinned_linter(d)
+
 
     def test_cli_refuses_when_original_linter_missing(self):
         with tempfile.TemporaryDirectory() as d:
