@@ -1,6 +1,6 @@
 """
 PS5 synthetic observation -> proposal -> human-decision-claim tests v0.3.
-SOURCE ONLY: 35 test definitions / zero tests executed.
+SOURCE ONLY: 36 test definitions / zero tests executed.
 No use of a PS5, PSN, Mac, Remote Play, external host, or real approval.
 The model never authorizes or performs a real action.
 """
@@ -405,6 +405,21 @@ class SourceOnlyMockLoopCases(unittest.TestCase):
         self.assertEqual(out.status, "MOCK_FRAME_OBSERVED")
         self.assertFalse(out.approval_authenticated)
         self.assertFalse(out.external_action_permitted)
+        self._locked(out)
+
+
+    def test_OBSA36_malformed_event_kind_never_invokes_hostile_eq(self):
+        class HostileKind:
+            def __eq__(self, other):
+                raise AssertionError("untrusted comparison must not execute")
+
+        observed = self._observed()
+        bad_event = replace(observed.events[-1], kind=HostileKind())
+        corrupted = replace(observed, events=(bad_event,))
+        out = self.m.simulated_stop(corrupted)
+        self.assertEqual(out.status, "EVIDENCE_GAP_STOP")
+        self.assertFalse(out.recorded_in_model)
+        self.assertIs(out.state, corrupted)
         self._locked(out)
 
 
