@@ -1,0 +1,461 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:labyrinth:philosophical-engine:decision-receipt:0.2-candidate",
+  "title": "Labyrinth Philosophical Engine Decision Receipt — candidate v0.2",
+  "description": "Structural validity only. Does not certify true evidence, independent review, transport or authorization.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_id",
+    "protocol_version",
+    "status",
+    "exact_proposition",
+    "source_packet",
+    "receipt_id",
+    "original_question_sha256",
+    "depth",
+    "depth_reason",
+    "stages",
+    "verdict",
+    "justification",
+    "recommendation",
+    "uncertainties",
+    "objections",
+    "falsifiers",
+    "revision_triggers",
+    "forecasts",
+    "authorization",
+    "independence"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "labyrinth.philosophical_engine.decision_receipt"
+    },
+    "protocol_version": {
+      "const": "PE-PORTABLE-0.2-CANDIDATE"
+    },
+    "status": {
+      "enum": [
+        "SYNTHETIC_RESEARCH",
+        "DESIGN_REVIEW",
+        "SUPERVISED_READ_ONLY"
+      ]
+    },
+    "receipt_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "exact_proposition": {
+      "type": "string",
+      "minLength": 1
+    },
+    "original_question_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "source_packet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "records"
+      ],
+      "properties": {
+        "records": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "kind",
+              "statement",
+              "provenance"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "kind": {
+                "enum": [
+                  "OBSERVATION",
+                  "INFERENCE",
+                  "HYPOTHESIS",
+                  "THEORY",
+                  "METAPHOR",
+                  "WISH",
+                  "UNKNOWN",
+                  "FORECAST",
+                  "STIPULATED_SYNTHETIC_RECORD"
+                ]
+              },
+              "statement": {
+                "type": "string",
+                "minLength": 1
+              },
+              "provenance": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    "depth": {
+      "enum": [
+        "QUICK",
+        "THREE",
+        "FULL"
+      ]
+    },
+    "depth_reason": {
+      "type": "string",
+      "minLength": 1
+    },
+    "stages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "contribution",
+          "cited_source_ids"
+        ],
+        "properties": {
+          "name": {
+            "enum": [
+              "ANJA",
+              "CHAT",
+              "RHYAN",
+              "ZHUANGZI",
+              "ATHENA",
+              "PROMETHEUS"
+            ]
+          },
+          "contribution": {
+            "type": "string",
+            "minLength": 1
+          },
+          "cited_source_ids": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "objection": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "verdict": {
+      "enum": [
+        "SUPPORTED",
+        "REFUTED",
+        "INCONCLUSIVE",
+        "NOT_TESTABLE"
+      ]
+    },
+    "justification": {
+      "type": "string",
+      "minLength": 1
+    },
+    "recommendation": {
+      "enum": [
+        "PREPARE",
+        "BUILD_PROBE",
+        "STOP_PARK"
+      ]
+    },
+    "uncertainties": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "objections": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "falsifiers": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "revision_triggers": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "forecasts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "claim",
+          "causal_pathway",
+          "disconfirmation_condition",
+          "status"
+        ],
+        "properties": {
+          "claim": {
+            "type": "string",
+            "minLength": 1
+          },
+          "causal_pathway": {
+            "type": "string",
+            "minLength": 1
+          },
+          "disconfirmation_condition": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "const": "FORECAST"
+          },
+          "horizon": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "authorization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "human_authority_reserved",
+        "engine_grants_execution",
+        "constraints"
+      ],
+      "properties": {
+        "human_authority_reserved": {
+          "const": true
+        },
+        "engine_grants_execution": {
+          "const": false
+        },
+        "constraints": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "external_approval_evidence": {
+          "type": "string"
+        }
+      }
+    },
+    "independence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "simulated_agreement_is_independent_confirmation",
+        "independent_qualification_established"
+      ],
+      "properties": {
+        "simulated_agreement_is_independent_confirmation": {
+          "const": false
+        },
+        "independent_qualification_established": {
+          "const": false
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "depth": {
+            "const": "QUICK"
+          }
+        },
+        "required": [
+          "depth"
+        ]
+      },
+      "then": {
+        "properties": {
+          "stages": {
+            "minItems": 0,
+            "maxItems": 0
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "depth": {
+            "const": "THREE"
+          }
+        },
+        "required": [
+          "depth"
+        ]
+      },
+      "then": {
+        "properties": {
+          "stages": {
+            "minItems": 3,
+            "maxItems": 3,
+            "prefixItems": [
+              {
+                "properties": {
+                  "name": {
+                    "const": "ANJA"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              },
+              {
+                "properties": {
+                  "name": {
+                    "const": "CHAT"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              },
+              {
+                "properties": {
+                  "name": {
+                    "const": "RHYAN"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "depth": {
+            "const": "FULL"
+          }
+        },
+        "required": [
+          "depth"
+        ]
+      },
+      "then": {
+        "properties": {
+          "stages": {
+            "minItems": 6,
+            "maxItems": 6,
+            "prefixItems": [
+              {
+                "properties": {
+                  "name": {
+                    "const": "ANJA"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              },
+              {
+                "properties": {
+                  "name": {
+                    "const": "CHAT"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              },
+              {
+                "properties": {
+                  "name": {
+                    "const": "RHYAN"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              },
+              {
+                "properties": {
+                  "name": {
+                    "const": "ZHUANGZI"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              },
+              {
+                "properties": {
+                  "name": {
+                    "const": "ATHENA"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              },
+              {
+                "properties": {
+                  "name": {
+                    "const": "PROMETHEUS"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "verdict": {
+            "enum": [
+              "SUPPORTED",
+              "REFUTED"
+            ]
+          }
+        },
+        "required": [
+          "verdict"
+        ]
+      },
+      "then": {
+        "properties": {
+          "source_packet": {
+            "properties": {
+              "records": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}
