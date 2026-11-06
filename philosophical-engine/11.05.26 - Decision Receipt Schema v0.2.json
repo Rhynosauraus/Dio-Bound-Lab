@@ -11,6 +11,7 @@
     "status",
     "exact_proposition",
     "source_packet",
+    "original_question_sha256",
     "depth",
     "depth_reason",
     "stages",
@@ -273,5 +274,187 @@
         }
       }
     }
-  }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "depth": {
+            "const": "QUICK"
+          }
+        },
+        "required": [
+          "depth"
+        ]
+      },
+      "then": {
+        "properties": {
+          "stages": {
+            "minItems": 0,
+            "maxItems": 0
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "depth": {
+            "const": "THREE"
+          }
+        },
+        "required": [
+          "depth"
+        ]
+      },
+      "then": {
+        "properties": {
+          "stages": {
+            "minItems": 3,
+            "maxItems": 3,
+            "prefixItems": [
+              {
+                "properties": {
+                  "name": {
+                    "const": "ANJA"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              },
+              {
+                "properties": {
+                  "name": {
+                    "const": "CHAT"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              },
+              {
+                "properties": {
+                  "name": {
+                    "const": "RHYAN"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "depth": {
+            "const": "FULL"
+          }
+        },
+        "required": [
+          "depth"
+        ]
+      },
+      "then": {
+        "properties": {
+          "stages": {
+            "minItems": 6,
+            "maxItems": 6,
+            "prefixItems": [
+              {
+                "properties": {
+                  "name": {
+                    "const": "ANJA"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              },
+              {
+                "properties": {
+                  "name": {
+                    "const": "CHAT"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              },
+              {
+                "properties": {
+                  "name": {
+                    "const": "RHYAN"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              },
+              {
+                "properties": {
+                  "name": {
+                    "const": "ZHUANGZI"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              },
+              {
+                "properties": {
+                  "name": {
+                    "const": "ATHENA"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              },
+              {
+                "properties": {
+                  "name": {
+                    "const": "PROMETHEUS"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "verdict": {
+            "enum": [
+              "SUPPORTED",
+              "REFUTED"
+            ]
+          }
+        },
+        "required": [
+          "verdict"
+        ]
+      },
+      "then": {
+        "properties": {
+          "source_packet": {
+            "properties": {
+              "records": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
 }
