@@ -13,6 +13,8 @@ DEPTH_STAGES = {"QUICK": [], "THREE": STAGES[:3], "FULL": STAGES}
 VERDICTS = {"SUPPORTED", "REFUTED", "INCONCLUSIVE", "NOT_TESTABLE"}
 ACTIONS = {"PREPARE", "BUILD_PROBE", "STOP_PARK"}
 STATUSES = {"SYNTHETIC_RESEARCH", "DESIGN_REVIEW", "SUPERVISED_READ_ONLY"}
+MAX_RECEIPT_BYTES = 1024 * 1024  # Bounding input is not proof of safe runtime isolation.
+MAX_ORIGINAL_BYTES = 128 * 1024
 
 def _check_legacy(receipt, expected_proposition=None):
     """Return errors. Structural-only checks, not philosophical adjudication."""
@@ -128,6 +130,8 @@ def check(receipt, expected_proposition=None):
     errors = []
     if not isinstance(receipt, dict):
         return ["receipt must be a JSON object"]
+    if not _valid_nonempty_str(receipt.get("receipt_id")):
+        errors.append("missing or invalid receipt_id")
     if set(receipt) - ROOT_FIELDS:
         errors.append("unexpected top-level fields: " + ", ".join(sorted(set(receipt) - ROOT_FIELDS)))
     for field in ("schema_id", "protocol_version", "status", "exact_proposition",
@@ -177,6 +181,8 @@ def check(receipt, expected_proposition=None):
         cites = s.get("cited_source_ids")
         if not isinstance(cites, list) or any(not _valid_nonempty_str(c) for c in cites):
             errors.append("stage citations must be an array of nonempty source IDs")
+        if "objection" in s and not isinstance(s["objection"], str):
+            errors.append("stage objection must be a string")
     forecasts = receipt.get("forecasts")
     if not isinstance(forecasts, list):
         errors.append("forecasts must be a list")
@@ -186,10 +192,19 @@ def check(receipt, expected_proposition=None):
                 errors.append("invalid forecast object")
             elif any(not _valid_nonempty_str(f.get(k)) for k in ("claim", "causal_pathway", "disconfirmation_condition")):
                 errors.append("forecast missing pathway, claim or falsifier")
+            elif "horizon" in f and not isinstance(f["horizon"], str):
+                errors.append("forecast horizon must be a string")
     for field in ("authorization", "independence"):
         if not isinstance(receipt.get(field), dict):
             errors.append("invalid " + field + " object")
     auth = receipt.get("authorization") if isinstance(receipt.get("authorization"), dict) else {}
+    if set(auth) - {"human_authority_reserved", "engine_grants_execution", "constraints", "external_approval_evidence"}:
+        errors.append("unexpected authorization fields")
+    if "external_approval_evidence" in auth and not isinstance(auth["external_approval_evidence"], str):
+        errors.append("external_approval_evidence must be a string, not proof of authorization")
+    independence = receipt.get("independence") if isinstance(receipt.get("independence"), dict) else {}
+    if set(independence) - {"simulated_agreement_is_independent_confirmation", "independent_qualification_established"}:
+        errors.append("unexpected independence fields")
     if not isinstance(auth.get("constraints"), list) or any(
         not _valid_nonempty_str(x) for x in auth.get("constraints", [])
     ):
@@ -203,7 +218,8 @@ def self_test():
     example = Path(__file__).with_name("11.05.26 - Decision Receipt Example v0.2.json")
     base = json.loads(example.read_text(encoding="utf-8"))
     question = base["exact_proposition"]
-    assert not check(base, question), "positive fixture failed"
+    if check(base, question):
+        raise RuntimeError("positive fixture failed")
     mutations = {
         "proposition switch": lambda d: d.update(exact_proposition="An easier, different question"),
         "ghost source": lambda d: d.update(stages=[{"name":"ANJA","contribution":"Invented fact","cited_source_ids":["NO_SUCH_ID"]}], depth="THREE"),
@@ -225,14 +241,48 @@ def self_test():
             {"name": "RHYAN", "contribution": "z", "cited_source_ids": []},
         ]),
         "unexpected root authority override": lambda d: d.update(authority_override="GRANTED"),
+        "hidden authorization grant": lambda d: d["authorization"].update(deployment_granted=True),
+        "invented independence field": lambda d: d["independence"].update(external_witness="PASS"),
+        "non-string receipt id": lambda d: d.update(receipt_id=[]),
+        "non-string stage objection": lambda d: d.update(depth="THREE", stages=[
+            {"name": name, "contribution": "x", "cited_source_ids": [], "objection": []}
+            for name in STAGES[:3]]),
+        "non-string forecast horizon": lambda d: d.update(forecasts=[
+            {"claim":"x","causal_pathway":"y","disconfirmation_condition":"z",
+             "status":"FORECAST","horizon":[]}]),
+        "non-string alleged approval evidence": lambda d: d["authorization"].update(external_approval_evidence={"granted":True}),
     }
     for name, mut in mutations.items():
         candidate = copy.deepcopy(base)
         mut(candidate)
         errors = check(candidate, question)
-        assert errors, name + " was not rejected"
-    print("PASS: 1 valid fixture + 16 deliberate structural violations rejected")
+        if not errors:
+            raise RuntimeError(name + " was not rejected")
+    print("PASS: 1 valid fixture + 22 deliberate structural violations rejected")
     print("LIMIT: no semantic entailment, provenance authentication, timing, independence or authorization is verified by this test")
+
+def _no_duplicate_keys(pairs):
+    seen = {}
+    for key, val in pairs:
+        if key in seen:
+            raise ValueError("duplicate JSON object key: " + key)
+        seen[key] = val
+    return seen
+
+def _reject_constant(name):
+    raise ValueError("non-standard JSON number is forbidden: " + name)
+
+def _load_json_strict(path):
+    data = Path(path).read_bytes()
+    if len(data) > MAX_RECEIPT_BYTES:
+        raise ValueError("receipt exceeds byte limit")
+    return json.loads(data.decode("utf-8"), object_pairs_hook=_no_duplicate_keys, parse_constant=_reject_constant)
+
+def _read_original(path):
+    data = Path(path).read_bytes()
+    if len(data) > MAX_ORIGINAL_BYTES:
+        raise ValueError("original question exceeds byte limit")
+    return data.decode("utf-8")
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
@@ -242,6 +292,8 @@ def main():
     p.add_argument("--unbound-structural-only", action="store_true", help="Allow a non-gating structure check without external proposition binding")
     p.add_argument("--self-test", action="store_true", help="Run synthetic structural negative tests")
     args = p.parse_args()
+    if args.unbound_structural_only and (args.expected_proposition is not None or args.expected_proposition_file):
+        p.error("unbound mode cannot be combined with a trusted-original argument")
     if args.self_test:
         self_test()
         return 0
@@ -251,11 +303,19 @@ def main():
         p.error("Choose one trusted original question source, not both")
     question = args.expected_proposition
     if args.expected_proposition_file:
-        question = Path(args.expected_proposition_file).read_text(encoding="utf-8")
+        try:
+            question = _read_original(args.expected_proposition_file)
+        except (OSError, UnicodeError, ValueError) as exc:
+            print("BLOCK: original-question file read failed: " + type(exc).__name__)
+            return 2
     if question is None and not args.unbound_structural_only:
         print("BLOCK: an external original proposition is required (or explicitly choose --unbound-structural-only)")
         return 3
-    doc = json.loads(Path(args.receipt).read_text(encoding="utf-8"))
+    try:
+        doc = _load_json_strict(args.receipt)
+    except (OSError, UnicodeError, ValueError) as exc:
+        print("BLOCK: strict receipt JSON load failed: " + type(exc).__name__)
+        return 2
     findings = check(doc, question)
     for finding in findings:
         print("BLOCK:", finding)
