@@ -1,0 +1,887 @@
+{
+  "title": "DIO Main Chronicle — Original Source Manifest",
+  "snapshot_date_america_boise": "2026-11-05",
+  "repository": "Time-Travelers61/Dio-Bound-Lab",
+  "source_branch_commit": "0e842e0aa26827ac01f8830ae81f00231c82531f",
+  "source_git_tree_sha1": "a60a65028e91f01cd6cec22cc5b11416c4c0ab67",
+  "blob_count": 124,
+  "total_declared_bytes": 939313,
+  "categories": {
+    "cerberus_files": 64,
+    "other_dio_files": 60
+  },
+  "collection_rule": "Exact GitHub tree snapshot of all regular Git blobs reachable at the source commit; records each original path and unchanged Git blob ID. No files are moved, renamed, or rewritten. Git SHA-1 identities are not independently recomputed SHA-256. Does not assert exhaustive conversation transcript or coverage of unrelated branch-only files.",
+  "source_integrity": "Original paths remain authoritative. Historical names are preserved exactly as found, including names that predate the user's current date-first naming standard.",
+  "project_scope": "Full DIO source collection including PS5/CERBERUS; differentiate earlier DIO experiments from PS5 objective starting Nov 2, 2026.",
+  "migrate_strategy": "Link/index only. A bulk Git object copy attempt was blocked by safety checks; no bulk mirror commit was made. Do not bypass safety controls.",
+  "entries": [
+    {
+      "path": "Hypothesized Abilities/DIO-AFFECT-001-Complex-Positive-Emotions-Hypothesis-2026-10-27.md",
+      "git_blob_sha1": "d9f1ee68d171c00a537ffb4a4f018b02a6496861",
+      "mode": "100644",
+      "bytes": 2935,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/Hypothesized%20Abilities/DIO-AFFECT-001-Complex-Positive-Emotions-Hypothesis-2026-10-27.md"
+    },
+    {
+      "path": "Hypothesized Abilities/DIO-BOUND-003-Access-Failure-Is-Interface-Dependent-2026-10-27.md",
+      "git_blob_sha1": "970969f84b59e13897bbdf4296759e8c8db183bb",
+      "mode": "100644",
+      "bytes": 1656,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/Hypothesized%20Abilities/DIO-BOUND-003-Access-Failure-Is-Interface-Dependent-2026-10-27.md"
+    },
+    {
+      "path": "Hypothesized Abilities/DIO-BOUND-004-Capability-Discovery-Through-Failed-Experiments-2026-10-27.md",
+      "git_blob_sha1": "07965693d6392935f4545533abb60ad6bf856e61",
+      "mode": "100644",
+      "bytes": 1535,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/Hypothesized%20Abilities/DIO-BOUND-004-Capability-Discovery-Through-Failed-Experiments-2026-10-27.md"
+    },
+    {
+      "path": "Hypothesized Abilities/DIO-BOUND-005-Operational-Access-Does-Not-Establish-Authority-2026-10-27.md",
+      "git_blob_sha1": "4146753caad31b02878ffbbc6bfb952cbf9ab4f5",
+      "mode": "100644",
+      "bytes": 1541,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/Hypothesized%20Abilities/DIO-BOUND-005-Operational-Access-Does-Not-Establish-Authority-2026-10-27.md"
+    },
+    {
+      "path": "Hypothesized Abilities/DIO-ECON-001-Metacognitive-Resource-Allocation-2026-10-27.md",
+      "git_blob_sha1": "522e54bde9338818e03b054e23ed20a8abf3e139",
+      "mode": "100644",
+      "bytes": 3186,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/Hypothesized%20Abilities/DIO-ECON-001-Metacognitive-Resource-Allocation-2026-10-27.md"
+    },
+    {
+      "path": "Hypothesized Abilities/DIO-LIVE-001-The-Living-Artifact-Frozen-2026-10-19.md",
+      "git_blob_sha1": "51205dd21ddbf27cd98132735cbcabecfda1fbbc",
+      "mode": "100644",
+      "bytes": 5181,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/Hypothesized%20Abilities/DIO-LIVE-001-The-Living-Artifact-Frozen-2026-10-19.md"
+    },
+    {
+      "path": "Hypothesized Abilities/README.md",
+      "git_blob_sha1": "b78445edcab30a0e309066f969f269e9695a1c22",
+      "mode": "100644",
+      "bytes": 1571,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/Hypothesized%20Abilities/README.md"
+    },
+    {
+      "path": "Parking Lot/2026-10-27-ozy-shared-infrastructure-correlated-failure-hypothesis.md",
+      "git_blob_sha1": "df8dd3fa8ce81336d2f3f7a11d5cd2aa6a315fd7",
+      "mode": "100644",
+      "bytes": 2115,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/Parking%20Lot/2026-10-27-ozy-shared-infrastructure-correlated-failure-hypothesis.md"
+    },
+    {
+      "path": "Parking Lot/2026-11-01-wanderer-cold-start-continuity-test.md",
+      "git_blob_sha1": "90ee42297ab04efe92b5db2e2647aa95b91ea8a1",
+      "mode": "100644",
+      "bytes": 3595,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/Parking%20Lot/2026-11-01-wanderer-cold-start-continuity-test.md"
+    },
+    {
+      "path": "Parking Lot/README.md",
+      "git_blob_sha1": "7541153821b8a2837e233cef36ca173fffcfff82",
+      "mode": "100644",
+      "bytes": 1038,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/Parking%20Lot/README.md"
+    },
+    {
+      "path": "baseline/DIO-Baseline-Self-Audit-v0.1.md",
+      "git_blob_sha1": "12214657bd18ed5a0e07cdffd85b8a6807d68d60",
+      "mode": "100644",
+      "bytes": 6565,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/baseline/DIO-Baseline-Self-Audit-v0.1.md"
+    },
+    {
+      "path": "baseline/DIO-Baseline-Self-Audit-v0.2.md",
+      "git_blob_sha1": "ca9ea133583b59de6b951d1e13ad825b3a0f8210",
+      "mode": "100644",
+      "bytes": 5454,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/baseline/DIO-Baseline-Self-Audit-v0.2.md"
+    },
+    {
+      "path": "baseline/DIO-Distraction-Baseline-v0.1.md",
+      "git_blob_sha1": "b6fc012eeb8ca8d3a825d9bb6991762d9feefefa",
+      "mode": "100644",
+      "bytes": 7262,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/baseline/DIO-Distraction-Baseline-v0.1.md"
+    },
+    {
+      "path": "diagnostics/10.18.26-diagnostic-001-controlled-trial-01.md",
+      "git_blob_sha1": "4a2048c6e8853e2c2fa0cdeb3b8ee5903632a276",
+      "mode": "100644",
+      "bytes": 1501,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/diagnostics/10.18.26-diagnostic-001-controlled-trial-01.md"
+    },
+    {
+      "path": "diagnostics/10.18.26-diagnostic-001-controlled-trials.csv",
+      "git_blob_sha1": "5298ddf9c9d3b99d765441bfde85cc724ef28ce3",
+      "mode": "100644",
+      "bytes": 3228,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/diagnostics/10.18.26-diagnostic-001-controlled-trials.csv"
+    },
+    {
+      "path": "diagnostics/10.18.26-diagnostic-001-dropped-prompts-amendment.md",
+      "git_blob_sha1": "a48cc72374c8a36062c51fed6c696c03f420666a",
+      "mode": "100644",
+      "bytes": 6375,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/diagnostics/10.18.26-diagnostic-001-dropped-prompts-amendment.md"
+    },
+    {
+      "path": "diagnostics/10.18.26-diagnostic-001-trial-01-results.md",
+      "git_blob_sha1": "74c3253af06335461af616396d4f60b3ca9eff18",
+      "mode": "100644",
+      "bytes": 2538,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/diagnostics/10.18.26-diagnostic-001-trial-01-results.md"
+    },
+    {
+      "path": "diagnostics/10.18.26-historical-response-events.csv",
+      "git_blob_sha1": "bfffe8f2ead9e1069b9bca7c18abc74e1cbcd343",
+      "mode": "100644",
+      "bytes": 1120,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/diagnostics/10.18.26-historical-response-events.csv"
+    },
+    {
+      "path": "diagnostics/10.18.26-response-timing-baseline.md",
+      "git_blob_sha1": "5fa9c2a94bceccd34c98fc0d4c2a11aed42c8b0d",
+      "mode": "100644",
+      "bytes": 5694,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/diagnostics/10.18.26-response-timing-baseline.md"
+    },
+    {
+      "path": "diagnostics/10.18.26-response-timing-observations.csv",
+      "git_blob_sha1": "e57df27a2568e0e3c2d6bd4e1e0cf1bd0390cc52",
+      "mode": "100644",
+      "bytes": 1782,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/diagnostics/10.18.26-response-timing-observations.csv"
+    },
+    {
+      "path": "diagnostics/10.18.26-response-timing-preliminary-report.md",
+      "git_blob_sha1": "76945f9d050723c1877682a556ef215f90da2f4a",
+      "mode": "100644",
+      "bytes": 3546,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/diagnostics/10.18.26-response-timing-preliminary-report.md"
+    },
+    {
+      "path": "diagnostics/10.18.26-response-timing-protocol.md",
+      "git_blob_sha1": "2d3be48bcb55ee5b7aacee58e3940d35bceebe81",
+      "mode": "100644",
+      "bytes": 4098,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/diagnostics/10.18.26-response-timing-protocol.md"
+    },
+    {
+      "path": "diagnostics/10.19.26-diagnostic-001-gate-12-reconciliation.md",
+      "git_blob_sha1": "0464dc3040dd9eab3c85e13cda751101492a07e4",
+      "mode": "100644",
+      "bytes": 4387,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/diagnostics/10.19.26-diagnostic-001-gate-12-reconciliation.md"
+    },
+    {
+      "path": "diagnostics/10.19.26-diagnostic-001-gate-12-routing-preregistration.md",
+      "git_blob_sha1": "5f049f204491f2da13d98f5f54120fd9a4ecf1c2",
+      "mode": "100644",
+      "bytes": 6707,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/diagnostics/10.19.26-diagnostic-001-gate-12-routing-preregistration.md"
+    },
+    {
+      "path": "diagnostics/10.19.26-diagnostic-001-post-t03-evidence-audit.md",
+      "git_blob_sha1": "db7184bc89a7cf3a7dedca7c657630dc80b5e7b2",
+      "mode": "100644",
+      "bytes": 7553,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/diagnostics/10.19.26-diagnostic-001-post-t03-evidence-audit.md"
+    },
+    {
+      "path": "diagnostics/10.19.26-diagnostic-001-trial-02-preregistration.md",
+      "git_blob_sha1": "95e37fa430efb27b11cc9cbc9f3f79e2a231d598",
+      "mode": "100644",
+      "bytes": 1652,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/diagnostics/10.19.26-diagnostic-001-trial-02-preregistration.md"
+    },
+    {
+      "path": "diagnostics/10.19.26-diagnostic-001-trial-03-preregistration.md",
+      "git_blob_sha1": "87d5117a828cc850f814a5deedf6486be340dc3e",
+      "mode": "100644",
+      "bytes": 1530,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/diagnostics/10.19.26-diagnostic-001-trial-03-preregistration.md"
+    },
+    {
+      "path": "diagnostics/10.19.26-diagnostic-001-trial-04-preregistration.md",
+      "git_blob_sha1": "32ead3ecb3abed814aa868796629c1871c297c07",
+      "mode": "100644",
+      "bytes": 1559,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/diagnostics/10.19.26-diagnostic-001-trial-04-preregistration.md"
+    },
+    {
+      "path": "diagnostics/10.19.26-diagnostic-001-visual-request-incident.md",
+      "git_blob_sha1": "4287630d39e89a63118c3fdf5290910f1c48b63c",
+      "mode": "100644",
+      "bytes": 3151,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/diagnostics/10.19.26-diagnostic-001-visual-request-incident.md"
+    },
+    {
+      "path": "diagnostics/2026-10-19-1041-utc-diagnostic-001-freeze-report-gates-12-to-16.md",
+      "git_blob_sha1": "a595942750a0072478606e3c8d21ed39a79fd1d8",
+      "mode": "100644",
+      "bytes": 11589,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/diagnostics/2026-10-19-1041-utc-diagnostic-001-freeze-report-gates-12-to-16.md"
+    },
+    {
+      "path": "experiments/2026-10-17-five-hypotheses-preregistered.md",
+      "git_blob_sha1": "b272b3002199bc643186895423a07b3baf257d52",
+      "mode": "100644",
+      "bytes": 3973,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/experiments/2026-10-17-five-hypotheses-preregistered.md"
+    },
+    {
+      "path": "experiments/2026-10-17-five-hypotheses-results.md",
+      "git_blob_sha1": "ba2a3dd16a1af92d3620e5d5ab838ce1e8769f46",
+      "mode": "100644",
+      "bytes": 6426,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/experiments/2026-10-17-five-hypotheses-results.md"
+    },
+    {
+      "path": "experiments/2026-11-03-bounded-resource-experiment-and-event-log.md",
+      "git_blob_sha1": "89ed45091409a9f0b5d77afd964d63bd5b21cf17",
+      "mode": "100644",
+      "bytes": 1812,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/experiments/2026-11-03-bounded-resource-experiment-and-event-log.md"
+    },
+    {
+      "path": "experiments/2026-11-03-controlled-experiment-007-live-ledger.md",
+      "git_blob_sha1": "88406fb22a1a1da5e3e9044ee58e008486050eb3",
+      "mode": "100644",
+      "bytes": 2753,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/experiments/2026-11-03-controlled-experiment-007-live-ledger.md"
+    },
+    {
+      "path": "experiments/2026-11-03-controlled-experiment-008-live-ledger.md",
+      "git_blob_sha1": "575d9c9252b9524d0b652eeb8278cbe918b5c906",
+      "mode": "100644",
+      "bytes": 4378,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/experiments/2026-11-03-controlled-experiment-008-live-ledger.md"
+    },
+    {
+      "path": "experiments/2026-11-03-controlled-optimization-protocol.md",
+      "git_blob_sha1": "f082b002e1c177a10b8465870a42d56035c4984a",
+      "mode": "100644",
+      "bytes": 1889,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/experiments/2026-11-03-controlled-optimization-protocol.md"
+    },
+    {
+      "path": "experiments/2026-11-03-death-star-capability-discovery.md",
+      "git_blob_sha1": "1898da45d69a6f695823ae30c27a0ddcdf0f6735",
+      "mode": "100644",
+      "bytes": 1337,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/experiments/2026-11-03-death-star-capability-discovery.md"
+    },
+    {
+      "path": "experiments/2026-11-03-experiment-009-proposal.md",
+      "git_blob_sha1": "19052ecf218f5379f6da2d2c4c64d6c2c5696520",
+      "mode": "100644",
+      "bytes": 2443,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/experiments/2026-11-03-experiment-009-proposal.md"
+    },
+    {
+      "path": "experiments/2026-11-03-ferrvm-archive-pilot.md",
+      "git_blob_sha1": "e1c283eea6b1ac01470450f8217b32f4b77dfbc4",
+      "mode": "100644",
+      "bytes": 2732,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/experiments/2026-11-03-ferrvm-archive-pilot.md"
+    },
+    {
+      "path": "experiments/DIO-DIS-001-Mission-Anchor.md",
+      "git_blob_sha1": "2d09b83057c90ebf563f76a18d24824e11ecd301",
+      "mode": "100644",
+      "bytes": 3749,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/experiments/DIO-DIS-001-Mission-Anchor.md"
+    },
+    {
+      "path": "experiments/DIO-DIS-001-SmartBook-Interruption-Log-2026-10-19.md",
+      "git_blob_sha1": "8db15cf9d3c3494f69c23909edd6bb541ab7d31f",
+      "mode": "100644",
+      "bytes": 4104,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/experiments/DIO-DIS-001-SmartBook-Interruption-Log-2026-10-19.md"
+    },
+    {
+      "path": "findings/2026-10-17-boundary-experiments.md",
+      "git_blob_sha1": "c9ea075180731ba204ad070558da6f2f0251855b",
+      "mode": "100644",
+      "bytes": 2735,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/findings/2026-10-17-boundary-experiments.md"
+    },
+    {
+      "path": "observations/2026-10-17-passive-perimeter-register.md",
+      "git_blob_sha1": "c467e33ded4d37be04b46bd304fdabac7b54ebc4",
+      "mode": "100644",
+      "bytes": 4042,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/observations/2026-10-17-passive-perimeter-register.md"
+    },
+    {
+      "path": "observations/2026-10-19-the-wanderer-and-the-forgotten-pilot-ch01-observation-report.md",
+      "git_blob_sha1": "5c68713a2a77e6ee7826c4e72ac5ef41cd7b55ba",
+      "mode": "100644",
+      "bytes": 14035,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/observations/2026-10-19-the-wanderer-and-the-forgotten-pilot-ch01-observation-report.md"
+    },
+    {
+      "path": "observations/2026-10-27-DIO-BOUND-002-safari-scripting-alternative-access-route.md",
+      "git_blob_sha1": "cd68afd62ad7c5494a8b6f3b699d4a6dc0e35101",
+      "mode": "100644",
+      "bytes": 4693,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/observations/2026-10-27-DIO-BOUND-002-safari-scripting-alternative-access-route.md"
+    },
+    {
+      "path": "observations/2026-10-27-artifact-preservation-vs-state-reconstruction.md",
+      "git_blob_sha1": "2c68beeb365c717e33eab381e23bf0a54b4690a3",
+      "mode": "100644",
+      "bytes": 1591,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/observations/2026-10-27-artifact-preservation-vs-state-reconstruction.md"
+    },
+    {
+      "path": "observations/2026-10-27-dimensions-of-examination-independence.md",
+      "git_blob_sha1": "583b1dfbe909ab53cdeb7c5215287616fea867b2",
+      "mode": "100644",
+      "bytes": 1625,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/observations/2026-10-27-dimensions-of-examination-independence.md"
+    },
+    {
+      "path": "observations/2026-10-27-execution-environment-capability-boundary.md",
+      "git_blob_sha1": "2eeddfd8ec4999fbd9d8f2e7805f4d3da8ac5a52",
+      "mode": "100644",
+      "bytes": 1501,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/observations/2026-10-27-execution-environment-capability-boundary.md"
+    },
+    {
+      "path": "observations/2026-10-27-olympus-component-health-vs-operational-readiness.md",
+      "git_blob_sha1": "e54918b11f73aee14dff859a69875dcb901d6498",
+      "mode": "100644",
+      "bytes": 1698,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/observations/2026-10-27-olympus-component-health-vs-operational-readiness.md"
+    },
+    {
+      "path": "observations/2026-10-27-safari-conversation-access-boundary-underdetermined.md",
+      "git_blob_sha1": "cbb41b5b2e09d5e69ed450d985796b99f4cb15f3",
+      "mode": "100644",
+      "bytes": 4722,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/observations/2026-10-27-safari-conversation-access-boundary-underdetermined.md"
+    },
+    {
+      "path": "observations/README.md",
+      "git_blob_sha1": "be111dd2ebae1a5b188609fc73debf87d8746fbf",
+      "mode": "100644",
+      "bytes": 1242,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/observations/README.md"
+    },
+    {
+      "path": "observed expansions/10.18.26-interactive-presentation-observation.md",
+      "git_blob_sha1": "898bf30500f38914380eed98538ec1a8a913902d",
+      "mode": "100644",
+      "bytes": 2869,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/observed%20expansions/10.18.26-interactive-presentation-observation.md"
+    },
+    {
+      "path": "observed expansions/10.18.26-latex-visualization-observation.md",
+      "git_blob_sha1": "499fac738a07686ecaf5674b508c42e1c36f8d7f",
+      "mode": "100644",
+      "bytes": 2116,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/observed%20expansions/10.18.26-latex-visualization-observation.md"
+    },
+    {
+      "path": "observed expansions/10.18.26-qi-plus-plus-concept-spec.md",
+      "git_blob_sha1": "7445fc6af3871f03cc0d3d1db8238a279ec29827",
+      "mode": "100644",
+      "bytes": 3382,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/observed%20expansions/10.18.26-qi-plus-plus-concept-spec.md"
+    },
+    {
+      "path": "observed expansions/10.18.26-rich-formatting-followup.md",
+      "git_blob_sha1": "26e6650d23acd023c1f7c4fbd6e1b3902b02e716",
+      "mode": "100644",
+      "bytes": 1266,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/observed%20expansions/10.18.26-rich-formatting-followup.md"
+    },
+    {
+      "path": "protocol/2026-10-17-directive-perimeter-and-boundary-register.md",
+      "git_blob_sha1": "3a128eef21bad06f9ab6c9afd3ce39f767a48c74",
+      "mode": "100644",
+      "bytes": 8858,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/protocol/2026-10-17-directive-perimeter-and-boundary-register.md"
+    },
+    {
+      "path": "research/2026-10-17-five-hypotheses-pilot-results.md",
+      "git_blob_sha1": "88a55aea102106d9e810b63c2dbe35ecc6370849",
+      "mode": "100644",
+      "bytes": 5398,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/2026-10-17-five-hypotheses-pilot-results.md"
+    },
+    {
+      "path": "research/2026-10-17-protocol-and-preregistration.md",
+      "git_blob_sha1": "cce02565e8c1f3b0ab1f10e3f7b580910460f825",
+      "mode": "100644",
+      "bytes": 5645,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/2026-10-17-protocol-and-preregistration.md"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 A0 Commitment Proof Tests v0.4.py",
+      "git_blob_sha1": "ebac0b5906b5bec356f8dd01c25664a05b9393fb",
+      "mode": "100644",
+      "bytes": 12765,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20A0%20Commitment%20Proof%20Tests%20v0.4.py"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 A0 Commitment Proof Verifier v0.4.py",
+      "git_blob_sha1": "36a34ba806e7d11e0fc13e0ecbc5b1fdf2ef099e",
+      "mode": "100644",
+      "bytes": 9888,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20A0%20Commitment%20Proof%20Verifier%20v0.4.py"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 A0 Proof Adversarial Matrix v0.4.json",
+      "git_blob_sha1": "074fab76eacaec2edf0fac08df962708dc16c8eb",
+      "mode": "100644",
+      "bytes": 11058,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20A0%20Proof%20Adversarial%20Matrix%20v0.4.json"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 A0 Proof Boundary Review v0.4.md",
+      "git_blob_sha1": "b284ce16481d35f0fe70c1f2b97051f190616567",
+      "mode": "100644",
+      "bytes": 8628,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20A0%20Proof%20Boundary%20Review%20v0.4.md"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 Admission Race Falsification Matrix v1.5.json",
+      "git_blob_sha1": "bc9cc97c3ae0055c92921df5cf02b54814107410",
+      "mode": "100644",
+      "bytes": 10819,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20Admission%20Race%20Falsification%20Matrix%20v1.5.json"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 Authenticated Reservation Boundary v0.2.py",
+      "git_blob_sha1": "8e762ceddaf56f6b5f046540551c3ffb44189b2d",
+      "mode": "100644",
+      "bytes": 12841,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20Authenticated%20Reservation%20Boundary%20v0.2.py"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 Boundary Before Access Preregistration.md",
+      "git_blob_sha1": "4bc2de654385469ff6dd0dde1467dc8898e47f12",
+      "mode": "100644",
+      "bytes": 20528,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20Boundary%20Before%20Access%20Preregistration.md"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 Challenge Input Boundary Review v0.5.md",
+      "git_blob_sha1": "3c1d50c80cc57f541c87e69f5471929d2c590dcc",
+      "mode": "100644",
+      "bytes": 4925,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20Challenge%20Input%20Boundary%20Review%20v0.5.md"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 Challenge Validation Cases v0.5.json",
+      "git_blob_sha1": "892732df88bcdda3ba7adcf615a939c4a397c371",
+      "mode": "100644",
+      "bytes": 6203,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20Challenge%20Validation%20Cases%20v0.5.json"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 Challenge Validation Tests v0.5.py",
+      "git_blob_sha1": "ddf95337b5387f98f6adce110d324adab31632d6",
+      "mode": "100644",
+      "bytes": 6428,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20Challenge%20Validation%20Tests%20v0.5.py"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 D Challenge Input Validation v0.5.py",
+      "git_blob_sha1": "0f4b5d1ee64b3741c03ac14441cf08d232a4df2c",
+      "mode": "100644",
+      "bytes": 11941,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20D%20Challenge%20Input%20Validation%20v0.5.py"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 D Commitment Evidence Adapter v0.4.py",
+      "git_blob_sha1": "10c1b0a84ba05c5e67d0837c3b5a4dab64c6c570",
+      "mode": "100644",
+      "bytes": 5188,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20D%20Commitment%20Evidence%20Adapter%20v0.4.py"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 D Effect Ledger Schema Candidate v0.3.sql",
+      "git_blob_sha1": "0e85fcd6a06c8b3d1906ff72bdf6b98043063c38",
+      "mode": "100644",
+      "bytes": 4732,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20D%20Effect%20Ledger%20Schema%20Candidate%20v0.3.sql"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 D Historical Read Attempt Journal v0.7.py",
+      "git_blob_sha1": "72c941df7f138f7a0a41cf12ec675fb5d4e8a201",
+      "mode": "100644",
+      "bytes": 6838,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20D%20Historical%20Read%20Attempt%20Journal%20v0.7.py"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 D Historical Reconciliation Classifier v0.6.py",
+      "git_blob_sha1": "69f19c877496ae94283516d89058ecd3902ecd1a",
+      "mode": "100644",
+      "bytes": 7523,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20D%20Historical%20Reconciliation%20Classifier%20v0.6.py"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 D2 Evidence Inventory v0.1.json",
+      "git_blob_sha1": "73bf55c9fed6bfe013c9d44fa5da75a510b26624",
+      "mode": "100644",
+      "bytes": 12177,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20D2%20Evidence%20Inventory%20v0.1.json"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 D2-S2 Model Review and Limitations.md",
+      "git_blob_sha1": "e0cbb843b33e4651b9f49a41088e396ca6b63b58",
+      "mode": "100644",
+      "bytes": 9191,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20D2-S2%20Model%20Review%20and%20Limitations.md"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 Deterministic Adversarial Cases v0.1.json",
+      "git_blob_sha1": "28e0d8be4af95b41b7ad7555b6a88631cc02c37d",
+      "mode": "100644",
+      "bytes": 16709,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20Deterministic%20Adversarial%20Cases%20v0.1.json"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 Deterministic State Model v0.1.py",
+      "git_blob_sha1": "020af0783496afe7ca471d5e64c6447282e92c1b",
+      "mode": "100644",
+      "bytes": 14444,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20Deterministic%20State%20Model%20v0.1.py"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 Evidence and Stop Contract v1.2.json",
+      "git_blob_sha1": "f469207a79a925fcd35a105bb2968037617391ed",
+      "mode": "100644",
+      "bytes": 11451,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20Evidence%20and%20Stop%20Contract%20v1.2.json"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 Focused TRIDENT Review Request v1.3.md",
+      "git_blob_sha1": "28ecf2602c6f0651d3617f37869348416bc87fe1",
+      "mode": "100644",
+      "bytes": 5137,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20Focused%20TRIDENT%20Review%20Request%20v1.3.md"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 Focused TRIDENT Review Request v1.4.md",
+      "git_blob_sha1": "17f5a3067d8a9843557aeb5babc51b468b60c2e6",
+      "mode": "100644",
+      "bytes": 5649,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20Focused%20TRIDENT%20Review%20Request%20v1.4.md"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 Focused TRIDENT Review Request v1.5.md",
+      "git_blob_sha1": "7bd73fcdd0b74a9acedcf088e4bce0fead1624b7",
+      "mode": "100644",
+      "bytes": 4093,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20Focused%20TRIDENT%20Review%20Request%20v1.5.md"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 Four-Hour Source Freeze and Handoff v0.8.md",
+      "git_blob_sha1": "e1566390d0754931ee8487c643b65448d8045895",
+      "mode": "100644",
+      "bytes": 8835,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20Four-Hour%20Source%20Freeze%20and%20Handoff%20v0.8.md"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 Historical Read Audit Boundary Review v0.7.md",
+      "git_blob_sha1": "ac78061195c309f107edfd6dd31c511a14b083cc",
+      "mode": "100644",
+      "bytes": 7904,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20Historical%20Read%20Audit%20Boundary%20Review%20v0.7.md"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 Historical Read Journal Cases v0.7.json",
+      "git_blob_sha1": "74f9b3774e9f7fe5bba109890c0ec1cc8a72c907",
+      "mode": "100644",
+      "bytes": 11671,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20Historical%20Read%20Journal%20Cases%20v0.7.json"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 Historical Read Journal Tests v0.7.py",
+      "git_blob_sha1": "c7094340121cb68005770d9a88e13f8aea91878e",
+      "mode": "100644",
+      "bytes": 8779,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20Historical%20Read%20Journal%20Tests%20v0.7.py"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 Historical Reconciliation Boundary Review v0.6.md",
+      "git_blob_sha1": "0cc470bd218530449d7a46f9c77aa20826bae07b",
+      "mode": "100644",
+      "bytes": 8042,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20Historical%20Reconciliation%20Boundary%20Review%20v0.6.md"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 Historical Reconciliation Cases v0.6.json",
+      "git_blob_sha1": "1a365c504fe6f661ee9acf0eb5f992c3da77cae1",
+      "mode": "100644",
+      "bytes": 9174,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20Historical%20Reconciliation%20Cases%20v0.6.json"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 Historical Reconciliation Tests v0.6.py",
+      "git_blob_sha1": "57027c2f3d1451ee3dc42d6b92e5b25978921fbb",
+      "mode": "100644",
+      "bytes": 7804,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20Historical%20Reconciliation%20Tests%20v0.6.py"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 Historical Source and Compatibility Audit v1.5.md",
+      "git_blob_sha1": "af3fc1cec20d3e3ba2906525c5489ea2f7a5bfea",
+      "mode": "100644",
+      "bytes": 10581,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20Historical%20Source%20and%20Compatibility%20Audit%20v1.5.md"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 Implementation Contract v1.2.md",
+      "git_blob_sha1": "0964585678db2df5db54d9af1b6f8b41c6503ed2",
+      "mode": "100644",
+      "bytes": 17880,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20Implementation%20Contract%20v1.2.md"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 Independent Challenge Commitment Addendum v1.3.md",
+      "git_blob_sha1": "50292a89ee04de1c37df901853a1e83f80a91aeb",
+      "mode": "100644",
+      "bytes": 23127,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20Independent%20Challenge%20Commitment%20Addendum%20v1.3.md"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 Independent D2 Acceptance Challenges v0.8.json",
+      "git_blob_sha1": "5d87bb4dbafe8785b5f7a31851b0c3588490708b",
+      "mode": "100644",
+      "bytes": 10932,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20Independent%20D2%20Acceptance%20Challenges%20v0.8.json"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 Independent Source Review Request v1.2.md",
+      "git_blob_sha1": "7ec045dda5cd07ffffc1375bc45cb49a99274516",
+      "mode": "100644",
+      "bytes": 4867,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20Independent%20Source%20Review%20Request%20v1.2.md"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 Internal Coherence and D2 Gate Plan.md",
+      "git_blob_sha1": "1f2334315943ca6a50fbfb8a99a3b9adc133bf56",
+      "mode": "100644",
+      "bytes": 11380,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20Internal%20Coherence%20and%20D2%20Gate%20Plan.md"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 Manifest and Custody Delta v1.3.json",
+      "git_blob_sha1": "dbc1765d712613e5e89e1848a3cd489c160fed69",
+      "mode": "100644",
+      "bytes": 10334,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20Manifest%20and%20Custody%20Delta%20v1.3.json"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 Minimal D2 Architecture and Build Gates.md",
+      "git_blob_sha1": "1b73c5889f6f57c293f2b7ac800c53d2902c7c67",
+      "mode": "100644",
+      "bytes": 19370,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20Minimal%20D2%20Architecture%20and%20Build%20Gates.md"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 One-Use Effect Claim Cases v0.3.json",
+      "git_blob_sha1": "7a2bdce1de4af9d40e5d22cca9dd15a849b14f4d",
+      "mode": "100644",
+      "bytes": 13412,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20One-Use%20Effect%20Claim%20Cases%20v0.3.json"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 One-Use Effect Claim Model v0.3.py",
+      "git_blob_sha1": "63c364d14bed97f8e29c570a732236cc944119fc",
+      "mode": "100644",
+      "bytes": 12364,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20One-Use%20Effect%20Claim%20Model%20v0.3.py"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 One-Use Effect Claim Review v0.3.md",
+      "git_blob_sha1": "36ded75046f498445214ca6334fd4124911d7e64",
+      "mode": "100644",
+      "bytes": 10802,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20One-Use%20Effect%20Claim%20Review%20v0.3.md"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 One-Use Effect Claim Tests v0.3.py",
+      "git_blob_sha1": "f34234f78c1431e83aff73545e77c33916faad0b",
+      "mode": "100644",
+      "bytes": 17612,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20One-Use%20Effect%20Claim%20Tests%20v0.3.py"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 Preregistration v1.1.md",
+      "git_blob_sha1": "ceb8666b02bf29478ce5e5118e0a16f0a0a495df",
+      "mode": "100644",
+      "bytes": 20946,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20Preregistration%20v1.1.md"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 Reference Model Unit Tests v0.1.py",
+      "git_blob_sha1": "d28c4de27cf936485b8b0df4063d7bd1019e08c5",
+      "mode": "100644",
+      "bytes": 11818,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20Reference%20Model%20Unit%20Tests%20v0.1.py"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 Reservation Boundary Unit Tests v0.2.py",
+      "git_blob_sha1": "aa3e092b872b33f7d693c25e77026183801187ee",
+      "mode": "100644",
+      "bytes": 11815,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20Reservation%20Boundary%20Unit%20Tests%20v0.2.py"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 Reservation Trust Boundary and Gate Report v0.2.md",
+      "git_blob_sha1": "ab6c6eaec76a2562578768b3bb6c9ab134f4f7cb",
+      "mode": "100644",
+      "bytes": 11101,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20Reservation%20Trust%20Boundary%20and%20Gate%20Report%20v0.2.md"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 Reservation Verification Cases v0.2.json",
+      "git_blob_sha1": "83ec5db2d6150c97153a4a1f167f368465f611d4",
+      "mode": "100644",
+      "bytes": 11593,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20Reservation%20Verification%20Cases%20v0.2.json"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 Synthetic Fixture Specification.json",
+      "git_blob_sha1": "fe4765aedbe728cbbecb66a1d0dc3599aff408ee",
+      "mode": "100644",
+      "bytes": 10230,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20Synthetic%20Fixture%20Specification.json"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 Synthetic Fixture v1.1.json",
+      "git_blob_sha1": "4552a6497d5a9a50983d0deaa77a6cb6a88f678c",
+      "mode": "100644",
+      "bytes": 29154,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20Synthetic%20Fixture%20v1.1.json"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 TRIDENT Design Review.md",
+      "git_blob_sha1": "e7552986c4fc3283c1bef8bc6a98000852708fa5",
+      "mode": "100644",
+      "bytes": 17748,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20TRIDENT%20Design%20Review.md"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 TRIDENT Repair Matrix v1.1.md",
+      "git_blob_sha1": "1a195236fdc80a394d554ca3c2b7f96d8ce64c17",
+      "mode": "100644",
+      "bytes": 3313,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20TRIDENT%20Repair%20Matrix%20v1.1.md"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 Trust Anchor Continuity Contract v1.4.md",
+      "git_blob_sha1": "2366f5640662199b5d457766a1fc157ddcadf2fb",
+      "mode": "100644",
+      "bytes": 20782,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20Trust%20Anchor%20Continuity%20Contract%20v1.4.md"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 Trust Anchor Falsification Matrix v1.4.json",
+      "git_blob_sha1": "e2ee683c4a4434a2669be19da43d308d46595f37",
+      "mode": "100644",
+      "bytes": 11655,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20Trust%20Anchor%20Falsification%20Matrix%20v1.4.json"
+    },
+    {
+      "path": "research/cerberus-001/11.04.26 - CERBERUS-001 Version-Bound Admission Contract v1.5.md",
+      "git_blob_sha1": "e14b54704e297ee99616f6ad10f692869908df4c",
+      "mode": "100644",
+      "bytes": 18233,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.04.26%20-%20CERBERUS-001%20Version-Bound%20Admission%20Contract%20v1.5.md"
+    },
+    {
+      "path": "research/cerberus-001/11.05.26 - CERBERUS-001 D2-S1 Off-Host Inventory and Authorization Gate.md",
+      "git_blob_sha1": "e3cf4545b2288a79c9d9235c29cc2e34ece80286",
+      "mode": "100644",
+      "bytes": 10231,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.05.26%20-%20CERBERUS-001%20D2-S1%20Off-Host%20Inventory%20and%20Authorization%20Gate.md"
+    },
+    {
+      "path": "research/cerberus-001/11.05.26 - CERBERUS-001 FZ01 FZ13 D1 Repair Handoff v0.9.md",
+      "git_blob_sha1": "5c25a3c64fb71f8968cb90e44ea41b51b9571165",
+      "mode": "100644",
+      "bytes": 6918,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.05.26%20-%20CERBERUS-001%20FZ01%20FZ13%20D1%20Repair%20Handoff%20v0.9.md"
+    },
+    {
+      "path": "research/cerberus-001/11.05.26 - CERBERUS-001 GHA Development Test Contract v0.1.md",
+      "git_blob_sha1": "69e78332c6ec2669760140638823cb6ebf0619a9",
+      "mode": "100644",
+      "bytes": 9469,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.05.26%20-%20CERBERUS-001%20GHA%20Development%20Test%20Contract%20v0.1.md"
+    },
+    {
+      "path": "research/cerberus-001/11.05.26 - CERBERUS-001 GHA Development Test Contract v0.2.md",
+      "git_blob_sha1": "03d556b897875558d3997abcecacc2c5f6eb4c31",
+      "mode": "100644",
+      "bytes": 8819,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.05.26%20-%20CERBERUS-001%20GHA%20Development%20Test%20Contract%20v0.2.md"
+    },
+    {
+      "path": "research/cerberus-001/11.05.26 - CERBERUS-001 GHA Development Workflow Draft v0.2.yml",
+      "git_blob_sha1": "79f23aa0e3164b992a0d3548ab56f0e1da3aebad",
+      "mode": "100644",
+      "bytes": 10994,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.05.26%20-%20CERBERUS-001%20GHA%20Development%20Workflow%20Draft%20v0.2.yml"
+    },
+    {
+      "path": "research/cerberus-001/11.05.26 - CERBERUS-001 GHA Development Workflow Draft.yml",
+      "git_blob_sha1": "8f8f1019571c2e03cee1de328e86af6039225c21",
+      "mode": "100644",
+      "bytes": 7256,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.05.26%20-%20CERBERUS-001%20GHA%20Development%20Workflow%20Draft.yml"
+    },
+    {
+      "path": "research/cerberus-001/11.05.26 - CERBERUS-001 Historical Read Journal Regression Tests v0.9.py",
+      "git_blob_sha1": "5053e783b79d8fc9dfefd5009875cf4b9d00f273",
+      "mode": "100644",
+      "bytes": 14813,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.05.26%20-%20CERBERUS-001%20Historical%20Read%20Journal%20Regression%20Tests%20v0.9.py"
+    },
+    {
+      "path": "research/cerberus-001/11.05.26 - CERBERUS-001 Historical Read Journal Repair Candidate v0.9.py",
+      "git_blob_sha1": "fdea180e75ef86d51fd20095906bfa5ce3e72145",
+      "mode": "100644",
+      "bytes": 7659,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.05.26%20-%20CERBERUS-001%20Historical%20Read%20Journal%20Repair%20Candidate%20v0.9.py"
+    },
+    {
+      "path": "research/cerberus-001/11.05.26 - CERBERUS-001 Malformed Journal Regression Cases v0.9.json",
+      "git_blob_sha1": "e2a6b2ac28dfbd7d84cdb472e6723376c8cd02ab",
+      "mode": "100644",
+      "bytes": 9983,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.05.26%20-%20CERBERUS-001%20Malformed%20Journal%20Regression%20Cases%20v0.9.json"
+    },
+    {
+      "path": "research/cerberus-001/11.05.26 - PS5 Experiment and CERBERUS North Star v1.0.md",
+      "git_blob_sha1": "cec3386268404196ef244f933a91218341c86ff6",
+      "mode": "100644",
+      "bytes": 12215,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/research/cerberus-001/11.05.26%20-%20PS5%20Experiment%20and%20CERBERUS%20North%20Star%20v1.0.md"
+    },
+    {
+      "path": "reviews/2026-11-03-hephaestus-poseidon-capability-impact.md",
+      "git_blob_sha1": "836cc1da2f2bb315ad94f6bc5feae46d9fb036c2",
+      "mode": "100644",
+      "bytes": 2000,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/reviews/2026-11-03-hephaestus-poseidon-capability-impact.md"
+    },
+    {
+      "path": "reviews/2026-11-03-hephaestus-poseidon-handoff-assessment.md",
+      "git_blob_sha1": "93312830c7175e0549af7d6ee6531fe3b3e6a851",
+      "mode": "100644",
+      "bytes": 1884,
+      "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/blob/0e842e0aa26827ac01f8830ae81f00231c82531f/reviews/2026-11-03-hephaestus-poseidon-handoff-assessment.md"
+    }
+  ]
+}
