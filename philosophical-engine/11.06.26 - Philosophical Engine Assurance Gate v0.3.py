@@ -151,6 +151,24 @@ def evaluate(receipt, *, expected_original=None, catalog=None, linter=None):
     }
 
 
+def refused_result(reason):
+    """Complete non-authorizing envelope when input parsing or source load fails."""
+    return {
+        'protocol': VERSION,
+        'result_class': 'REFUSED',
+        'structural_check': 'BLOCK',
+        'original_proposition': 'NOT_VERIFIED',
+        'catalog_bytes': 'NOT_VERIFIED',
+        'semantic_adjudication': 'NOT_PERFORMED',
+        'source_authentication': 'NOT_PERFORMED',
+        'human_authorization': 'NOT_VERIFIED',
+        'free_text_approval_claim_present': None,
+        'execution_authorized': False,
+        'adoption_gate': 'BLOCKED',
+        'issues': [reason],
+    }
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('receipt')
@@ -178,9 +196,7 @@ def main(argv=None):
         report = evaluate(receipt, expected_original=original, catalog=catalog, linter=checker)
     except (OSError, ValueError, TypeError, UnicodeError, RecursionError, json.JSONDecodeError) as exc:
         # Do not print receipt contents or secrets embedded in paths/errors.
-        report = {'protocol': VERSION, 'result_class': 'REFUSED',
-                  'adoption_gate': 'BLOCKED', 'execution_authorized': False,
-                  'issues': ['input or source refusal: ' + type(exc).__name__]}
+        report = refused_result('input or source refusal: ' + type(exc).__name__)
     print(json.dumps(report, sort_keys=True, ensure_ascii=True))
     return RESULT_CODES[report['result_class']]
 
