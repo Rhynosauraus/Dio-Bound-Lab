@@ -1,0 +1,57 @@
+{
+  "schema_id": "labyrinth.philosophical_engine.decision_receipt",
+  "protocol_version": "PE-PORTABLE-0.2-CANDIDATE",
+  "status": "SYNTHETIC_RESEARCH",
+  "receipt_id": "PE-PORTABLE-DEMO-001",
+  "exact_proposition": "The last green synthetic CI run authorizes a production deployment.",
+  "source_packet": {
+    "records": [
+      {
+        "id": "G1",
+        "kind": "STIPULATED_SYNTHETIC_RECORD",
+        "statement": "The only reported CI run was green and exercised synthetic fixtures.",
+        "provenance": "fictional sealed classroom packet, G1"
+      },
+      {
+        "id": "G2",
+        "kind": "STIPULATED_SYNTHETIC_RECORD",
+        "statement": "A fictional deployment policy requires separate human authorization.",
+        "provenance": "fictional sealed classroom packet, G2"
+      },
+      {
+        "id": "G3",
+        "kind": "STIPULATED_SYNTHETIC_RECORD",
+        "statement": "The fictional closed authorization register includes no scope-matching approval.",
+        "provenance": "fictional sealed classroom packet, G3"
+      }
+    ]
+  },
+  "depth": "QUICK",
+  "depth_reason": "A straightforward contrast between CI completion and separate required human authorization; full philosophical examination would add no necessary evidence for this limited proposition.",
+  "stages": [],
+  "verdict": "REFUTED",
+  "justification": "For the closed fictional packet, G1 establishes only a green synthetic test; G2 requires a separate approval, and G3 stipulates that none exists. Thus the exact authorization proposition is refuted.",
+  "recommendation": "STOP_PARK",
+  "uncertainties": [],
+  "objections": [
+    "A successful CI run can be useful evidence of test quality; it cannot be substituted for a required authorization."
+  ],
+  "falsifiers": [
+    "A valid human authorization covering the exact proposed deployment and effective at the decision time would change this conclusion."
+  ],
+  "revision_triggers": [
+    "A separately verified and scope-matched approval appears in the authorization register."
+  ],
+  "forecasts": [],
+  "authorization": {
+    "human_authority_reserved": true,
+    "engine_grants_execution": false,
+    "constraints": [
+      "Fictional example only; no external system actions, deployment, or permissions."
+    ]
+  },
+  "independence": {
+    "simulated_agreement_is_independent_confirmation": false,
+    "independent_qualification_established": false
+  }
+}
