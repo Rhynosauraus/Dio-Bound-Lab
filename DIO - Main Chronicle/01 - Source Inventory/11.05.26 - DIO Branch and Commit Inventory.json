@@ -1,0 +1,191 @@
+{
+  "title": "DIO Main Chronicle - All Branch Head Inventory",
+  "snapshot_date_america_boise": "2026-11-05",
+  "repository": "Time-Travelers61/Dio-Bound-Lab",
+  "default_branch": "main",
+  "branch_count": 25,
+  "branches": [
+    {
+      "branch": "docs/2026-11-01-mobile-presentation-observation",
+      "head_commit": "31ae0c8905aabc50589e94de590c068e0771d514",
+      "immutable_commit_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/commit/31ae0c8905aabc50589e94de590c068e0771d514",
+      "branch_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/tree/docs/2026-11-01-mobile-presentation-observation",
+      "protected": false
+    },
+    {
+      "branch": "docs/2026-11-02-architectural-emergence-audit",
+      "head_commit": "4c3c9f9fdb911421f5749404740a690ec0a1704d",
+      "immutable_commit_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/commit/4c3c9f9fdb911421f5749404740a690ec0a1704d",
+      "branch_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/tree/docs/2026-11-02-architectural-emergence-audit",
+      "protected": false
+    },
+    {
+      "branch": "experiment/dio-boundary-github-2026-10-21",
+      "head_commit": "e37a342a07f25e402a658faab568c0c524d9e1f2",
+      "immutable_commit_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/commit/e37a342a07f25e402a658faab568c0c524d9e1f2",
+      "branch_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/tree/experiment/dio-boundary-github-2026-10-21",
+      "protected": false
+    },
+    {
+      "branch": "main",
+      "head_commit": "75989e788a40c1839f613b035eb893042d71d84f",
+      "immutable_commit_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/commit/75989e788a40c1839f613b035eb893042d71d84f",
+      "branch_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/tree/main",
+      "protected": false
+    },
+    {
+      "branch": "review/cerberus-001-d2-blueprint-20261104",
+      "head_commit": "13640f0c9ae211e6eb3080ecc8e0a9126574ac26",
+      "immutable_commit_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/commit/13640f0c9ae211e6eb3080ecc8e0a9126574ac26",
+      "branch_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/tree/review/cerberus-001-d2-blueprint-20261104",
+      "protected": false
+    },
+    {
+      "branch": "review/cerberus-001-d2-s1-offhost-inventory-20261105",
+      "head_commit": "c90bc323e376bb8844be50c40d1e68535214ef8c",
+      "immutable_commit_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/commit/c90bc323e376bb8844be50c40d1e68535214ef8c",
+      "branch_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/tree/review/cerberus-001-d2-s1-offhost-inventory-20261105",
+      "protected": false
+    },
+    {
+      "branch": "review/cerberus-001-d2-s2-a0-proof-20261104",
+      "head_commit": "80c8f9444193018835015cff9ab63560f1f7afb6",
+      "immutable_commit_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/commit/80c8f9444193018835015cff9ab63560f1f7afb6",
+      "branch_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/tree/review/cerberus-001-d2-s2-a0-proof-20261104",
+      "protected": false
+    },
+    {
+      "branch": "review/cerberus-001-d2-s2-auth-source-20261104",
+      "head_commit": "2a296df1973007239c77487b0e7cf0054b84abfe",
+      "immutable_commit_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/commit/2a296df1973007239c77487b0e7cf0054b84abfe",
+      "branch_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/tree/review/cerberus-001-d2-s2-auth-source-20261104",
+      "protected": false
+    },
+    {
+      "branch": "review/cerberus-001-d2-s2-challenge-input-20261104",
+      "head_commit": "fce4daf2b312e9a5a91ab099005743aa54eb0e2d",
+      "immutable_commit_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/commit/fce4daf2b312e9a5a91ab099005743aa54eb0e2d",
+      "branch_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/tree/review/cerberus-001-d2-s2-challenge-input-20261104",
+      "protected": false
+    },
+    {
+      "branch": "review/cerberus-001-d2-s2-effect-claim-20261104",
+      "head_commit": "2cd9a9de9c0147792c9dbc0b9bb789e9fbac7090",
+      "immutable_commit_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/commit/2cd9a9de9c0147792c9dbc0b9bb789e9fbac7090",
+      "branch_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/tree/review/cerberus-001-d2-s2-effect-claim-20261104",
+      "protected": false
+    },
+    {
+      "branch": "review/cerberus-001-d2-s2-final-freeze-20261104",
+      "head_commit": "cc7deefeb7d82486c47c25afa1133faf4992d048",
+      "immutable_commit_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/commit/cc7deefeb7d82486c47c25afa1133faf4992d048",
+      "branch_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/tree/review/cerberus-001-d2-s2-final-freeze-20261104",
+      "protected": false
+    },
+    {
+      "branch": "review/cerberus-001-d2-s2-read-attempt-custody-20261104",
+      "head_commit": "8a23b27c07ed22722dde924fdad55f25e81fc852",
+      "immutable_commit_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/commit/8a23b27c07ed22722dde924fdad55f25e81fc852",
+      "branch_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/tree/review/cerberus-001-d2-s2-read-attempt-custody-20261104",
+      "protected": false
+    },
+    {
+      "branch": "review/cerberus-001-d2-s2-reconcile-20261104",
+      "head_commit": "651aec1b7905119da5943622d120b624dedc3c8b",
+      "immutable_commit_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/commit/651aec1b7905119da5943622d120b624dedc3c8b",
+      "branch_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/tree/review/cerberus-001-d2-s2-reconcile-20261104",
+      "protected": false
+    },
+    {
+      "branch": "review/cerberus-001-d2-s2-source-20261104",
+      "head_commit": "1093da71375ce15b351c82bf2c68e88cb0a2ac9c",
+      "immutable_commit_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/commit/1093da71375ce15b351c82bf2c68e88cb0a2ac9c",
+      "branch_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/tree/review/cerberus-001-d2-s2-source-20261104",
+      "protected": false
+    },
+    {
+      "branch": "review/cerberus-001-fz01-fz13-hardening-20261105",
+      "head_commit": "93f9e6d9f9ce9abe88cfe8dd3e4cdef5d54ef85e",
+      "immutable_commit_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/commit/93f9e6d9f9ce9abe88cfe8dd3e4cdef5d54ef85e",
+      "branch_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/tree/review/cerberus-001-fz01-fz13-hardening-20261105",
+      "protected": false
+    },
+    {
+      "branch": "review/cerberus-001-internal-coherence-20261104",
+      "head_commit": "18b20e4204318c3a1d958ef776656cc7151781a3",
+      "immutable_commit_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/commit/18b20e4204318c3a1d958ef776656cc7151781a3",
+      "branch_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/tree/review/cerberus-001-internal-coherence-20261104",
+      "protected": false
+    },
+    {
+      "branch": "review/cerberus-001-v11-20261104",
+      "head_commit": "82599aa6778d71c57f7e7cdfed40abc6b5573515",
+      "immutable_commit_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/commit/82599aa6778d71c57f7e7cdfed40abc6b5573515",
+      "branch_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/tree/review/cerberus-001-v11-20261104",
+      "protected": false
+    },
+    {
+      "branch": "review/cerberus-001-v12-20261104",
+      "head_commit": "af89777a0e7f805c98afdba6d5d930d67f5c4cbc",
+      "immutable_commit_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/commit/af89777a0e7f805c98afdba6d5d930d67f5c4cbc",
+      "branch_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/tree/review/cerberus-001-v12-20261104",
+      "protected": false
+    },
+    {
+      "branch": "review/cerberus-001-v13-20261104",
+      "head_commit": "4644000a7f273c4a508887d4474f23aff676fc18",
+      "immutable_commit_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/commit/4644000a7f273c4a508887d4474f23aff676fc18",
+      "branch_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/tree/review/cerberus-001-v13-20261104",
+      "protected": false
+    },
+    {
+      "branch": "review/cerberus-001-v14-20261104",
+      "head_commit": "803d5454962625769564937664ff736d7e2b6642",
+      "immutable_commit_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/commit/803d5454962625769564937664ff736d7e2b6642",
+      "branch_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/tree/review/cerberus-001-v14-20261104",
+      "protected": false
+    },
+    {
+      "branch": "review/cerberus-001-v15-20261104",
+      "head_commit": "5f1d11c786b6340c9c5cf51bc432b8679733533c",
+      "immutable_commit_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/commit/5f1d11c786b6340c9c5cf51bc432b8679733533c",
+      "branch_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/tree/review/cerberus-001-v15-20261104",
+      "protected": false
+    },
+    {
+      "branch": "review/cerberus-d2-s1-gha-h3-source-hardening-20261105",
+      "head_commit": "eaac5c9e6a9c7ac411b46440f6af0dc0ab73618b",
+      "immutable_commit_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/commit/eaac5c9e6a9c7ac411b46440f6af0dc0ab73618b",
+      "branch_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/tree/review/cerberus-d2-s1-gha-h3-source-hardening-20261105",
+      "protected": false
+    },
+    {
+      "branch": "review/cerberus-d2-s1-gha-spec-20261105",
+      "head_commit": "6e47da7a5620bc458963254059cebced99cea163",
+      "immutable_commit_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/commit/6e47da7a5620bc458963254059cebced99cea163",
+      "branch_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/tree/review/cerberus-d2-s1-gha-spec-20261105",
+      "protected": false
+    },
+    {
+      "branch": "review/cerberus-origin-north-star-20261105",
+      "head_commit": "0e842e0aa26827ac01f8830ae81f00231c82531f",
+      "immutable_commit_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/commit/0e842e0aa26827ac01f8830ae81f00231c82531f",
+      "branch_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/tree/review/cerberus-origin-north-star-20261105",
+      "protected": false
+    },
+    {
+      "branch": "review/dio-main-chronicle-20261105",
+      "head_commit": "086cab05ad149e4e48ccdae30056d40fcfdff291",
+      "immutable_commit_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/commit/086cab05ad149e4e48ccdae30056d40fcfdff291",
+      "branch_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/tree/review/dio-main-chronicle-20261105",
+      "protected": false
+    }
+  ],
+  "claims_and_limitations": [
+    "Full first-page GitHub branch listing was retrieved at snapshot; 25 heads observed, but no claim that deleted or older historical branches are included.",
+    "Every head SHA points to a complete immutable Git commit and tree. This inventory supplements the 124-file source-tree manifest, which covers only the separate PS5 North Star ancestor commit.",
+    "Branch and original-file names are preserved without move, rewrite, deletion, merge, checkout or execution.",
+    "A Git commit link establishes repository provenance but not independent raw-byte SHA-256 verification.",
+    "Historical DIO conversation text outside the GitHub repository is not stored here; first-chat continuity must be separately sourced."
+  ]
+}
