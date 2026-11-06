@@ -155,6 +155,25 @@ class GateTests(unittest.TestCase):
             self.assertEqual(result.returncode,2)
             self.assertEqual(json.loads(result.stdout)['result_class'],'REFUSED')
 
+    def test_refused_envelope_complete(self):
+        x=gate.refused_result('refused test input')
+        self.assertEqual(set(x), {'protocol','result_class','structural_check',
+           'original_proposition','catalog_bytes','semantic_adjudication',
+           'source_authentication','human_authorization','free_text_approval_claim_present',
+           'execution_authorized','adoption_gate','issues'})
+        self.assertIsNone(x['free_text_approval_claim_present'])
+        self.assertFalse(x['execution_authorized'])
+        self.assertEqual(x['adoption_gate'],'BLOCKED')
+
+    def test_error_cli_has_complete_refusal(self):
+        with tempfile.TemporaryDirectory() as d:
+            path=Path(d)/'bad.json'
+            path.write_bytes(b'{invalid')
+            result=subprocess.run([sys.executable,str(GATE),str(path)],
+                capture_output=True,text=True,timeout=8)
+            self.assertEqual(result.returncode,2)
+            self.assertEqual(json.loads(result.stdout),gate.refused_result('input or source refusal: JSONDecodeError'))
+
     def test_no_success_exit_classes(self):
         self.assertTrue(all(v!=0 for v in gate.RESULT_CODES.values()))
 
