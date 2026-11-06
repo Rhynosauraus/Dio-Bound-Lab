@@ -116,8 +116,8 @@ def _valid_proposal(proposal: object) -> bool:
         and _id(_own(proposal, "proposal_id"))
         and _positive_sequence(_own(proposal, "frame_sequence"))
         and _digest(_own(proposal, "frame_digest"))
-        and _own(proposal, "action") in ACTIONS
         and type(_own(proposal, "action")) is str
+        and _own(proposal, "action") in ACTIONS
     )
 
 
@@ -285,6 +285,11 @@ def propose_mock_action(state: object, proposal: object) -> MockOutcome:
         return _refuse(state, "REFUSED_STALE_PROPOSAL")
     if proposal.action not in state.available_actions:
         return _refuse(state, "REFUSED_UNAVAILABLE_ACTION")
+    if any(
+        event.kind == "PROPOSED" and event.reference == proposal.proposal_id
+        for event in state.events
+    ):
+        return _refuse(state, "REFUSED_DUPLICATE_PROPOSAL")
     # A candidate proposal is never an instruction to control a device.
     return _emit(
         state, "PROPOSED", proposal.proposal_id,
