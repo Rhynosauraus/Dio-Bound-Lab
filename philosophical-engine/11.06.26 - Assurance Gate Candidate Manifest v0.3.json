@@ -1,0 +1,55 @@
+{
+  "schema": "labyrinth.pe.assurance_candidate_manifest.v0.3",
+  "date_America_Boise": "11.06.26",
+  "release_state": "CANDIDATE_NOT_APPROVED_NOT_MERGED",
+  "source_repository": "Time-Travelers61/Dio-Bound-Lab",
+  "audited_commit": "73545f53c70d5e28673dc20f56f0d96feceafcfd",
+  "branch": "repair/pe-trident-assurance-gate-v0.3",
+  "files": [
+    {
+      "path": "philosophical-engine/11.06.26 - Philosophical Engine Assurance Gate v0.3.py",
+      "git_blob_sha1": "9b5966e0232591f44819d69680d774e3dee82f47",
+      "sha256": "569cc613c439bf2ad6eb52fa6094f176ced6ea4f800f5b1f7c3aa4a296d9357c",
+      "role": "non-authorizing classifier"
+    },
+    {
+      "path": "philosophical-engine/11.06.26 - Philosophical Engine Assurance Gate Tests.py",
+      "git_blob_sha1": "2f26724315bdd62edf99968cad024e1c436b51a7",
+      "sha256": "1d653b031e73050170b2a214f93e42b7a131481b236c63b9f4915a84d6ff396a",
+      "role": "same-author synthetic tests"
+    }
+  ],
+  "required_exact_upstream": {
+    "path": "philosophical-engine/11.05.26 - Decision Receipt Offline Linter v0.2.py",
+    "sha256": "6ca7543868dc8dac66d3926236abd1f2e62b1577fa6941aff347e604cc2819a2",
+    "standing": "adopted_for_this_candidate_as_a_pinned_dependency_not_semantic_qualified"
+  },
+  "development_tests": {
+    "environment": "local disposable Python 3.13.5 in current chat runtime",
+    "same_author_suite": "18/18_PASS",
+    "validator_integration": "NOT_RUN_WITH_EXACT_UPSTREAM_IN_THIS_ENVIRONMENT",
+    "independent_review": "NOT_RUN",
+    "source_authentication": "NOT_RUN",
+    "semantic_adjudication": "NOT_RUN"
+  },
+  "proposed_benchmark_custody": {
+    "local_pack_id": "PE-BENCH-001",
+    "case_count": 12,
+    "candidate_case_pack_sha256": "67faeca4b62abaa52217c6e617732630836fa6cd0c41a5448e165d34504260d6",
+    "custodian_held_sealed_reference_sha256": "72ceda4dda3f25930055c065ad392cc9bf65c46580f0fd2b012ad7d8ed8c6940",
+    "candidate_responses": "NOT_RUN",
+    "independent_grading": "NOT_RUN",
+    "note": "Hashes are inventory markers; possession of the sealed key does not establish independent custody."
+  },
+  "human_authority": "RESERVED",
+  "release_allowed": false,
+  "claims_not_established": [
+    "semantic_correctness",
+    "authenticated_evidence",
+    "independent_qualification",
+    "cross_project_delivery",
+    "authorization",
+    "decision_quality_improvement"
+  ],
+  "frozen_release_commit_sha": "PENDING_FUTURE_HUMAN_APPROVED_RELEASE_MANIFEST"
+}
