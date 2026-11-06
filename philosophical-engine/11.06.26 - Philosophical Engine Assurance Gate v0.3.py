@@ -7,7 +7,6 @@ The original v0.2 linter is loaded only if its exact SHA-256 matches.
 import argparse
 import hashlib
 import json
-import runpy
 import sys
 from pathlib import Path
 
@@ -55,9 +54,15 @@ def trusted_question(path):
 
 def load_pinned_linter(directory):
     path = Path(directory) / LINTER_NAME
-    if digest(path.read_bytes()) != LINTER_SHA256:
+    # Read once: executing by path after hashing would permit file-swap drift.
+    verified_bytes = path.read_bytes()
+    if digest(verified_bytes) != LINTER_SHA256:
         raise ValueError('pinned v0.2 validator source mismatch')
-    func = runpy.run_path(str(path), run_name='pe_assurance_import').get('check')
+    # Execute precisely the bytes already verified; do not reopen the path.
+    namespace = {'__name__': 'pe_assurance_verified_validator',
+                 '__file__': str(path), '__package__': None}
+    exec(compile(verified_bytes, str(path), 'exec'), namespace)
+    func = namespace.get('check')
     if not callable(func):
         raise ValueError('pinned validator lacks check function')
     return func
