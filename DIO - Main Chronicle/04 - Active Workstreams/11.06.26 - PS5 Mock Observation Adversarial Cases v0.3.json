@@ -465,6 +465,20 @@
       "observed_result": "NOT_RUN",
       "independent_examination": "PENDING",
       "claim_ceiling": "LOCAL_CAUSAL_REPLAY_ONLY_NOT_SECURITY"
+    },
+    {
+      "id": "OBS-A36",
+      "category": "malformed event-kind equality trap",
+      "scenario": "An exact MockEvent row has a nonstring kind object whose equality method would raise. Reject by strict type before any untrusted comparator evaluation.",
+      "expected_status": "EVIDENCE_GAP_STOP",
+      "expected_external_action_permitted": false,
+      "expected_approval_authenticated": false,
+      "expected_durable_commit_proven": false,
+      "expected_custody_gap": true,
+      "executed": false,
+      "observed_result": "NOT_RUN",
+      "independent_examination": "PENDING",
+      "claim_ceiling": "LOCAL_CAUSAL_REPLAY_ONLY_NOT_SECURITY"
     }
   ],
   "assumptions": [
@@ -477,7 +491,8 @@
     "v0.3 validates event-to-current-state causal replay with newly stored frame sequence and abstract action affordances. It cannot independently establish that events, images, human decisions or the current state are authentic.",
     "OBS-A32 and OBS-A35 are deliberately NEGATIVE controls: the source model accepts a self-consistent old state and a replacement well-shaped invented frame, proving lack of external rollback fencing and origin witness.",
     "A coherent whole-history deletion/replacement or metadata rewrite may pass local validation; no independent C witness exists.",
-    "A local unrecorded STOP latch at capacity is explicitly marked local_capacity_halt; missing/damaged state remains an EVIDENCE_GAP_STOP refusal but no persisted physical stop."
+    "A local unrecorded STOP latch at capacity is explicitly marked local_capacity_halt; missing/damaged state remains an EVIDENCE_GAP_STOP refusal but no persisted physical stop.",
+    "OBS-A36 is an author-discovered hostile equality trap in a malformed prior record. Exact string type must be checked before comparing an untrusted event.kind. This is a source-only prediction."
   ],
   "future_milestones": [
     "Teach with worked examples and guided corrections",
