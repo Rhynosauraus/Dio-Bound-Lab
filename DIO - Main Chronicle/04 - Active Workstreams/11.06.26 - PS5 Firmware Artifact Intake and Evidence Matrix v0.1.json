@@ -1,0 +1,152 @@
+{
+  "schema": "ps5-n1c-firmware-artifact-intake/v0.1",
+  "record_created_america_boise": "2026-11-06",
+  "repository": "Time-Travelers61/Dio-Bound-Lab",
+  "parent_issue": 6,
+  "mission": "Offline source and firmware metadata research, separate from OBSERVE-001 and CERBERUS operation",
+  "authority": {
+    "user_console_access": false,
+    "mac_access": false,
+    "pup_binary_download": false,
+    "community_binary_download": false,
+    "run_tools": false,
+    "run_python": false,
+    "run_vm": false,
+    "register_actions": false,
+    "run_actions": false,
+    "change_permissions": false,
+    "merge": false
+  },
+  "evidence_ceilings": [
+    "upstream statements not runtime tests",
+    "community hashes are declared, not recomputed",
+    "official OSS code is partial component source",
+    "13.60 capture is not 14.22 executable source",
+    "source-only audit cannot prove exploit or decrypt feasibility"
+  ],
+  "resources": [
+    {
+      "id": "FW-001",
+      "kind": "sony_version_notes",
+      "origin": "sony_primary",
+      "version": "26.07-14.22.00",
+      "url": "https://www.playstation.com/en-us/support/hardware/ps5/system-software-info/",
+      "observed": "public_page_read",
+      "format": "HTML",
+      "binary_downloaded": false,
+      "usable_now": "version security-fix notes",
+      "not_proven": "actual local console version or detailed vulnerabilities"
+    },
+    {
+      "id": "FW-002",
+      "kind": "sony_pup_update",
+      "origin": "sony_primary_download_page_with_community_checksum",
+      "version": "14.22.00",
+      "url": "https://www.playstation.com/en-us/support/hardware/ps5/system-software/",
+      "declared_bytes": 1266091008,
+      "declared_sha256": "b0d5818d5ce26e2537d1e2febaebd9a3bef1bb1cf8e9898ddf099773706a810b",
+      "declared_build_date": "2026-10-27",
+      "community_index_commit": "6f4bc337885d51280529b729fed69ae11754066a",
+      "binary_downloaded": false,
+      "checksum_recomputed": false,
+      "decrypted": false,
+      "usable_now": "listed package size and checksum claim",
+      "not_proven": "raw file identity, extractable kernel bytes or 14.22 decryption"
+    },
+    {
+      "id": "FW-003",
+      "kind": "sony_pup_recovery",
+      "origin": "sony_primary_download_page_with_community_checksum",
+      "version": "14.22.00",
+      "url": "https://www.playstation.com/en-us/support/hardware/ps5/system-software/",
+      "declared_bytes": 1423697408,
+      "declared_sha256": "42ea0e5aad1361e098837d40157863c4c519f0bbc66eb03c04dbaaf339b063fb",
+      "declared_build_date": "2026-10-27",
+      "community_index_commit": "6f4bc337885d51280529b729fed69ae11754066a",
+      "binary_downloaded": false,
+      "checksum_recomputed": false,
+      "decrypted": false,
+      "usable_now": "listed recovery size and checksum claim",
+      "not_proven": "file integrity on disk or feasibility of decryption"
+    },
+    {
+      "id": "FW-004",
+      "kind": "sony_oss_webkit",
+      "origin": "sony_primary",
+      "url": "https://www.playstation.com/en-us/oss/ps5/webkit/",
+      "version_group": "14.00 -",
+      "source_archive_downloaded": false,
+      "usable_now": "source listing and license availability",
+      "not_proven": "exact 14.22 build equivalence or proprietary console kernel source"
+    },
+    {
+      "id": "FW-005",
+      "kind": "sony_oss_javascriptcore",
+      "origin": "sony_primary",
+      "url": "https://www.playstation.com/en-us/oss/ps5/webkit-javascriptcore/",
+      "source_archive_downloaded": false,
+      "usable_now": "open source component listing",
+      "not_proven": "exact 14.22 shipping version or exploit entry point"
+    },
+    {
+      "id": "FW-006",
+      "kind": "upstream_decrypted_pup_unpacker",
+      "origin": "github_community_source",
+      "url": "https://github.com/zecoxao/ps5-pup-unpacker/blob/005cccc908142c35ab7280e7f9eef8d5203c21e0/README.md",
+      "git_blob": "bf8f101ae30572d6bbcd9baedca18fe13c60c247",
+      "source_read": true,
+      "executed": false,
+      "usable_now": "input prerequisite and capability documentation",
+      "not_proven": "operation on encrypted 14.22 retail firmware"
+    },
+    {
+      "id": "FW-007",
+      "kind": "upstream_console_assisted_decrypt",
+      "origin": "github_community_source",
+      "url": "https://github.com/zecoxao/ps5-pup-decrypt/blob/290f5dd216b6878223457f51b32127acc480964a/README.md",
+      "git_blob": "72da9a0a570793b50c5d3a87fe21ee6cdca0144c",
+      "source_read": true,
+      "executed": false,
+      "requires_privileged_console": true,
+      "usable_now": "version and privilege constraints from README",
+      "not_proven": "standalone PS5 14.22 offline decryption"
+    },
+    {
+      "id": "FW-008",
+      "kind": "community_ps5_13_60_kernel_memory_capture",
+      "origin": "github_unverified_community_artifact",
+      "url": "https://github.com/terrafirma2021/ps5-13.60-kernel-dump/blob/eb8ab03faa5d18c15f09f4b407c71e2aeeedf4b9/README.md",
+      "metadata_url": "https://github.com/terrafirma2021/ps5-13.60-kernel-dump/blob/eb8ab03faa5d18c15f09f4b407c71e2aeeedf4b9/kernel-13.60-live.bin.json",
+      "git_metadata_blob": "01959c4673e219b4d12e0d087d0c5f340ec98dd2",
+      "firmware": "13.60",
+      "declared_uncompressed_bytes": 103546880,
+      "declared_sha256": "c3f745e25dc25ee7afef89eb418b295b6334bbefe8aa17e6886483c35d78cddd",
+      "unmapped_data_pages": 688,
+      "capture_downloaded": false,
+      "capture_sha256_recomputed": false,
+      "origin_independently_attested": false,
+      "usable_now": "older build's claimed layout and known incompleteness",
+      "not_proven": "authentic captured memory or PS5 14.22 code"
+    },
+    {
+      "id": "FW-009",
+      "kind": "community_ps5_sdk",
+      "origin": "github_community_source",
+      "url": "https://github.com/PS5Dev/PS5SDK/blob/a2e03a2a0231a3a3397fa6cd087a01ca6d04f273/README.md",
+      "git_blob": "1f5ba66ed77569fede343ba951dbff8230624a2b",
+      "source_read": true,
+      "executed": false,
+      "usable_now": "limited community header/API development references",
+      "not_proven": "complete application SDK or 14.22 native execution"
+    }
+  ],
+  "stage_status": {
+    "N1C_S1_PUBLIC_SOURCE_INVENTORY": "SOURCE_ONLY_COMPLETED",
+    "N1C_S2_SONY_OSS_COMPONENT_MAP": "NOT_PERFORMED",
+    "N1C_S3_PUP_PACKAGE_STATIC_ANALYSIS": "NO_ARTIFACT_NO_AUTHORIZATION",
+    "N1C_S4_OLDER_KERNEL_CAPTURE_INDEPENDENT_HASH": "NO_ARTIFACT_NO_AUTHORIZATION",
+    "N1C_S5_INDEPENDENT_EXAMINATION": "PENDING_MILESTONE"
+  },
+  "required_future_human_gate": "Explicitly name disposable off-host analysis environment, precise downloaded artifacts and read-only inspection/verification actions separately; never infer PS5 decryption, payload access or physical console permission from this manifest.",
+  "record_rule": "Always append source/condition/direct observation/prediction/unknown; do not rewrite an older BLOCK or NOT_RUN."
+}
