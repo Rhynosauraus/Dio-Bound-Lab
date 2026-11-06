@@ -8,15 +8,21 @@
   "files": [
     {
       "path": "philosophical-engine/11.06.26 - Philosophical Engine Assurance Gate v0.3.py",
-      "git_blob_sha1": "9b5966e0232591f44819d69680d774e3dee82f47",
-      "sha256": "569cc613c439bf2ad6eb52fa6094f176ced6ea4f800f5b1f7c3aa4a296d9357c",
+      "git_blob_sha1": "cccd01c1b290dfce032791e049807da1d2422ca7",
+      "sha256": "b752a1390b57982ced9a516139b69b8f5a5a7f870c0dde09f9ba1d9ec6a2f008",
       "role": "non-authorizing classifier"
     },
     {
       "path": "philosophical-engine/11.06.26 - Philosophical Engine Assurance Gate Tests.py",
-      "git_blob_sha1": "2f26724315bdd62edf99968cad024e1c436b51a7",
-      "sha256": "1d653b031e73050170b2a214f93e42b7a131481b236c63b9f4915a84d6ff396a",
+      "git_blob_sha1": "9b85aa1e341002ca791d1e675e769aa4bfd41ad3",
+      "sha256": "297f8b0ffb41f87ce841e1965276099266c5d387e0671bbe039c834cd26961c4",
       "role": "same-author synthetic tests"
+    },
+    {
+      "path": "philosophical-engine/11.06.26 - Philosophical Engine Assurance Result Schema v0.3.json",
+      "git_blob_sha1": "e336cbc81a0f9c8c59c8e38f7cc81b58819d92cf",
+      "sha256": "edc9402344909b5105c996f9e8c3efe1d67cc7a6a9357e96e8ad14ac3b122214",
+      "role": "cross-field result contract; never authorizes an action"
     }
   ],
   "required_exact_upstream": {
@@ -26,11 +32,14 @@
   },
   "development_tests": {
     "environment": "local disposable Python 3.13.5 in current chat runtime",
-    "same_author_suite": "18/18_PASS",
+    "same_author_suite": "22/22_PASS",
     "validator_integration": "NOT_RUN_WITH_EXACT_UPSTREAM_IN_THIS_ENVIRONMENT",
     "independent_review": "NOT_RUN",
     "source_authentication": "NOT_RUN",
-    "semantic_adjudication": "NOT_RUN"
+    "semantic_adjudication": "NOT_RUN",
+    "result_schema_development": "4/4 positive result classes and 5/5 negative inconsistency cases validated locally using jsonschema 4.26.0",
+    "mac_replay": "NOT_RUN_DESKTOP_COMMANDER_MONTHLY_USAGE_LIMIT; do not retry on that device",
+    "verified_bytes_file_swap": "TEST_PASS_MOCKED_GOOD_BYTES_AFTER_PATH_SWAP; actual upstream integration NOT RUN"
   },
   "proposed_benchmark_custody": {
     "local_pack_id": "PE-BENCH-001",
@@ -51,5 +60,6 @@
     "authorization",
     "decision_quality_improvement"
   ],
-  "frozen_release_commit_sha": "PENDING_FUTURE_HUMAN_APPROVED_RELEASE_MANIFEST"
+  "frozen_release_commit_sha": "PENDING_FUTURE_HUMAN_APPROVED_RELEASE_MANIFEST",
+  "note": "Manifest is a mutable draft candidate inventory, not a frozen signed release. Original PR #7 audited HEAD remains unchanged. No source-authentication, semantic adjudication or authority attestation."
 }
