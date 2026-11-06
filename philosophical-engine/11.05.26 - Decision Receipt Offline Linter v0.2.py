@@ -121,6 +121,23 @@ ROOT_FIELDS = {
 def _valid_nonempty_str(x):
     return isinstance(x, str) and bool(x.strip())
 
+def _invalid_unicode_tree(value):
+    """Find unpaired surrogates without recursion; a receipt is UTF-8 transport."""
+    pending = [value]
+    while pending:
+        node = pending.pop()
+        if isinstance(node, str):
+            try:
+                node.encode("utf-8")
+            except UnicodeEncodeError:
+                return True
+        elif isinstance(node, dict):
+            pending.extend(node.keys())
+            pending.extend(node.values())
+        elif isinstance(node, list):
+            pending.extend(node)
+    return False
+
 def check(receipt, expected_proposition=None):
     """Safe standard-library structural check. External proposition binding is caller-owned.
 
@@ -130,6 +147,8 @@ def check(receipt, expected_proposition=None):
     errors = []
     if not isinstance(receipt, dict):
         return ["receipt must be a JSON object"]
+    if _invalid_unicode_tree(receipt):
+        return ["receipt contains non-UTF-8 representable string"]
     if not _valid_nonempty_str(receipt.get("receipt_id")):
         errors.append("missing or invalid receipt_id")
     if set(receipt) - ROOT_FIELDS:
@@ -251,6 +270,7 @@ def self_test():
             {"claim":"x","causal_pathway":"y","disconfirmation_condition":"z",
              "status":"FORECAST","horizon":[]}]),
         "non-string alleged approval evidence": lambda d: d["authorization"].update(external_approval_evidence={"granted":True}),
+        "invalid Unicode scalar": lambda d: d.update(exact_proposition="\ud800"),
     }
     for name, mut in mutations.items():
         candidate = copy.deepcopy(base)
@@ -258,7 +278,7 @@ def self_test():
         errors = check(candidate, question)
         if not errors:
             raise RuntimeError(name + " was not rejected")
-    print("PASS: 1 valid fixture + 22 deliberate structural violations rejected")
+    print("PASS: 1 valid fixture + 23 deliberate structural violations rejected")
     print("LIMIT: no semantic entailment, provenance authentication, timing, independence or authorization is verified by this test")
 
 def _no_duplicate_keys(pairs):
@@ -273,15 +293,15 @@ def _reject_constant(name):
     raise ValueError("non-standard JSON number is forbidden: " + name)
 
 def _load_json_strict(path):
-    data = Path(path).read_bytes()
-    if len(data) > MAX_RECEIPT_BYTES:
-        raise ValueError("receipt exceeds byte limit")
+    with Path(path).open("rb") as handle:
+        data = handle.read(MAX_RECEIPT_BYTES + 1)
+    if len(data) > MAX_RECEIPT_BYTES:        raise ValueError("receipt exceeds byte limit")
     return json.loads(data.decode("utf-8"), object_pairs_hook=_no_duplicate_keys, parse_constant=_reject_constant)
 
 def _read_original(path):
-    data = Path(path).read_bytes()
-    if len(data) > MAX_ORIGINAL_BYTES:
-        raise ValueError("original question exceeds byte limit")
+    with Path(path).open("rb") as handle:
+        data = handle.read(MAX_ORIGINAL_BYTES + 1)
+    if len(data) > MAX_ORIGINAL_BYTES:        raise ValueError("original question exceeds byte limit")
     return data.decode("utf-8")
 
 def main():
@@ -313,7 +333,7 @@ def main():
         return 3
     try:
         doc = _load_json_strict(args.receipt)
-    except (OSError, UnicodeError, ValueError) as exc:
+    except (OSError, UnicodeError, ValueError, RecursionError) as exc:
         print("BLOCK: strict receipt JSON load failed: " + type(exc).__name__)
         return 2
     findings = check(doc, question)
