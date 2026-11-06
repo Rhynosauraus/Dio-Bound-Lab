@@ -53,5 +53,6 @@
   "independence": {
     "simulated_agreement_is_independent_confirmation": false,
     "independent_qualification_established": false
-  }
+  },
+  "original_question_sha256": "53f180e5b213dca8d07273de802c459e3234618180e9c0326992530e7f26f82d"
 }
