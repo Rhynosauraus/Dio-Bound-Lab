@@ -1,0 +1,90 @@
+{
+  "schema": "labyrinth.pe.assurance_candidate_manifest.v0.3",
+  "date_America_Boise": "11.06.26",
+  "release_state": "CANDIDATE_NOT_APPROVED_NOT_MERGED",
+  "source_repository": "Time-Travelers61/Dio-Bound-Lab",
+  "audited_commit": "73545f53c70d5e28673dc20f56f0d96feceafcfd",
+  "branch": "repair/pe-trident-assurance-gate-v0.3",
+  "files": [
+    {
+      "path": "philosophical-engine/11.06.26 - Philosophical Engine Assurance Gate v0.3.py",
+      "git_blob_sha1": "cccd01c1b290dfce032791e049807da1d2422ca7",
+      "sha256": "b752a1390b57982ced9a516139b69b8f5a5a7f870c0dde09f9ba1d9ec6a2f008",
+      "role": "non-authorizing classifier"
+    },
+    {
+      "path": "philosophical-engine/11.06.26 - Philosophical Engine Assurance Gate Tests.py",
+      "git_blob_sha1": "9b85aa1e341002ca791d1e675e769aa4bfd41ad3",
+      "sha256": "297f8b0ffb41f87ce841e1965276099266c5d387e0671bbe039c834cd26961c4",
+      "role": "same-author synthetic tests"
+    },
+    {
+      "path": "philosophical-engine/11.06.26 - Philosophical Engine Assurance Result Schema v0.3.json",
+      "git_blob_sha1": "e336cbc81a0f9c8c59c8e38f7cc81b58819d92cf",
+      "sha256": "edc9402344909b5105c996f9e8c3efe1d67cc7a6a9357e96e8ad14ac3b122214",
+      "role": "cross-field result contract; never authorizes an action"
+    },
+    {
+      "path": "philosophical-engine/11.06.26 - PE-BENCH-001B Development Trial Coordinator.py",
+      "git_blob_sha1": "b6f122932c18c39e0eee396eaa28ce08e8e9c2a2",
+      "sha256": "7f323153318b239beeb0464c3bf23c5ecc756e850b6ddfa1fa5f75a58a5670f0",
+      "role": "source-pinned development trial scheduling; no model calls"
+    },
+    {
+      "path": "philosophical-engine/11.06.26 - Philosophical Engine Integrated Replay v0.1.py",
+      "git_blob_sha1": "fb5586be462d4bdad69dbc4e2ecdbeff7a8dc06c",
+      "sha256": "d8660f1a66dfbb352f56a43a55f0826ec7aba0f816d3e7d2da466c5c6aaa26bd",
+      "role": "exact checkout no-effects real-integrated replay harness; NOT RUN"
+    }
+  ],
+  "required_exact_upstream": {
+    "path": "philosophical-engine/11.05.26 - Decision Receipt Offline Linter v0.2.py",
+    "sha256": "6ca7543868dc8dac66d3926236abd1f2e62b1577fa6941aff347e604cc2819a2",
+    "standing": "adopted_for_this_candidate_as_a_pinned_dependency_not_semantic_qualified"
+  },
+  "development_tests": {
+    "environment": "local disposable Python 3.13.5 in current chat runtime",
+    "same_author_suite": "22/22_PASS",
+    "validator_integration": "NOT_RUN_WITH_EXACT_UPSTREAM_IN_THIS_ENVIRONMENT",
+    "independent_review": "NOT_RUN",
+    "source_authentication": "NOT_RUN",
+    "semantic_adjudication": "NOT_RUN",
+    "result_schema_development": "4/4 positive result classes and 5/5 negative inconsistency cases validated locally using jsonschema 4.26.0",
+    "mac_replay": "NOT_RUN_DESKTOP_COMMANDER_MONTHLY_USAGE_LIMIT; do not retry on that device",
+    "verified_bytes_file_swap": "TEST_PASS_MOCKED_GOOD_BYTES_AFTER_PATH_SWAP; actual upstream integration NOT RUN",
+    "benchmark_coordinator": "9/9 EXPLICIT SELF TESTS PASS under python 3.13.5 and -O, exact source and output hashes verified, 12×3 prepared, no candidate responses",
+    "integrated_replay_script": "SYNTAX_CHECK_AND_MISSING_SOURCE_REFUSAL_ONLY; 11 actual integration probes NOT RUN",
+    "integration_blocker": "Sandbox lacks repository GitHub network access; Desktop Commander monthly usage limit; no other host activated",
+    "legacy_benchmark_vocab": "UNKNOWN vs INCONCLUSIVE/NOT_TESTABLE mismatch; automatic mapping prohibited pending examiner review"
+  },
+  "proposed_benchmark_custody": {
+    "local_pack_id": "PE-BENCH-001",
+    "case_count": 12,
+    "candidate_case_pack_sha256": "67faeca4b62abaa52217c6e617732630836fa6cd0c41a5448e165d34504260d6",
+    "custodian_held_sealed_reference_sha256": "72ceda4dda3f25930055c065ad392cc9bf65c46580f0fd2b012ad7d8ed8c6940",
+    "candidate_responses": "NOT_RUN",
+    "independent_grading": "NOT_RUN",
+    "note": "Hashes are inventory markers; possession of the sealed key does not establish independent custody."
+  },
+  "human_authority": "RESERVED",
+  "release_allowed": false,
+  "claims_not_established": [
+    "semantic_correctness",
+    "authenticated_evidence",
+    "independent_qualification",
+    "cross_project_delivery",
+    "authorization",
+    "decision_quality_improvement"
+  ],
+  "frozen_release_commit_sha": "PENDING_FUTURE_HUMAN_APPROVED_RELEASE_MANIFEST",
+  "note": "Manifest is a mutable draft candidate inventory, not a frozen signed release. Original PR #7 audited HEAD remains unchanged. No source-authentication, semantic adjudication or authority attestation.",
+  "benchmark_development": {
+    "schedule_seed": "pe-bench-001b-v1",
+    "schedule_sha256": "73403120981cb3009d07c29d7fc277f08914a4879c863f49a39aa20de06f865b",
+    "candidate_prompt_pack_sha256": "93965b77fc3c0119cc9da9aa09e93d9301069fc5447b2e2d010767f57a2f0efc",
+    "trial_count": 36,
+    "model_calls": 0,
+    "reference_keys_distributed": false,
+    "status": "PREPARED_ONLY"
+  }
+}
