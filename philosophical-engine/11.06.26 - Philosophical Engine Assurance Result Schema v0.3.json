@@ -1,0 +1,195 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:labyrinth:pe:assurance-result:0.3-candidate",
+  "title": "PE assurance result v0.3 — non-authorizing machine envelope",
+  "description": "Structural-only classification; every status blocks adoption/authorization. External semantic and source review not performed.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "protocol",
+    "result_class",
+    "structural_check",
+    "original_proposition",
+    "catalog_bytes",
+    "semantic_adjudication",
+    "source_authentication",
+    "human_authorization",
+    "free_text_approval_claim_present",
+    "execution_authorized",
+    "adoption_gate",
+    "issues"
+  ],
+  "properties": {
+    "protocol": {
+      "const": "PE-ASSURANCE-0.3-CANDIDATE"
+    },
+    "result_class": {
+      "enum": [
+        "REFUSED",
+        "STRUCTURAL_UNBOUND",
+        "STRUCTURAL_BOUND",
+        "SOURCE_CATALOG_MATCHED"
+      ]
+    },
+    "structural_check": {
+      "enum": [
+        "PASS",
+        "BLOCK"
+      ]
+    },
+    "original_proposition": {
+      "enum": [
+        "EXTERNALLY_MATCHED",
+        "NOT_VERIFIED"
+      ]
+    },
+    "catalog_bytes": {
+      "enum": [
+        "MATCHED_NOT_AUTHENTICATED",
+        "NOT_VERIFIED"
+      ]
+    },
+    "semantic_adjudication": {
+      "const": "NOT_PERFORMED"
+    },
+    "source_authentication": {
+      "const": "NOT_PERFORMED"
+    },
+    "human_authorization": {
+      "const": "NOT_VERIFIED"
+    },
+    "free_text_approval_claim_present": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "execution_authorized": {
+      "const": false
+    },
+    "adoption_gate": {
+      "const": "BLOCKED"
+    },
+    "issues": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "result_class": {
+            "const": "REFUSED"
+          }
+        },
+        "required": [
+          "result_class"
+        ]
+      },
+      "then": {
+        "properties": {
+          "structural_check": {
+            "const": "BLOCK"
+          },
+          "original_proposition": {
+            "const": "NOT_VERIFIED"
+          },
+          "catalog_bytes": {
+            "const": "NOT_VERIFIED"
+          },
+          "issues": {
+            "minItems": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result_class": {
+            "const": "STRUCTURAL_UNBOUND"
+          }
+        },
+        "required": [
+          "result_class"
+        ]
+      },
+      "then": {
+        "properties": {
+          "structural_check": {
+            "const": "PASS"
+          },
+          "original_proposition": {
+            "const": "NOT_VERIFIED"
+          },
+          "catalog_bytes": {
+            "const": "NOT_VERIFIED"
+          },
+          "issues": {
+            "maxItems": 0
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result_class": {
+            "const": "STRUCTURAL_BOUND"
+          }
+        },
+        "required": [
+          "result_class"
+        ]
+      },
+      "then": {
+        "properties": {
+          "structural_check": {
+            "const": "PASS"
+          },
+          "original_proposition": {
+            "const": "EXTERNALLY_MATCHED"
+          },
+          "catalog_bytes": {
+            "const": "NOT_VERIFIED"
+          },
+          "issues": {
+            "maxItems": 0
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result_class": {
+            "const": "SOURCE_CATALOG_MATCHED"
+          }
+        },
+        "required": [
+          "result_class"
+        ]
+      },
+      "then": {
+        "properties": {
+          "structural_check": {
+            "const": "PASS"
+          },
+          "original_proposition": {
+            "const": "EXTERNALLY_MATCHED"
+          },
+          "catalog_bytes": {
+            "const": "MATCHED_NOT_AUTHENTICATED"
+          },
+          "issues": {
+            "maxItems": 0
+          }
+        }
+      }
+    }
+  ]
+}
