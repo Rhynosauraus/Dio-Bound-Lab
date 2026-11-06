@@ -152,6 +152,10 @@ def _valid_event(event: object, index: int) -> bool:
     if type(event) is not MockEvent:
         return False
     kind = _own(event, "kind")
+    # A damaged exact-class row may carry arbitrary hostile objects.
+    # Reject before any equality/membership operator can invoke them.
+    if type(kind) is not str:
+        return False
     related = _own(event, "related_proposal")
     digest = _own(event, "frame_digest")
     action = _own(event, "action")
