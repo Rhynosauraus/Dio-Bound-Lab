@@ -1,0 +1,15 @@
+{
+  "archive_title": "DIO Main Chronicle - Issue 1 Full Snapshot",
+  "snapshot_date_america_boise": "2026-11-05",
+  "source_repository": "Time-Travelers61/Dio-Bound-Lab",
+  "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/pull/1",
+  "issue_number": 1,
+  "issue": {
+    "title": "DIO-BND-007: Verify scoped GitHub write and read-back boundary",
+    "state": "open",
+    "body": "## Purpose\nA bounded capability experiment in Dio-Bound-Lab: preregister a GitHub branch-scoped write/read-back test, run it, and preserve results without changing frozen records.\n\n## Result\n**PASS** — A new branch and preregistration file were created; an independent fetch returned the exact sentinel and expected content. A separate results file documents what this proves and what it does not.\n\n## Limits\nThis does not establish autonomous background operation, cross-session memory, native ChatGPT message editing, or expanded permissions. No secrets or private connector data were included. No merge requested.\n\n## Review\nPlease review the method and evidence; leave this draft unmerged until explicitly approved.",
+    "source_url": "https://github.com/Time-Travelers61/Dio-Bound-Lab/pull/1"
+  },
+  "comments": [],
+  "limitations": "This snapshots exact retrieved issue body and available GitHub comments but not entire GitHub event timeline or original ChatGPT transcript. Missing metadata recorded null. DIO user-relayed judgments are not independently authenticated by this archive."
+}
